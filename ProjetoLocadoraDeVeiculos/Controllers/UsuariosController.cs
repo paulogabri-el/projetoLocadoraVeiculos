@@ -113,8 +113,8 @@ namespace ProjetoLocadoraDeVeiculos.Controllers
                     editUser.Nome = usuario.Nome;
                     editUser.Cpf = usuario.Cpf;
                     editUser.Email = usuario.Email;
-                    editUser.Senha = usuario.Senha;
                     editUser.DataAlteracao = DateTime.Now;
+                    editUser.SetSenhaHash();
                     _context.Update(editUser);
                     await _context.SaveChangesAsync();
                 }

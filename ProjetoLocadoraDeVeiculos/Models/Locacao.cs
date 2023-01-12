@@ -27,7 +27,7 @@ namespace ProjetoLocadoraDeVeiculos.Models
         [DisplayName("Status locação")]
         [ForeignKey("Status")]
         public int StatusLocacaoId { get; set; }
-        [DisplayName("StatusLocacao")]
+        [DisplayName("Status locação")]
         public StatusLocacao? StatusLocacao { get; set; }
 
         [Required(ErrorMessage = "Campo de preenchimento obrigatório.")]
