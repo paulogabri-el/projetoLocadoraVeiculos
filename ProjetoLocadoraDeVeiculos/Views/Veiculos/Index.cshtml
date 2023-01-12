@@ -1,0 +1,83 @@
+﻿@model IEnumerable<ProjetoLocadoraDeVeiculos.Models.Veiculo>
+
+@{
+    ViewData["Title"] = "Veículos";
+}
+
+<h1>Veículos</h1>
+
+<p>
+    <a asp-action="Create">Novo Cadastro</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Nome)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.CategoriaVeiculo)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Placa)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.StatusVeiculo)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ValorDiaria)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ValorMultaFixa)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ValorMultaDiaria)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.DataCadastro)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.DataAlteracao)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Nome)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CategoriaVeiculo.Nome)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Placa)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.StatusVeiculo.Nome)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ValorDiaria)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ValorMultaFixa)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ValorMultaDiaria)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DataCadastro)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DataAlteracao)
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.Id">Editar</a> |
+                <a asp-action="Details" asp-route-id="@item.Id">Detalhes</a> |
+                <a asp-action="Delete" asp-route-id="@item.Id">Excluir</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

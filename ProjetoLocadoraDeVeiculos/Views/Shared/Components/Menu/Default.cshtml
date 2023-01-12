@@ -1,0 +1,41 @@
+﻿@model Usuario
+
+<a class="navbar-brand d-flex justify-content-start fs-5" asp-area="" asp-controller="Home" asp-action="Index">Olá, @Model.Nome</a>
+<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
+        aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+</button>
+<div class="navbar-collapse collapse d-sm-inline-flex">
+    <ul class="navbar-nav flex-grow-1 d-flex justify-content-end">
+        <li class="nav-item">
+            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link text-dark" asp-area="" asp-controller="StatusVeiculos" asp-action="Index">Status Veiculo</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link text-dark" asp-area="" asp-controller="StatusLocacoes" asp-action="Index">Status Locação</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link text-dark" asp-area="" asp-controller="Usuarios" asp-action="Index">Usuários</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link text-dark" asp-area="" asp-controller="Clientes" asp-action="Index">Clientes</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link text-dark" asp-area="" asp-controller="Temporadas" asp-action="Index">Temporadas</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link text-dark" asp-area="" asp-controller="CategoriaVeiculos" asp-action="Index">Categoria Veículos</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link text-dark" asp-area="" asp-controller="Veiculos" asp-action="Index">Veículos</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link text-dark" asp-area="" asp-controller="Locacoes" asp-action="Index">Locações</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link text-danger" asp-area="" asp-controller="Login" asp-action="Sair">Sair</a>
+        </li>
+    </ul>
+</div>
