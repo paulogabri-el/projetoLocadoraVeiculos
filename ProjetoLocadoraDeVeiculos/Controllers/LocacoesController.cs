@@ -87,7 +87,15 @@ namespace ProjetoLocadoraDeVeiculos.Controllers
                 _context.Add(newLoc);
                 TimeSpan qtddias = DateTime.Now - newLoc.DataLocacao;
                 newLoc.QtdDiasAlugados = qtddias.Days;
+                var valorTotal = (newLoc.DataEntrega - newLoc.DataLocacao).Days * newLoc.ValorDiaria;
+                newLoc.ValorTotal = valorTotal;
                 _context.Add(newLoc);
+                if(newLoc.StatusLocacaoId == 3)
+                {
+                    var vec = await _context.Veiculo.FindAsync(newLoc.VeiculoId);
+                    vec.StatusVeiculoId = 2;
+                    _context.Update(vec);
+                }
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
@@ -142,13 +150,29 @@ namespace ProjetoLocadoraDeVeiculos.Controllers
                     editLoc.VeiculoId= locacao.VeiculoId;
                     editLoc.DataEntrega = locacao.DataEntrega;
                     editLoc.DataAlteracao = DateTime.Now;
-                    _context.Update(editLoc);
                     TimeSpan qtddias = DateTime.Now - editLoc.DataLocacao;
                     editLoc.QtdDiasAlugados = qtddias.Days;
                     if (editLoc.QtdDiasAlugados < 0)
                     {
                         editLoc.QtdDiasAlugados = 0;
                     }
+
+                    var vec = await _context.Veiculo.FindAsync(editLoc.VeiculoId);
+                    
+                    if (editLoc.StatusLocacaoId == 3)
+                    {
+                        vec.StatusVeiculoId = 2;
+                        _context.Update(vec);
+                    }
+                    var valorTotal = (editLoc.DataEntrega - editLoc.DataLocacao).Days * editLoc.ValorDiaria;
+
+                    if (editLoc.StatusLocacaoId == 2)
+                    {
+                        editLoc.DataEntrega = DateTime.Now;
+                        vec.StatusVeiculoId = 3;
+                        _context.Update(vec);
+                    }
+                    editLoc.ValorTotal = valorTotal;
                     _context.Update(editLoc);
                     await _context.SaveChangesAsync();
                 }

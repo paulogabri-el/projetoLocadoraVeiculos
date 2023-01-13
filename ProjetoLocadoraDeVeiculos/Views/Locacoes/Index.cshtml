@@ -39,12 +39,15 @@
             <th>
                 @Html.DisplayNameFor(model => model.ValorDiaria)
             </th>
-@*            <th>
+            <th>
+                @Html.DisplayNameFor(model => model.ValorTotal)
+            </th>
+            <th>
                 @Html.DisplayNameFor(model => model.DataCadastro)
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.DataAlteracao)
-            </th>*@
+            </th>
             <th></th>
         </tr>
     </thead>
@@ -78,12 +81,15 @@
             <td>
                 @Html.DisplayFor(modelItem => item.ValorDiaria)
             </td>
-@*            <td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ValorTotal)
+            </td>
+            <td>
                 @Html.DisplayFor(modelItem => item.DataCadastro)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.DataAlteracao)
-            </td>*@
+            </td>
             <td>
                 <a asp-action="Edit" asp-route-id="@item.Id">Editar</a> |
                 <a asp-action="Details" asp-route-id="@item.Id">Detalhes</a> |

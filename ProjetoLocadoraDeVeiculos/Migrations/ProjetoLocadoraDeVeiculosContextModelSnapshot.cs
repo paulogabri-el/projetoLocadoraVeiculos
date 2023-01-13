@@ -108,6 +108,9 @@ namespace ProjetoLocadoraDeVeiculos.Migrations
                     b.Property<decimal>("ValorDiaria")
                         .HasColumnType("decimal(65,30)");
 
+                    b.Property<decimal?>("ValorTotal")
+                        .HasColumnType("decimal(65,30)");
+
                     b.Property<int>("VeiculoId")
                         .HasColumnType("int");
 
@@ -136,6 +139,9 @@ namespace ProjetoLocadoraDeVeiculos.Migrations
                     b.Property<DateTime?>("DataCadastro")
                         .HasColumnType("datetime(6)");
 
+                    b.Property<bool?>("Internal")
+                        .HasColumnType("tinyint(1)");
+
                     b.Property<string>("Nome")
                         .IsRequired()
                         .HasColumnType("longtext");
@@ -156,6 +162,9 @@ namespace ProjetoLocadoraDeVeiculos.Migrations
 
                     b.Property<DateTime?>("DataCadastro")
                         .HasColumnType("datetime(6)");
+
+                    b.Property<bool?>("Internal")
+                        .HasColumnType("tinyint(1)");
 
                     b.Property<string>("Nome")
                         .IsRequired()

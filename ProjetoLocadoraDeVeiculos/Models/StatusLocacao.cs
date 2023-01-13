@@ -16,6 +16,7 @@ namespace ProjetoLocadoraDeVeiculos.Models
         [DisplayName("Data Alteração")]
         [DataType(DataType.Date)]
         public DateTime? DataAlteracao { get; set; }
+        public bool? Internal { get; set; }
 
         public ICollection<Locacao> Veiculos { get; set; } = new List<Locacao>();
 

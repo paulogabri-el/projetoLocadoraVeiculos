@@ -58,7 +58,9 @@ namespace ProjetoLocadoraDeVeiculos.Models
         [DisplayName("Valor calculado da diária")]
         [DisplayFormat(DataFormatString = "{0:F2}")]
         public decimal ValorDiaria { get; set; } //Calculado com base na diária do carro e adicionado o % em cima com base na temporada escolhida
-      
+
+        public decimal? ValorTotal { get; set; }
+
         [DisplayName("Data de cadastro")]
         [DataType(DataType.Date)]
         public DateTime? DataCadastro { get; set; }
