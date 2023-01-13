@@ -164,14 +164,13 @@ namespace ProjetoLocadoraDeVeiculos.Controllers
                         vec.StatusVeiculoId = 2;
                         _context.Update(vec);
                     }
-                    var valorTotal = (editLoc.DataEntrega - editLoc.DataLocacao).Days * editLoc.ValorDiaria;
-
                     if (editLoc.StatusLocacaoId == 2)
                     {
                         editLoc.DataEntrega = DateTime.Now;
                         vec.StatusVeiculoId = 3;
                         _context.Update(vec);
                     }
+                    var valorTotal = (editLoc.DataEntrega - editLoc.DataLocacao).Days * editLoc.ValorDiaria;
                     editLoc.ValorTotal = valorTotal;
                     _context.Update(editLoc);
                     await _context.SaveChangesAsync();
