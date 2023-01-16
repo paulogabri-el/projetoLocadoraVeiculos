@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Cryptography.X509Certificates;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
@@ -96,6 +97,8 @@ namespace ProjetoLocadoraDeVeiculos.Controllers
                     vec.StatusVeiculoId = 2;
                     _context.Update(vec);
                 }
+
+
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
@@ -105,6 +108,25 @@ namespace ProjetoLocadoraDeVeiculos.Controllers
             ViewData["VeiculoId"] = new SelectList(_context.Veiculo, "Id", "Nome", locacao.VeiculoId);
             return View(locacao);
         }
+
+        public ActionResult Teste(int idT, int idV)
+        {
+            var vlTemp = _context.Temporada.Find(idT);
+            var vlVec = _context.Veiculo.Find(idV);
+            var result = (vlTemp.PercentualAcrescerDiaria * vlVec.ValorDiaria / 100) + vlVec.ValorDiaria;
+
+            return View(result);
+        }
+
+
+        //public decimal vltotal(int idT, int idV)
+        //{
+        //    var vlTemp = _context.Temporada.Find(idT);
+        //    var vlVec = _context.Veiculo.Find(idV);
+
+        //    return (vlVec.ValorDiaria * vlTemp.PercentualAcrescerDiaria / 100) + vlVec.ValorDiaria;
+        //}
+
 
         // GET: Locacoes/Edit/5
         public async Task<IActionResult> Edit(int? id)
@@ -240,5 +262,6 @@ namespace ProjetoLocadoraDeVeiculos.Controllers
         {
           return _context.Locacao.Any(e => e.Id == id);
         }
+
     }
 }

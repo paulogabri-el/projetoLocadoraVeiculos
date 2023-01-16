@@ -126,7 +126,7 @@ namespace ProjetoLocadoraDeVeiculos.Controllers
                     editCar.StatusVeiculoId = veiculo.StatusVeiculoId;
                     editCar.ValorDiaria = veiculo.ValorDiaria;
                     editCar.ValorMultaFixa = veiculo.ValorMultaFixa;
-                    editCar.ValorMultaDiaria = veiculo.ValorDiaria;
+                    editCar.ValorMultaDiaria = veiculo.ValorMultaDiaria;
                     editCar.DataAlteracao = DateTime.Now;
                     _context.Update(editCar);
                     await _context.SaveChangesAsync();
