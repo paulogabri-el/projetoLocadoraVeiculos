@@ -81,7 +81,16 @@
     
     <form asp-action="Delete">
         <input type="hidden" asp-for="Id" />
-        <input type="submit" value="Excluir" class="btn btn-danger" /> |
+        @if (Model.StatusLocacao.Id != 2)
+        {
+            <input type="submit" value="Excluir" class="btn btn-danger" />
+        }
+        |
         <a asp-action="Index">Voltar</a>
     </form>
+    <br />
+    @if (Model.StatusLocacao.Id == 2)
+    {
+        <h5 class="flex-nowrap">Locações finalizadas não podem ser excluídas!</h5>
+    }
 </div>

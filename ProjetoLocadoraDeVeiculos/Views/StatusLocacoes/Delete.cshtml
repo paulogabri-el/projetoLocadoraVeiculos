@@ -32,7 +32,16 @@
     
     <form asp-action="Delete">
         <input type="hidden" asp-for="Id" />
-        <input type="submit" value="Excluir" class="btn btn-danger" /> |
+        @if (Model.Internal != true)
+        {
+            <input type="submit" value="Excluir" class="btn btn-danger" /> 
+        }
+        |
         <a asp-action="Index">Voltar</a>
     </form>
+    <br />
+    @if (Model.Internal == true)
+    {
+        <h5 class="flex-nowrap">Status internos não podem ser excluídos pois podem afetar a integridade do sistema!</h5>
+    }
 </div>

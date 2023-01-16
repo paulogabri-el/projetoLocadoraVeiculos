@@ -19,7 +19,10 @@
                 <span asp-validation-for="Nome" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <input type="submit" value="Salvar" class="btn btn-primary" />
+                @if (Model.Internal != true)
+                {
+                    <input type="submit" value="Salvar" class="btn btn-primary" />
+                }
             </div>
         </form>
     </div>
@@ -28,6 +31,11 @@
 <div>
     <a asp-action="Index">Voltar</a>
 </div>
+<br />
+@if (Model.Internal == true)
+{
+        <h5 class="flex-nowrap">Status internos não podem ser editados pois podem afetar a integridade do sistema!</h5>
+}
 
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
