@@ -11,8 +11,8 @@ using ProjetoLocadoraDeVeiculos.Data;
 namespace ProjetoLocadoraDeVeiculos.Migrations
 {
     [DbContext(typeof(ProjetoLocadoraDeVeiculosContext))]
-    [Migration("20230113155725_ComponenteInterno")]
-    partial class ComponenteInterno
+    [Migration("20230117180844_Initial")]
+    partial class Initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -108,6 +108,15 @@ namespace ProjetoLocadoraDeVeiculos.Migrations
                         .HasColumnType("int");
 
                     b.Property<decimal>("ValorDiaria")
+                        .HasColumnType("decimal(65,30)");
+
+                    b.Property<decimal>("ValorMultaDiaria")
+                        .HasColumnType("decimal(65,30)");
+
+                    b.Property<decimal>("ValorMultaFixa")
+                        .HasColumnType("decimal(65,30)");
+
+                    b.Property<decimal?>("ValorTotal")
                         .HasColumnType("decimal(65,30)");
 
                     b.Property<int>("VeiculoId")

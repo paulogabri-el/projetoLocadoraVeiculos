@@ -21,6 +21,10 @@ namespace ProjetoLocadoraDeVeiculos.Models.ViewModels
 
         public int? QtdDiasAlugados { get; set; }
 
-        public decimal ValorDiaria { get; set; } //Calculado com base na diária do carro e adicionado o % em cima com base na temporada escolhida
+        public decimal ValorDiaria { get; set; }
+
+        public decimal ValorMultaDiaria { get; set; }
+
+        public decimal ValorMultaFixa { get; set; }
     }
 }

@@ -61,7 +61,8 @@ namespace ProjetoLocadoraDeVeiculos.Migrations
                     Nome = table.Column<string>(type: "longtext", nullable: false)
                         .Annotation("MySql:CharSet", "utf8mb4"),
                     DataCadastro = table.Column<DateTime>(type: "datetime", nullable: true),
-                    DataAlteracao = table.Column<DateTime>(type: "datetime", nullable: true)
+                    DataAlteracao = table.Column<DateTime>(type: "datetime", nullable: true),
+                    Internal = table.Column<bool>(type: "tinyint(1)", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -78,7 +79,8 @@ namespace ProjetoLocadoraDeVeiculos.Migrations
                     Nome = table.Column<string>(type: "longtext", nullable: false)
                         .Annotation("MySql:CharSet", "utf8mb4"),
                     DataCadastro = table.Column<DateTime>(type: "datetime", nullable: true),
-                    DataAlteracao = table.Column<DateTime>(type: "datetime", nullable: true)
+                    DataAlteracao = table.Column<DateTime>(type: "datetime", nullable: true),
+                    Internal = table.Column<bool>(type: "tinyint(1)", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -180,6 +182,9 @@ namespace ProjetoLocadoraDeVeiculos.Migrations
                     QtdDiasAlugados = table.Column<int>(type: "int", nullable: true),
                     QtdRenovacoes = table.Column<int>(type: "int", nullable: true),
                     ValorDiaria = table.Column<decimal>(type: "decimal(65,30)", nullable: false),
+                    ValorMultaDiaria = table.Column<decimal>(type: "decimal(65,30)", nullable: false),
+                    ValorMultaFixa = table.Column<decimal>(type: "decimal(65,30)", nullable: false),
+                    ValorTotal = table.Column<decimal>(type: "decimal(65,30)", nullable: true),
                     DataCadastro = table.Column<DateTime>(type: "datetime", nullable: true),
                     DataAlteracao = table.Column<DateTime>(type: "datetime", nullable: true)
                 },

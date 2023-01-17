@@ -8,6 +8,8 @@ using Microsoft.EntityFrameworkCore;
 using ProjetoLocadoraDeVeiculos.Data;
 using ProjetoLocadoraDeVeiculos.Models;
 using ProjetoLocadoraDeVeiculos.Models.ViewModels;
+using DocumentValidator;
+using System.Linq.Expressions;
 
 namespace ProjetoLocadoraDeVeiculos.Controllers
 {
@@ -57,23 +59,24 @@ namespace ProjetoLocadoraDeVeiculos.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("Id,Nome,Cpf,Cnh,DataNascimento,DataCadastro,DataAlteracao")] ClienteViewModel cliente)
         {
-            if (ModelState.IsValid)
-            {
-                var newCliente = new Cliente()
+                if (ModelState.IsValid)
                 {
-                    Id = cliente.Id,
-                    Nome = cliente.Nome,
-                    Cpf = cliente.Cpf,
-                    Cnh = cliente.Cnh,
-                    DataNascimento = cliente.DataNascimento,
-                    DataCadastro = DateTime.Now
-                };
-                _context.Add(newCliente);
-                await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
-            }
-            return View(cliente);
+                    var newCliente = new Cliente()
+                    {
+                        Id = cliente.Id,
+                        Nome = cliente.Nome,
+                        Cpf = cliente.Cpf,
+                        Cnh = cliente.Cnh,
+                        DataNascimento = cliente.DataNascimento,
+                        DataCadastro = DateTime.Now
+                    };
+                        _context.Add(newCliente);
+                        await _context.SaveChangesAsync();
+                        return RedirectToAction(nameof(Index));
+                    }
+                return View(cliente);
         }
+                
 
         // GET: Clientes/Edit/5
         public async Task<IActionResult> Edit(int? id)

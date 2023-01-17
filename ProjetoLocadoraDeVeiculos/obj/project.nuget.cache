@@ -1,9 +1,10 @@
 {
   "version": 2,
-  "dgSpecHash": "Hqj/2U5xOXhYzXnsSZ1ke+UXwrkcKRLRmmcJM1qo82nmw7iHX+SBLyYzP6IS/rzJURVCnonWyZaQTOuD0/YIfQ==",
+  "dgSpecHash": "shfTCYwxbkKMeJD++UMXZy1+JwNY2565VJTIhhFPnczCnsR6YXjR93D9qEhL+6gRjgtLqX+Ib/vQ0jfDYbwyIA==",
   "success": true,
   "projectFilePath": "C:\\Users\\Paulo Gabriel\\Desktop\\202301081833ProjetoLocadoraDeVeiculos\\ProjetoLocadoraDeVeiculos\\ProjetoLocadoraDeVeiculos\\ProjetoLocadoraDeVeiculos.csproj",
   "expectedPackageFiles": [
+    "C:\\Users\\Paulo Gabriel\\.nuget\\packages\\docsbrvalidator\\1.3.1\\docsbrvalidator.1.3.1.nupkg.sha512",
     "C:\\Users\\Paulo Gabriel\\.nuget\\packages\\humanizer.core\\2.8.26\\humanizer.core.2.8.26.nupkg.sha512",
     "C:\\Users\\Paulo Gabriel\\.nuget\\packages\\messagepack\\2.1.152\\messagepack.2.1.152.nupkg.sha512",
     "C:\\Users\\Paulo Gabriel\\.nuget\\packages\\messagepack.annotations\\2.1.152\\messagepack.annotations.2.1.152.nupkg.sha512",

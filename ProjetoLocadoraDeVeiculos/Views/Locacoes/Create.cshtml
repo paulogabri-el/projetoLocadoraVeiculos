@@ -7,6 +7,13 @@
 <h1>Cadastro</h1>
 
 <h4>Locação</h4>
+@if (TempData["MensagemErro"] != null)
+{
+    <div class="alert alert-danger" role="alert">
+        <button type="button" class="btn btn-danger btn-sm btn-close" data-bs-dismiss="alert" arial-label="Close"></button>
+        @TempData["MensagemErro"]
+    </div>
+}
 <hr />
 <div class="row">
     <div class="col-md-4">
@@ -42,6 +49,16 @@
                 <label asp-for="ValorDiaria" class="control-label"></label>
                 <input id="valorDiaria" asp-for="ValorDiaria" class="form-control"/>
                 <span asp-validation-for="ValorDiaria" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="ValorMultaFixa" class="control-label"></label>
+                <input id="valorMultaFixa" asp-for="ValorMultaFixa" class="form-control" />
+                <span asp-validation-for="ValorMultaFixa" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="ValorMultaDiaria" class="control-label"></label>
+                <input id="ValorMultaDiaria" asp-for="ValorMultaDiaria" class="form-control" />
+                <span asp-validation-for="ValorMultaDiaria" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <input type="submit" value="Cadastrar" class="btn btn-primary" />

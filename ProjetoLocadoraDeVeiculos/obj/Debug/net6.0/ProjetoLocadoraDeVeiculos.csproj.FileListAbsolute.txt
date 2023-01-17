@@ -549,3 +549,4 @@ C:\Users\Paulo Gabriel\Desktop\202301081833ProjetoLocadoraDeVeiculos\ProjetoLoca
 C:\Users\Paulo Gabriel\Desktop\202301081833ProjetoLocadoraDeVeiculos\ProjetoLocadoraDeVeiculos\ProjetoLocadoraDeVeiculos\obj\Debug\net6.0\ProjetoLocadoraDeVeiculos.genruntimeconfig.cache
 C:\Users\Paulo Gabriel\Desktop\202301081833ProjetoLocadoraDeVeiculos\ProjetoLocadoraDeVeiculos\ProjetoLocadoraDeVeiculos\obj\Debug\net6.0\ref\ProjetoLocadoraDeVeiculos.dll
 C:\Users\Paulo Gabriel\Desktop\202301081833ProjetoLocadoraDeVeiculos\ProjetoLocadoraDeVeiculos\ProjetoLocadoraDeVeiculos\obj\Debug\net6.0\scopedcss\Views\Shared\_LayoutDeslogado.cshtml.rz.scp.css
+C:\Users\Paulo Gabriel\Desktop\202301081833ProjetoLocadoraDeVeiculos\ProjetoLocadoraDeVeiculos\ProjetoLocadoraDeVeiculos\bin\Debug\net6.0\DocumentValidator.dll

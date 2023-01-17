@@ -2,6 +2,19 @@
   "version": 3,
   "targets": {
     "net6.0": {
+      "DocsBRValidator/1.3.1": {
+        "type": "package",
+        "compile": {
+          "lib/net6.0/DocumentValidator.dll": {
+            "related": ".xml"
+          }
+        },
+        "runtime": {
+          "lib/net6.0/DocumentValidator.dll": {
+            "related": ".xml"
+          }
+        }
+      },
       "Humanizer.Core/2.8.26": {
         "type": "package",
         "compile": {
@@ -3564,6 +3577,25 @@
     }
   },
   "libraries": {
+    "DocsBRValidator/1.3.1": {
+      "sha512": "pJcy5pGecKbI/MkyxAYXXLcYImRp/diMXQqCPr1kFpBqVleMN0rS3CWMsq2J8RHaVc7seMhHkaFasAQW9IG+Zw==",
+      "type": "package",
+      "path": "docsbrvalidator/1.3.1",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "docicon.png",
+        "docsbrvalidator.1.3.1.nupkg.sha512",
+        "docsbrvalidator.nuspec",
+        "lib/net5.0/DocumentValidator.dll",
+        "lib/net5.0/DocumentValidator.xml",
+        "lib/net6.0/DocumentValidator.dll",
+        "lib/net6.0/DocumentValidator.xml",
+        "lib/netcoreapp3.1/DocumentValidator.dll",
+        "lib/netcoreapp3.1/DocumentValidator.xml",
+        "readme.txt"
+      ]
+    },
     "Humanizer.Core/2.8.26": {
       "sha512": "OiKusGL20vby4uDEswj2IgkdchC1yQ6rwbIkZDVBPIR6al2b7n3pC91elBul9q33KaBgRKhbZH3+2Ur4fnWx2A==",
       "type": "package",
@@ -10024,6 +10056,7 @@
   },
   "projectFileDependencyGroups": {
     "net6.0": [
+      "DocsBRValidator >= 1.3.1",
       "Microsoft.EntityFrameworkCore.SqlServer >= 6.0.12",
       "Microsoft.EntityFrameworkCore.Tools >= 6.0.12",
       "Microsoft.VisualStudio.Web.CodeGeneration.Design >= 6.0.11",
@@ -10076,6 +10109,10 @@
       "net6.0": {
         "targetAlias": "net6.0",
         "dependencies": {
+          "DocsBRValidator": {
+            "target": "Package",
+            "version": "[1.3.1, )"
+          },
           "Microsoft.EntityFrameworkCore.SqlServer": {
             "target": "Package",
             "version": "[6.0.12, )"

@@ -67,7 +67,7 @@ namespace ProjetoLocadoraDeVeiculos.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,ClienteId,VeiculoId,StatusLocacaoId,TemporadaId,DataLocacao,DataEntrega,QtdDiasAlugados,QtdRenovacoes,ValorDiaria,DataCadastro,DataAlteracao")] LocacaoViewModel locacao)
+        public async Task<IActionResult> Create([Bind("Id,ClienteId,VeiculoId,StatusLocacaoId,TemporadaId,DataLocacao,DataEntrega,QtdDiasAlugados,QtdRenovacoes,ValorDiaria,ValorMultaDiaria,ValorMultaFixa,DataCadastro,DataAlteracao")] LocacaoViewModel locacao)
         {
             if (ModelState.IsValid)
             {
@@ -75,9 +75,11 @@ namespace ProjetoLocadoraDeVeiculos.Controllers
                 {
                     ClienteId = locacao.ClienteId,
                     StatusLocacaoId = locacao.StatusLocacaoId,
-                    TemporadaId= locacao.TemporadaId,
-                    ValorDiaria= locacao.ValorDiaria,
-                    VeiculoId= locacao.VeiculoId,
+                    TemporadaId = locacao.TemporadaId,
+                    ValorDiaria = locacao.ValorDiaria,
+                    ValorMultaDiaria = locacao.ValorMultaDiaria,
+                    ValorMultaFixa = locacao.ValorMultaFixa,
+                    VeiculoId = locacao.VeiculoId,
                     QtdDiasAlugados = locacao.QtdDiasAlugados,
                     QtdRenovacoes = 0,
                     DataEntrega = locacao.DataEntrega,
@@ -90,17 +92,24 @@ namespace ProjetoLocadoraDeVeiculos.Controllers
                 newLoc.QtdDiasAlugados = qtddias.Days;
                 var valorTotal = (newLoc.DataEntrega - newLoc.DataLocacao).Days * newLoc.ValorDiaria;
                 newLoc.ValorTotal = valorTotal;
-                _context.Add(newLoc);
-                if(newLoc.StatusLocacaoId == 3)
+                if((newLoc.DataEntrega - newLoc.DataLocacao).Days > 30)
                 {
-                    var vec = await _context.Veiculo.FindAsync(newLoc.VeiculoId);
-                    vec.StatusVeiculoId = 2;
-                    _context.Update(vec);
+                    TempData["MensagemErro"] = $"Você não pode alugar um veículo por mais de 30 dias.";
                 }
+                else 
+                {
+                    _context.Add(newLoc);
+                    if(newLoc.StatusLocacaoId == 3)
+                    {
+                        var vec = await _context.Veiculo.FindAsync(newLoc.VeiculoId);
+                        vec.StatusVeiculoId = 2;
+                        _context.Update(vec);
+                    }
 
-
-                await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
+                    await _context.SaveChangesAsync();
+                    return RedirectToAction(nameof(Index));
+                }
+                return RedirectToAction(nameof(Create));
             }
             ViewData["ClienteId"] = new SelectList(_context.Cliente, "Id", "Nome", locacao.ClienteId);
             ViewData["StatusLocacaoId"] = new SelectList(_context.StatusLocacao, "Id", "Nome", locacao.StatusLocacaoId);
@@ -153,7 +162,7 @@ namespace ProjetoLocadoraDeVeiculos.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,ClienteId,VeiculoId,StatusLocacaoId,TemporadaId,DataLocacao,DataEntrega,QtdDiasAlugados,QtdRenovacoes,ValorDiaria,DataCadastro,DataAlteracao")] LocacaoViewModel locacao)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,ClienteId,VeiculoId,StatusLocacaoId,TemporadaId,DataLocacao,DataEntrega,QtdDiasAlugados,QtdRenovacoes,ValorDiaria,ValorMultaDiaria,ValorMultaFixa,DataCadastro,DataAlteracao")] LocacaoViewModel locacao)
         {
             if (id != locacao.Id)
             {
@@ -165,10 +174,14 @@ namespace ProjetoLocadoraDeVeiculos.Controllers
                 try
                 {
                     var editLoc = await _context.Locacao.FindAsync(id);
+                    var aux = editLoc.DataLocacao;
+                    var aux2 = editLoc.DataEntrega;
                     editLoc.ClienteId = locacao.ClienteId;
                     editLoc.StatusLocacaoId = locacao.StatusLocacaoId;
                     editLoc.TemporadaId = locacao.TemporadaId;
-                    editLoc.ValorDiaria= locacao.ValorDiaria;
+                    editLoc.ValorDiaria = locacao.ValorDiaria;
+                    editLoc.ValorMultaDiaria = locacao.ValorMultaDiaria;
+                    editLoc.ValorMultaFixa = locacao.ValorMultaFixa;
                     editLoc.VeiculoId= locacao.VeiculoId;
                     editLoc.DataEntrega = locacao.DataEntrega;
                     editLoc.DataAlteracao = DateTime.Now;
@@ -178,7 +191,12 @@ namespace ProjetoLocadoraDeVeiculos.Controllers
                     {
                         editLoc.QtdDiasAlugados = 0;
                     }
-
+                    if ((editLoc.DataEntrega - editLoc.DataLocacao).Days > 30 || (editLoc.QtdRenovacoes == 3 && editLoc.DataEntrega > aux2))
+                    {
+                        TempData["MensagemErro"] = $"Você não pode ter mais de 3 renovações ou alugar um carro por mais de 30 dias.";
+                    }
+                    
+                    else {
                     var vec = await _context.Veiculo.FindAsync(editLoc.VeiculoId);
                     
                     if (editLoc.StatusLocacaoId == 3)
@@ -187,15 +205,35 @@ namespace ProjetoLocadoraDeVeiculos.Controllers
                         _context.Update(vec);
                     }
                     if (editLoc.StatusLocacaoId == 2)
-                    {
-                        editLoc.DataEntrega = DateTime.Now;
-                        vec.StatusVeiculoId = 3;
-                        _context.Update(vec);
+                        {
+                            var difDias = (DateTime.Now - aux2).Days;
+                            editLoc.DataEntrega = DateTime.Now;
+                            vec.StatusVeiculoId = 3;
+                            _context.Update(vec);
+                            if(difDias <= 0) 
+                            {
+                                var valorTotal = (editLoc.DataEntrega - editLoc.DataLocacao).Days * editLoc.ValorDiaria;
+                                editLoc.ValorTotal = valorTotal;
+                            }
+                            else
+                            {
+                                var days = (DateTime.Now - aux2).Days;
+                                var valorTotal = ((aux2 - aux).Days * editLoc.ValorDiaria) + (days * editLoc.ValorMultaDiaria) + editLoc.ValorMultaFixa;
+                                editLoc.ValorTotal = valorTotal;
+                            }
+                            _context.Update(editLoc);
+                            await _context.SaveChangesAsync();
+
+                        }
+                    else 
+                        { 
+                            var valorTotal = (editLoc.DataEntrega - editLoc.DataLocacao).Days * editLoc.ValorDiaria;
+                            editLoc.ValorTotal = valorTotal;
+                            _context.Update(editLoc);
+                            await _context.SaveChangesAsync();
+                        }
+                        return RedirectToAction(nameof(Index));
                     }
-                    var valorTotal = (editLoc.DataEntrega - editLoc.DataLocacao).Days * editLoc.ValorDiaria;
-                    editLoc.ValorTotal = valorTotal;
-                    _context.Update(editLoc);
-                    await _context.SaveChangesAsync();
                 }
                 catch (DbUpdateConcurrencyException)
                 {
@@ -208,7 +246,7 @@ namespace ProjetoLocadoraDeVeiculos.Controllers
                         throw;
                     }
                 }
-                return RedirectToAction(nameof(Index));
+                return RedirectToAction(nameof(Edit));
             }
             ViewData["ClienteId"] = new SelectList(_context.Cliente, "Id", "Nome", locacao.ClienteId);
             ViewData["StatusLocacaoId"] = new SelectList(_context.StatusLocacao, "Id", "Nome", locacao.StatusLocacaoId);
