@@ -102,25 +102,11 @@ namespace ProjetoLocadoraDeVeiculos.Controllers
 
             if (ModelState.IsValid)
             {
-                try
-                {
                     var editCategoriaVec = await _context.CategoriaVeiculo.FindAsync(id);
                     editCategoriaVec.Nome = categoriaVeiculo.Nome;
                     editCategoriaVec.DataAlteracao = DateTime.Now;
                     _context.Update(editCategoriaVec);
                     await _context.SaveChangesAsync();
-                }
-                catch (DbUpdateConcurrencyException)
-                {
-                    if (!CategoriaVeiculoExists(categoriaVeiculo.Id))
-                    {
-                        return NotFound();
-                    }
-                    else
-                    {
-                        throw;
-                    }
-                }
                 return RedirectToAction(nameof(Index));
             }
             return View(categoriaVeiculo);
@@ -149,18 +135,26 @@ namespace ProjetoLocadoraDeVeiculos.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            if (_context.CategoriaVeiculo == null)
+            try
             {
-                return Problem("Entity set 'ProjetoLocadoraDeVeiculosContext.CategoriaVeiculo'  is null.");
-            }
-            var categoriaVeiculo = await _context.CategoriaVeiculo.FindAsync(id);
-            if (categoriaVeiculo != null)
-            {
+                if (_context.CategoriaVeiculo == null)
+                {
+                    return Problem("Entity set 'ProjetoLocadoraDeVeiculosContext.CategoriaVeiculo'  is null.");
+                }
+                var categoriaVeiculo = await _context.CategoriaVeiculo.FindAsync(id);
+                if (categoriaVeiculo != null)
+                {
                     _context.CategoriaVeiculo.Remove(categoriaVeiculo);
+                }
+                await _context.SaveChangesAsync();
+                return RedirectToAction(nameof(Index));
             }
-            
-            await _context.SaveChangesAsync();
-            return RedirectToAction(nameof(Index));
+            catch (Exception erro)
+            {
+
+                return RedirectToAction("ErroReferencialCategoria", "Error");
+            }
+
         }
 
         private bool CategoriaVeiculoExists(int id)

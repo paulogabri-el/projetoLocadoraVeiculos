@@ -56,6 +56,30 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ2xpZW50ZXNcSW5kZXguY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
+[C:/Users/Paulo Gabriel/Desktop/202301081833ProjetoLocadoraDeVeiculos/ProjetoLocadoraDeVeiculos/ProjetoLocadoraDeVeiculos/Views/Error/ErroReferencialCategoria.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRXJyb3JcRXJyb1JlZmVyZW5jaWFsQ2F0ZWdvcmlhLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Paulo Gabriel/Desktop/202301081833ProjetoLocadoraDeVeiculos/ProjetoLocadoraDeVeiculos/ProjetoLocadoraDeVeiculos/Views/Error/ErroReferencialCliente.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRXJyb3JcRXJyb1JlZmVyZW5jaWFsQ2xpZW50ZS5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Paulo Gabriel/Desktop/202301081833ProjetoLocadoraDeVeiculos/ProjetoLocadoraDeVeiculos/ProjetoLocadoraDeVeiculos/Views/Error/ErroReferencialStatusLocacao.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRXJyb3JcRXJyb1JlZmVyZW5jaWFsU3RhdHVzTG9jYWNhby5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Paulo Gabriel/Desktop/202301081833ProjetoLocadoraDeVeiculos/ProjetoLocadoraDeVeiculos/ProjetoLocadoraDeVeiculos/Views/Error/ErroReferencialStatusVeiculo.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRXJyb3JcRXJyb1JlZmVyZW5jaWFsU3RhdHVzVmVpY3Vsby5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Paulo Gabriel/Desktop/202301081833ProjetoLocadoraDeVeiculos/ProjetoLocadoraDeVeiculos/ProjetoLocadoraDeVeiculos/Views/Error/ErroReferencialTemporada.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRXJyb3JcRXJyb1JlZmVyZW5jaWFsVGVtcG9yYWRhLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Paulo Gabriel/Desktop/202301081833ProjetoLocadoraDeVeiculos/ProjetoLocadoraDeVeiculos/ProjetoLocadoraDeVeiculos/Views/Error/ErroReferencialVeiculo.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRXJyb3JcRXJyb1JlZmVyZW5jaWFsVmVpY3Vsby5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
 [C:/Users/Paulo Gabriel/Desktop/202301081833ProjetoLocadoraDeVeiculos/ProjetoLocadoraDeVeiculos/ProjetoLocadoraDeVeiculos/Views/Home/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxJbmRleC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 

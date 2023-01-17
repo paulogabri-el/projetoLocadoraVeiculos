@@ -156,18 +156,26 @@ namespace ProjetoLocadoraDeVeiculos.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            if (_context.Temporada == null)
+            try
             {
-                return Problem("Entity set 'ProjetoLocadoraDeVeiculosContext.Temporada'  is null.");
+                if (_context.Temporada == null)
+                {
+                    return Problem("Entity set 'ProjetoLocadoraDeVeiculosContext.Temporada'  is null.");
+                }
+                var temporada = await _context.Temporada.FindAsync(id);
+                if (temporada != null)
+                {
+                    _context.Temporada.Remove(temporada);
+                }
+
+                await _context.SaveChangesAsync();
+                return RedirectToAction(nameof(Index));
             }
-            var temporada = await _context.Temporada.FindAsync(id);
-            if (temporada != null)
+            catch (Exception erro)
             {
-                _context.Temporada.Remove(temporada);
+
+                return RedirectToAction("ErroReferencialTemporada", "Error");
             }
-            
-            await _context.SaveChangesAsync();
-            return RedirectToAction(nameof(Index));
         }
 
         private bool TemporadaExists(int id)

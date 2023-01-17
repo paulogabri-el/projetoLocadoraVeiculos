@@ -174,18 +174,26 @@ namespace ProjetoLocadoraDeVeiculos.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            if (_context.Veiculo == null)
+            try
             {
-                return Problem("Entity set 'ProjetoLocadoraDeVeiculosContext.Veiculo'  is null.");
+                if (_context.Veiculo == null)
+                {
+                    return Problem("Entity set 'ProjetoLocadoraDeVeiculosContext.Veiculo'  is null.");
+                }
+                var veiculo = await _context.Veiculo.FindAsync(id);
+                if (veiculo != null)
+                {
+                    _context.Veiculo.Remove(veiculo);
+                }
+
+                await _context.SaveChangesAsync();
+                return RedirectToAction(nameof(Index));
             }
-            var veiculo = await _context.Veiculo.FindAsync(id);
-            if (veiculo != null)
+            catch (Exception erro)
             {
-                _context.Veiculo.Remove(veiculo);
+
+                return RedirectToAction("ErroReferencialVeiculo", "Error");
             }
-            
-            await _context.SaveChangesAsync();
-            return RedirectToAction(nameof(Index));
         }
 
         private bool VeiculoExists(int id)
