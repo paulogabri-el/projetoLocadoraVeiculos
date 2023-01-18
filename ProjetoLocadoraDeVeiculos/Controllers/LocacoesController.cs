@@ -55,10 +55,13 @@ namespace ProjetoLocadoraDeVeiculos.Controllers
         public IActionResult Create()
         {
             ViewData["ClienteId"] = new SelectList(_context.Cliente, "Id", "Nome");
-            ViewData["StatusLocacaoId"] = new SelectList(_context.StatusLocacao, "Id", "Nome");
+            //Exibir somente os status "Agendada" e "Em andamento" no momento do cadastro da locação.
+            var resultStat = _context.StatusLocacao.Where(x => x.Id == 1 || x.Id == 3);
+            ViewData["StatusLocacaoId"] = new SelectList(resultStat, "Id", "Nome");
             ViewData["TemporadaId"] = new SelectList(_context.Temporada, "Id", "Nome");
-            var result = _context.Veiculo.Where(x => x.StatusVeiculoId == 1);
-            ViewData["VeiculoId"] = new SelectList(result, "Id", "Nome");
+            //Exibir somente veículos com status "Disponível" no momento do cadastro da locação.
+            var resultVec = _context.Veiculo.Where(x => x.StatusVeiculoId == 1);
+            ViewData["VeiculoId"] = new SelectList(resultVec, "Id", "Nome");
             return View();
         }
 
@@ -90,8 +93,18 @@ namespace ProjetoLocadoraDeVeiculos.Controllers
                 _context.Add(newLoc);
                 TimeSpan qtddias = DateTime.Now - newLoc.DataLocacao;
                 newLoc.QtdDiasAlugados = qtddias.Days;
+
+                //Validação para não setar a quantidade de dias negativo.
+                if (newLoc.QtdDiasAlugados < 0)
+                {
+                    newLoc.QtdDiasAlugados = 0;
+                }
+
+                //Calculo estipulado do valor total da locação, juros vão ser calculados somente quando a locação for alterada para o status "Finalizada".
                 var valorTotal = (newLoc.DataEntrega - newLoc.DataLocacao).Days * newLoc.ValorDiaria;
                 newLoc.ValorTotal = valorTotal;
+
+                //Validação para não permitir alugar o veículo por mais de 30 dias.
                 if((newLoc.DataEntrega - newLoc.DataLocacao).Days > 30)
                 {
                     TempData["MensagemErro"] = $"Você não pode alugar um veículo por mais de 30 dias.";
@@ -99,7 +112,8 @@ namespace ProjetoLocadoraDeVeiculos.Controllers
                 else 
                 {
                     _context.Add(newLoc);
-                    if(newLoc.StatusLocacaoId == 3)
+                    //Validação para alterar o status do veículo para "Alugado" caso o status da locação seja definido como "Em andamento".
+                    if (newLoc.StatusLocacaoId == 3)
                     {
                         var vec = await _context.Veiculo.FindAsync(newLoc.VeiculoId);
                         vec.StatusVeiculoId = 2;
@@ -150,6 +164,7 @@ namespace ProjetoLocadoraDeVeiculos.Controllers
             {
                 return NotFound();
             }
+
             ViewData["ClienteId"] = new SelectList(_context.Cliente, "Id", "Nome", locacao.ClienteId);
             ViewData["StatusLocacaoId"] = new SelectList(_context.StatusLocacao, "Id", "Nome", locacao.StatusLocacaoId);
             ViewData["TemporadaId"] = new SelectList(_context.Temporada, "Id", "Nome", locacao.TemporadaId);
@@ -187,10 +202,8 @@ namespace ProjetoLocadoraDeVeiculos.Controllers
                     editLoc.DataAlteracao = DateTime.Now;
                     TimeSpan qtddias = DateTime.Now - editLoc.DataLocacao;
                     editLoc.QtdDiasAlugados = qtddias.Days;
-                    if (editLoc.QtdDiasAlugados < 0)
-                    {
-                        editLoc.QtdDiasAlugados = 0;
-                    }
+
+                    //Validação para não permitir o veículo ser alugado por mais de 30 dias ou ter mais de 3 renovações.
                     if ((editLoc.DataEntrega - editLoc.DataLocacao).Days > 30 || (editLoc.QtdRenovacoes == 3 && editLoc.DataEntrega > aux2))
                     {
                         TempData["MensagemErro"] = $"Você não pode ter mais de 3 renovações ou alugar um carro por mais de 30 dias.";
@@ -198,13 +211,23 @@ namespace ProjetoLocadoraDeVeiculos.Controllers
                     
                     else {
                     var vec = await _context.Veiculo.FindAsync(editLoc.VeiculoId);
-                    
-                    if (editLoc.StatusLocacaoId == 3)
-                    {
-                        vec.StatusVeiculoId = 2;
-                        _context.Update(vec);
-                    }
-                    if (editLoc.StatusLocacaoId == 2)
+
+                        //Validação para alterar o status do veículo para "Alugado" caso o status da locação seja definido como "Em andamento".
+                        if (editLoc.StatusLocacaoId == 3)
+                        {
+                            vec.StatusVeiculoId = 2;
+                            _context.Update(vec);
+                        }
+
+                        //Validação para alterar o status do veículo para "Disponível" caso o status da locação seja definido como "Cancelada"
+                        if (editLoc.StatusLocacaoId == 4)
+                        {
+                            vec.StatusVeiculoId = 1;
+                            _context.Update(vec);
+                        }
+
+                        //Validação para calcular os valores totais da locação caso o status seja definido como "Finalizada".
+                        if (editLoc.StatusLocacaoId == 2)
                         {
                             var difDias = (DateTime.Now - aux2).Days;
                             editLoc.DataEntrega = DateTime.Now;
