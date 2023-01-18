@@ -16,6 +16,27 @@
         @TempData["MensagemErro"]
     </div>
 }
+@if (TempData["MensagemErro2"] != null)
+{
+    <div class="alert alert-danger" role="alert">
+        <button type="button" class="btn btn-danger btn-sm btn-close" data-bs-dismiss="alert" arial-label="Close"></button>
+        @TempData["MensagemErro2"]
+    </div>
+}
+@if (TempData["MensagemErro3"] != null)
+{
+    <div class="alert alert-danger" role="alert">
+        <button type="button" class="btn btn-danger btn-sm btn-close" data-bs-dismiss="alert" arial-label="Close"></button>
+        @TempData["MensagemErro3"]
+    </div>
+}
+@if (TempData["MensagemErro4"] != null)
+{
+    <div class="alert alert-danger" role="alert">
+        <button type="button" class="btn btn-danger btn-sm btn-close" data-bs-dismiss="alert" arial-label="Close"></button>
+        @TempData["MensagemErro4"]
+    </div>
+}
 
 <div class="row">
     <div class="col-md-4">
