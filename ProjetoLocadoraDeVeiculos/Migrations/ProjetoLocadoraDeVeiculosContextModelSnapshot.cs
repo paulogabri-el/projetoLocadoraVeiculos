@@ -26,10 +26,10 @@ namespace ProjetoLocadoraDeVeiculos.Migrations
                         .HasColumnType("int");
 
                     b.Property<DateTime>("DataAlteracao")
-                        .HasColumnType("datetime");
+                        .HasColumnType("datetime(6)");
 
                     b.Property<DateTime>("DataCadastro")
-                        .HasColumnType("datetime");
+                        .HasColumnType("datetime(6)");
 
                     b.Property<string>("Nome")
                         .IsRequired()
@@ -55,13 +55,13 @@ namespace ProjetoLocadoraDeVeiculos.Migrations
                         .HasColumnType("longtext");
 
                     b.Property<DateTime?>("DataAlteracao")
-                        .HasColumnType("datetime");
+                        .HasColumnType("datetime(6)");
 
                     b.Property<DateTime?>("DataCadastro")
-                        .HasColumnType("datetime");
+                        .HasColumnType("datetime(6)");
 
                     b.Property<DateTime>("DataNascimento")
-                        .HasColumnType("datetime");
+                        .HasColumnType("datetime(6)");
 
                     b.Property<string>("Nome")
                         .IsRequired()
@@ -82,16 +82,19 @@ namespace ProjetoLocadoraDeVeiculos.Migrations
                         .HasColumnType("int");
 
                     b.Property<DateTime?>("DataAlteracao")
-                        .HasColumnType("datetime");
+                        .HasColumnType("datetime(6)");
 
                     b.Property<DateTime?>("DataCadastro")
-                        .HasColumnType("datetime");
+                        .HasColumnType("datetime(6)");
 
                     b.Property<DateTime>("DataEntrega")
-                        .HasColumnType("datetime");
+                        .HasColumnType("datetime(6)");
+
+                    b.Property<DateTime>("DataEntregaOriginal")
+                        .HasColumnType("datetime(6)");
 
                     b.Property<DateTime>("DataLocacao")
-                        .HasColumnType("datetime");
+                        .HasColumnType("datetime(6)");
 
                     b.Property<int?>("QtdDiasAlugados")
                         .HasColumnType("int");
@@ -140,10 +143,10 @@ namespace ProjetoLocadoraDeVeiculos.Migrations
                         .HasColumnType("int");
 
                     b.Property<DateTime?>("DataAlteracao")
-                        .HasColumnType("datetime");
+                        .HasColumnType("datetime(6)");
 
                     b.Property<DateTime?>("DataCadastro")
-                        .HasColumnType("datetime");
+                        .HasColumnType("datetime(6)");
 
                     b.Property<bool?>("Internal")
                         .HasColumnType("tinyint(1)");
@@ -164,10 +167,10 @@ namespace ProjetoLocadoraDeVeiculos.Migrations
                         .HasColumnType("int");
 
                     b.Property<DateTime?>("DataAlteracao")
-                        .HasColumnType("datetime");
+                        .HasColumnType("datetime(6)");
 
                     b.Property<DateTime?>("DataCadastro")
-                        .HasColumnType("datetime");
+                        .HasColumnType("datetime(6)");
 
                     b.Property<bool?>("Internal")
                         .HasColumnType("tinyint(1)");
@@ -188,10 +191,10 @@ namespace ProjetoLocadoraDeVeiculos.Migrations
                         .HasColumnType("int");
 
                     b.Property<DateTime?>("DataAlteracao")
-                        .HasColumnType("datetime");
+                        .HasColumnType("datetime(6)");
 
                     b.Property<DateTime?>("DataCadastro")
-                        .HasColumnType("datetime");
+                        .HasColumnType("datetime(6)");
 
                     b.Property<string>("Nome")
                         .IsRequired()
@@ -222,10 +225,10 @@ namespace ProjetoLocadoraDeVeiculos.Migrations
                         .HasColumnType("longtext");
 
                     b.Property<DateTime?>("DataAlteracao")
-                        .HasColumnType("datetime");
+                        .HasColumnType("datetime(6)");
 
                     b.Property<DateTime?>("DataCadastro")
-                        .HasColumnType("datetime");
+                        .HasColumnType("datetime(6)");
 
                     b.Property<string>("Email")
                         .IsRequired()
@@ -254,10 +257,10 @@ namespace ProjetoLocadoraDeVeiculos.Migrations
                         .HasColumnType("int");
 
                     b.Property<DateTime?>("DataAlteracao")
-                        .HasColumnType("datetime");
+                        .HasColumnType("datetime(6)");
 
                     b.Property<DateTime?>("DataCadastro")
-                        .HasColumnType("datetime");
+                        .HasColumnType("datetime(6)");
 
                     b.Property<string>("Nome")
                         .IsRequired()
@@ -293,25 +296,25 @@ namespace ProjetoLocadoraDeVeiculos.Migrations
                     b.HasOne("ProjetoLocadoraDeVeiculos.Models.Cliente", "Cliente")
                         .WithMany("Locacoes")
                         .HasForeignKey("ClienteId")
-                        .OnDelete(DeleteBehavior.Restrict)
+                        .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.HasOne("ProjetoLocadoraDeVeiculos.Models.StatusLocacao", "StatusLocacao")
                         .WithMany("Veiculos")
                         .HasForeignKey("StatusLocacaoId")
-                        .OnDelete(DeleteBehavior.Restrict)
+                        .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.HasOne("ProjetoLocadoraDeVeiculos.Models.Temporada", "Temporada")
                         .WithMany("Locacoes")
                         .HasForeignKey("TemporadaId")
-                        .OnDelete(DeleteBehavior.Restrict)
+                        .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.HasOne("ProjetoLocadoraDeVeiculos.Models.Veiculo", "Veiculo")
                         .WithMany("Locacoes")
                         .HasForeignKey("VeiculoId")
-                        .OnDelete(DeleteBehavior.Restrict)
+                        .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.Navigation("Cliente");
@@ -328,13 +331,13 @@ namespace ProjetoLocadoraDeVeiculos.Migrations
                     b.HasOne("ProjetoLocadoraDeVeiculos.Models.CategoriaVeiculo", "CategoriaVeiculo")
                         .WithMany("Veiculos")
                         .HasForeignKey("CategoriaVeiculoId")
-                        .OnDelete(DeleteBehavior.Restrict)
+                        .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.HasOne("ProjetoLocadoraDeVeiculos.Models.StatusVeiculo", "StatusVeiculo")
                         .WithMany("Veiculos")
                         .HasForeignKey("StatusVeiculoId")
-                        .OnDelete(DeleteBehavior.Restrict)
+                        .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.Navigation("CategoriaVeiculo");

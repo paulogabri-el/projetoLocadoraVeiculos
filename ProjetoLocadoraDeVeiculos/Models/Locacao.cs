@@ -47,6 +47,10 @@ namespace ProjetoLocadoraDeVeiculos.Models
         [DataType(DataType.Date)]
         public DateTime DataEntrega { get; set; }
 
+        [DisplayName("Data entrega original")]
+        [DataType(DataType.Date)]
+        public DateTime DataEntregaOriginal { get; set; }
+
 
         [DisplayName("Dias alugados")]
         public int? QtdDiasAlugados { get; set; }

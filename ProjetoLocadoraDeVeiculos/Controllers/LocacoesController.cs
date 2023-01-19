@@ -86,6 +86,7 @@ namespace ProjetoLocadoraDeVeiculos.Controllers
                     QtdDiasAlugados = locacao.QtdDiasAlugados,
                     QtdRenovacoes = 0,
                     DataEntrega = locacao.DataEntrega,
+                    DataEntregaOriginal = locacao.DataEntrega,
                     DataLocacao = locacao.DataLocacao,
                     DataCadastro = DateTime.Now
 
@@ -245,11 +246,15 @@ namespace ProjetoLocadoraDeVeiculos.Controllers
                             editLoc.DataEntrega = DateTime.Now;
                             vec.StatusVeiculoId = 3;
                             _context.Update(vec);
+
+                            //Calculo caso a devolução esteja em dias.
                             if(difDias <= 0) 
                             {
                                 var valorTotal = (editLoc.DataEntrega - editLoc.DataLocacao).Days * editLoc.ValorDiaria;
                                 editLoc.ValorTotal = valorTotal;
                             }
+
+                            //Calculo caso a devolução esteja em atraso.
                             else
                             {
                                 var days = (DateTime.Now - aux2).Days;
@@ -264,6 +269,7 @@ namespace ProjetoLocadoraDeVeiculos.Controllers
                         { 
                             var valorTotal = (editLoc.DataEntrega - editLoc.DataLocacao).Days * editLoc.ValorDiaria;
                             editLoc.ValorTotal = valorTotal;
+
                             //Validação para alterar o status do veículo para "Disponível" caso o status da locação seja definido como "Cancelada" e definir valor total como R$ 0,00.
                             if (editLoc.StatusLocacaoId == 4)
                             {
