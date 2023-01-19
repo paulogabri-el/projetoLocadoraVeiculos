@@ -105,14 +105,34 @@ namespace ProjetoLocadoraDeVeiculos.Controllers
                 var valorTotal = (newLoc.DataEntrega - newLoc.DataLocacao).Days * newLoc.ValorDiaria;
                 newLoc.ValorTotal = valorTotal;
 
+
+                if (newLoc.VeiculoId != 0)
+                {
+                    var locsAgendadas = _context.Locacao.Where(x => x.StatusLocacaoId == 1 && x.VeiculoId == newLoc.VeiculoId);
+                    var idLoc = locsAgendadas.FirstOrDefault();
+
+
+                    if (idLoc.VeiculoId > 0)
+                    {
+                        var dataLocAlug = idLoc.DataLocacao;
+                        var dataDevAlug = idLoc.DataEntrega;
+
+                        if ((newLoc.DataLocacao >= dataLocAlug && newLoc.DataLocacao <= dataDevAlug) || (newLoc.DataEntrega >= dataLocAlug && newLoc.DataEntrega <= dataDevAlug))
+                        {
+                            TempData["MensagemErroValid"] = $"O veículo escolhido não pode ser alugado/agendado entre {dataLocAlug.ToString("dd/MM/yyyy")} e {dataDevAlug.ToString("dd/MM/yyyy")} porquê já está reservado.";
+                        }
+                    }
+                }
+
                 //Validação para não permitir alugar o veículo por mais de 30 dias.
-                if((newLoc.DataEntrega - newLoc.DataLocacao).Days > 30)
+                if ((newLoc.DataEntrega - newLoc.DataLocacao).Days > 30)
                 {
                     TempData["MensagemErro"] = $"Você não pode alugar um veículo por mais de 30 dias.";
                 }
+
                 else 
                 {
-                    _context.Add(newLoc);
+                    _context.Add(newLoc);0
                     //Validação para alterar o status do veículo para "Alugado" caso o status da locação seja definido como "Em andamento".
                     if (newLoc.StatusLocacaoId == 3)
                     {
