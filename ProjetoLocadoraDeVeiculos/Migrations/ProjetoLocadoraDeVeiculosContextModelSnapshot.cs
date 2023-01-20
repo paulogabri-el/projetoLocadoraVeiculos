@@ -96,6 +96,9 @@ namespace ProjetoLocadoraDeVeiculos.Migrations
                     b.Property<DateTime>("DataLocacao")
                         .HasColumnType("datetime(6)");
 
+                    b.Property<decimal?>("Desconto")
+                        .HasColumnType("decimal(65,30)");
+
                     b.Property<int?>("QtdDiasAlugados")
                         .HasColumnType("int");
 

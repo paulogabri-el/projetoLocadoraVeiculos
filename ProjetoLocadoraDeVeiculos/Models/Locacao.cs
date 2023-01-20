@@ -74,6 +74,9 @@ namespace ProjetoLocadoraDeVeiculos.Models
         [DisplayName("Valor total")]
         public decimal? ValorTotal { get; set; }
 
+        [DisplayName("Desconto")]
+        public decimal? Desconto { get; set; }
+
         [DisplayName("Data de cadastro")]
         [DataType(DataType.Date)]
         public DateTime? DataCadastro { get; set; }

@@ -79,9 +79,7 @@ namespace ProjetoLocadoraDeVeiculos.Controllers
                     ClienteId = locacao.ClienteId,
                     StatusLocacaoId = locacao.StatusLocacaoId,
                     TemporadaId = locacao.TemporadaId,
-                    ValorDiaria = locacao.ValorDiaria,
-                    ValorMultaDiaria = locacao.ValorMultaDiaria,
-                    ValorMultaFixa = locacao.ValorMultaFixa,
+                    Desconto = locacao.Desconto,
                     VeiculoId = locacao.VeiculoId,
                     QtdDiasAlugados = locacao.QtdDiasAlugados,
                     QtdRenovacoes = 0,
@@ -91,6 +89,21 @@ namespace ProjetoLocadoraDeVeiculos.Controllers
                     DataCadastro = DateTime.Now
 
                 };
+                if (newLoc.Desconto == null)
+                {
+                    newLoc.Desconto = 0;
+                }
+                var carro = _context.Veiculo.Where(x => x.Id == newLoc.VeiculoId);
+                var carVal = carro.FirstOrDefault();
+
+                var temporada = _context.Temporada.Where(x => x.Id == newLoc.TemporadaId);
+                var tempPerc = temporada.FirstOrDefault();
+
+
+                newLoc.ValorDiaria = (carVal.ValorDiaria + (carVal.ValorDiaria * tempPerc.PercentualAcrescerDiaria / 100));
+                newLoc.ValorMultaDiaria = (carVal.ValorMultaDiaria + (carVal.ValorMultaDiaria * tempPerc.PercentualAcrescerMultaDiaria / 100));
+                newLoc.ValorMultaFixa = (carVal.ValorMultaFixa + (carVal.ValorMultaFixa * tempPerc.PercentualAcrescerMultaFixa / 100));
+
                 _context.Add(newLoc);
                 TimeSpan qtddias = DateTime.Now - newLoc.DataLocacao;
                 newLoc.QtdDiasAlugados = qtddias.Days;
@@ -102,7 +115,7 @@ namespace ProjetoLocadoraDeVeiculos.Controllers
                 }
 
                 //Calculo estipulado do valor total da locação, juros vão ser calculados somente quando a locação for alterada para o status "Finalizada".
-                var valorTotal = (newLoc.DataEntrega - newLoc.DataLocacao).Days * newLoc.ValorDiaria;
+                var valorTotal = (((newLoc.DataEntrega - newLoc.DataLocacao).Days) * (carVal.ValorDiaria + (carVal.ValorDiaria * tempPerc.PercentualAcrescerDiaria / 100))) - newLoc.Desconto;
                 newLoc.ValorTotal = valorTotal;
 
 
@@ -111,17 +124,20 @@ namespace ProjetoLocadoraDeVeiculos.Controllers
                     var locsAgendadas = _context.Locacao.Where(x => x.StatusLocacaoId == 1 && x.VeiculoId == newLoc.VeiculoId);
                     var idLoc = locsAgendadas.FirstOrDefault();
 
-
-                    if (idLoc.VeiculoId > 0)
+                    if (idLoc != null)
                     {
-                        var dataLocAlug = idLoc.DataLocacao;
-                        var dataDevAlug = idLoc.DataEntrega;
-
-                        if ((newLoc.DataLocacao >= dataLocAlug && newLoc.DataLocacao <= dataDevAlug) || (newLoc.DataEntrega >= dataLocAlug && newLoc.DataEntrega <= dataDevAlug))
+                        if (idLoc.VeiculoId > 0)
                         {
-                            TempData["MensagemErroValid"] = $"O veículo escolhido não pode ser alugado/agendado entre {dataLocAlug.ToString("dd/MM/yyyy")} e {dataDevAlug.ToString("dd/MM/yyyy")} porquê já está reservado.";
+                            var dataLocAlug = idLoc.DataLocacao;
+                            var dataDevAlug = idLoc.DataEntrega;
+
+                            if ((newLoc.DataLocacao >= dataLocAlug && newLoc.DataLocacao <= dataDevAlug) || (newLoc.DataEntrega >= dataLocAlug && newLoc.DataEntrega <= dataDevAlug))
+                            {
+                                TempData["MensagemErroValid"] = $"O veículo escolhido não pode ser alugado/agendado entre {dataLocAlug.ToString("dd/MM/yyyy")} e {dataDevAlug.ToString("dd/MM/yyyy")} porquê já está reservado.";
+                            }
                         }
                     }
+                    
                 }
 
                 //Validação para não permitir alugar o veículo por mais de 30 dias.
@@ -132,7 +148,7 @@ namespace ProjetoLocadoraDeVeiculos.Controllers
 
                 else 
                 {
-                    _context.Add(newLoc);0
+                    _context.Add(newLoc);
                     //Validação para alterar o status do veículo para "Alugado" caso o status da locação seja definido como "Em andamento".
                     if (newLoc.StatusLocacaoId == 3)
                     {
@@ -153,23 +169,6 @@ namespace ProjetoLocadoraDeVeiculos.Controllers
             return View(locacao);
         }
 
-        public ActionResult Teste(int idT, int idV)
-        {
-            var vlTemp = _context.Temporada.Find(idT);
-            var vlVec = _context.Veiculo.Find(idV);
-            var result = (vlTemp.PercentualAcrescerDiaria * vlVec.ValorDiaria / 100) + vlVec.ValorDiaria;
-
-            return View(result);
-        }
-
-
-        //public decimal vltotal(int idT, int idV)
-        //{
-        //    var vlTemp = _context.Temporada.Find(idT);
-        //    var vlVec = _context.Veiculo.Find(idV);
-
-        //    return (vlVec.ValorDiaria * vlTemp.PercentualAcrescerDiaria / 100) + vlVec.ValorDiaria;
-        //}
 
 
         // GET: Locacoes/Edit/5
@@ -218,9 +217,7 @@ namespace ProjetoLocadoraDeVeiculos.Controllers
                     editLoc.ClienteId = locacao.ClienteId;
                     editLoc.StatusLocacaoId = locacao.StatusLocacaoId;
                     editLoc.TemporadaId = locacao.TemporadaId;
-                    editLoc.ValorDiaria = locacao.ValorDiaria;
-                    editLoc.ValorMultaDiaria = locacao.ValorMultaDiaria;
-                    editLoc.ValorMultaFixa = locacao.ValorMultaFixa;
+                    editLoc.Desconto = locacao.Desconto;
                     editLoc.VeiculoId= locacao.VeiculoId;
                     editLoc.DataEntrega = locacao.DataEntrega;
                     editLoc.DataAlteracao = DateTime.Now;
@@ -250,7 +247,17 @@ namespace ProjetoLocadoraDeVeiculos.Controllers
 
 
                     else {
-                    var vec = await _context.Veiculo.FindAsync(editLoc.VeiculoId);
+                        var vec = await _context.Veiculo.FindAsync(editLoc.VeiculoId);
+
+                        var carro = _context.Veiculo.Where(x => x.Id == editLoc.VeiculoId);
+                        var carVal = carro.FirstOrDefault();
+
+                        var temporada = _context.Temporada.Where(x => x.Id == editLoc.TemporadaId);
+                        var tempPerc = temporada.FirstOrDefault();
+
+                        editLoc.ValorDiaria = (carVal.ValorDiaria + (carVal.ValorDiaria * tempPerc.PercentualAcrescerDiaria));
+                        editLoc.ValorMultaDiaria = (carVal.ValorMultaDiaria + (carVal.ValorMultaDiaria * tempPerc.PercentualAcrescerMultaDiaria));
+                        editLoc.ValorMultaFixa = (carVal.ValorMultaFixa + (carVal.ValorMultaFixa * tempPerc.PercentualAcrescerMultaFixa));
 
                         //Validação para alterar o status do veículo para "Alugado" caso o status da locação seja definido como "Em andamento".
                         if (editLoc.StatusLocacaoId == 3)
@@ -266,19 +273,25 @@ namespace ProjetoLocadoraDeVeiculos.Controllers
                             editLoc.DataEntrega = DateTime.Now;
                             vec.StatusVeiculoId = 3;
                             _context.Update(vec);
+                            
 
                             //Calculo caso a devolução esteja em dias.
-                            if(difDias <= 0) 
+                            if (difDias <= 0) 
                             {
-                                var valorTotal = (editLoc.DataEntrega - editLoc.DataLocacao).Days * editLoc.ValorDiaria;
+                                var valorTotal = ((editLoc.DataEntrega - editLoc.DataLocacao).Days * (editLoc.ValorDiaria + (editLoc.ValorMultaDiaria * tempPerc.PercentualAcrescerDiaria / 100))) - editLoc.Desconto;
                                 editLoc.ValorTotal = valorTotal;
                             }
 
                             //Calculo caso a devolução esteja em atraso.
                             else
                             {
+
+                                
+
                                 var days = (DateTime.Now - aux2).Days;
-                                var valorTotal = ((aux2 - aux).Days * editLoc.ValorDiaria) + (days * editLoc.ValorMultaDiaria) + editLoc.ValorMultaFixa;
+                                var valorTotal = ((aux2 - aux).Days * (carVal.ValorDiaria + (carVal.ValorMultaDiaria * tempPerc.PercentualAcrescerDiaria / 100))) + 
+                                                 (days * (carVal.ValorMultaDiaria + (carVal.ValorMultaDiaria * tempPerc.PercentualAcrescerMultaDiaria / 100))) + 
+                                                 (carVal.ValorMultaFixa + (carVal.ValorMultaFixa * tempPerc.PercentualAcrescerMultaFixa / 100)) - editLoc.Desconto;
                                 editLoc.ValorTotal = valorTotal;
                             }
                             _context.Update(editLoc);
@@ -287,7 +300,7 @@ namespace ProjetoLocadoraDeVeiculos.Controllers
                         }
                         else 
                         { 
-                            var valorTotal = (editLoc.DataEntrega - editLoc.DataLocacao).Days * editLoc.ValorDiaria;
+                            var valorTotal = (editLoc.DataEntrega - editLoc.DataLocacao).Days * (carVal.ValorDiaria + (carVal.ValorMultaDiaria * tempPerc.PercentualAcrescerDiaria / 100)) - editLoc.Desconto;
                             editLoc.ValorTotal = valorTotal;
 
                             //Validação para alterar o status do veículo para "Disponível" caso o status da locação seja definido como "Cancelada" e definir valor total como R$ 0,00.

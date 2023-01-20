@@ -21,10 +21,12 @@ namespace ProjetoLocadoraDeVeiculos.Models.ViewModels
 
         public int? QtdDiasAlugados { get; set; }
 
-        public decimal ValorDiaria { get; set; }
+        public decimal? ValorDiaria { get; set; }
 
-        public decimal ValorMultaDiaria { get; set; }
+        public decimal? ValorMultaDiaria { get; set; }
 
-        public decimal ValorMultaFixa { get; set; }
+        public decimal? ValorMultaFixa { get; set; }
+
+        public decimal? Desconto { get; set; }
     }
 }
