@@ -23,7 +23,7 @@ namespace ProjetoLocadoraDeVeiculos.Controllers
         // GET: Usuarios
         public async Task<IActionResult> Index()
         {
-              return View(await _context.Usuario.ToListAsync());
+            return View(await _context.Usuario.ToListAsync());
         }
 
         // GET: Usuarios/Details/5
@@ -114,6 +114,7 @@ namespace ProjetoLocadoraDeVeiculos.Controllers
                     editUser.Cpf = usuario.Cpf;
                     editUser.Email = usuario.Email;
                     editUser.DataAlteracao = DateTime.Now;
+                    editUser.Senha = usuario.Senha;
                     editUser.SetSenhaHash();
                     _context.Update(editUser);
                     await _context.SaveChangesAsync();
@@ -166,14 +167,14 @@ namespace ProjetoLocadoraDeVeiculos.Controllers
             {
                 _context.Usuario.Remove(usuario);
             }
-            
+
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
         private bool UsuarioExists(int id)
         {
-          return _context.Usuario.Any(e => e.Id == id);
+            return _context.Usuario.Any(e => e.Id == id);
         }
     }
 }

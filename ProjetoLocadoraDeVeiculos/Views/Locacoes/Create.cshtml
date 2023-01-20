@@ -29,15 +29,15 @@
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
                 <label asp-for="ClienteId" class="control-label"></label>
-                <select asp-for="ClienteId" class ="form-control" asp-items="ViewBag.ClienteId"></select>
+                <select asp-for="ClienteId" class="form-control" asp-items="ViewBag.ClienteId"></select>
             </div>
             <div class="form-group">
                 <label asp-for="VeiculoId" class="control-label"></label>
-                <select asp-for="VeiculoId" class ="form-control" asp-items="ViewBag.VeiculoId"></select>
+                <select asp-for="VeiculoId" class="form-control" asp-items="ViewBag.VeiculoId"></select>
             </div>
             <div class="form-group">
                 <label asp-for="StatusLocacaoId" class="control-label"></label>
-                <select asp-for="StatusLocacaoId" class ="form-control" asp-items="ViewBag.StatusLocacaoId"></select>
+                <select asp-for="StatusLocacaoId" class="form-control" asp-items="ViewBag.StatusLocacaoId"></select>
             </div>
             <div class="form-group">
                 <label asp-for="TemporadaId" class="control-label"></label>
@@ -70,6 +70,8 @@
 </div>
 
 @section Scripts {
-    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
 
 }

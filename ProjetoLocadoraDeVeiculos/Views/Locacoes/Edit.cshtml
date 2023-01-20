@@ -71,35 +71,35 @@
             </div>
             <div class="form-group">
                 <label asp-for="Desconto" class="control-label"></label>
-                <input asp-for="Desconto" class="form-control"/>
+                <input asp-for="Desconto" class="form-control" />
                 <span asp-validation-for="Desconto" class="text-danger"></span>
-            
-            @if (Model.StatusLocacao.Id != 2 || TempData["MensagemErro"] != null)
-            {
-                <div class="form-group">
-                    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop">Salvar</button>
-                </div>
-            }
-            
-            <!-- Modal -->
-            <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-                <div class="modal-dialog">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <h1 class="modal-title fs-5" id="staticBackdropLabel">Editar Locação</h1>
-                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                        </div>
-                        <div class="modal-body">
-                            <p>Caso a data de entrega tenha sido alterada, o sistema vai considerar como uma renovação!</p>
-                            <p>Deseja continuar?</p>
-                        </div>
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Não</button>
-                            <input type="submit" value="Salvar" class="btn btn-primary">
+
+                @if (Model.StatusLocacao.Id != 2 || TempData["MensagemErro"] != null)
+                {
+                    <div class="form-group">
+                        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop">Salvar</button>
+                    </div>
+                }
+
+                <!-- Modal -->
+                <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h1 class="modal-title fs-5" id="staticBackdropLabel">Editar Locação</h1>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                            </div>
+                            <div class="modal-body">
+                                <p>Caso a data de entrega tenha sido alterada para uma data maior do que a original, o sistema vai considerar como uma renovação!</p>
+                                <p>Deseja continuar?</p>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Não</button>
+                                <input type="submit" value="Salvar" class="btn btn-primary">
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
         </form>
     </div>
 </div>
@@ -115,7 +115,9 @@
 }
 
 @section Scripts {
-    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
 }
 
 

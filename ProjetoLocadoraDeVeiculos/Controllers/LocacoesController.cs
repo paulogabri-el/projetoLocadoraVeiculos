@@ -70,7 +70,7 @@ namespace ProjetoLocadoraDeVeiculos.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,ClienteId,VeiculoId,StatusLocacaoId,TemporadaId,DataLocacao,DataEntrega,QtdDiasAlugados,QtdRenovacoes,ValorDiaria,ValorMultaDiaria,ValorMultaFixa,DataCadastro,DataAlteracao")] LocacaoViewModel locacao)
+        public async Task<IActionResult> Create([Bind("Id,ClienteId,VeiculoId,StatusLocacaoId,TemporadaId,DataLocacao,DataEntrega,QtdDiasAlugados,QtdRenovacoes,ValorDiaria,ValorMultaDiaria,ValorMultaFixa,Desconto,DataCadastro,DataAlteracao")] LocacaoViewModel locacao)
         {
             if (ModelState.IsValid)
             {
@@ -137,7 +137,7 @@ namespace ProjetoLocadoraDeVeiculos.Controllers
                             }
                         }
                     }
-                    
+
                 }
 
                 //Validação para não permitir alugar o veículo por mais de 30 dias.
@@ -146,7 +146,7 @@ namespace ProjetoLocadoraDeVeiculos.Controllers
                     TempData["MensagemErro"] = $"Você não pode alugar um veículo por mais de 30 dias.";
                 }
 
-                else 
+                else
                 {
                     _context.Add(newLoc);
                     //Validação para alterar o status do veículo para "Alugado" caso o status da locação seja definido como "Em andamento".
@@ -185,13 +185,13 @@ namespace ProjetoLocadoraDeVeiculos.Controllers
                 return NotFound();
             }
 
-             ViewData["ClienteId"] = new SelectList(_context.Cliente, "Id", "Nome", locacao.ClienteId);
-             ViewData["StatusLocacaoId"] = new SelectList(_context.StatusLocacao, "Id", "Nome", locacao.StatusLocacaoId);
-             ViewData["TemporadaId"] = new SelectList(_context.Temporada, "Id", "Nome", locacao.TemporadaId);
-             ViewData["VeiculoId"] = new SelectList(_context.Veiculo, "Id", "Nome", locacao.VeiculoId);
+            ViewData["ClienteId"] = new SelectList(_context.Cliente, "Id", "Nome", locacao.ClienteId);
+            ViewData["StatusLocacaoId"] = new SelectList(_context.StatusLocacao, "Id", "Nome", locacao.StatusLocacaoId);
+            ViewData["TemporadaId"] = new SelectList(_context.Temporada, "Id", "Nome", locacao.TemporadaId);
+            ViewData["VeiculoId"] = new SelectList(_context.Veiculo, "Id", "Nome", locacao.VeiculoId);
 
-             return View(locacao);
-            
+            return View(locacao);
+
         }
 
         // POST: Locacoes/Edit/5
@@ -199,7 +199,7 @@ namespace ProjetoLocadoraDeVeiculos.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,ClienteId,VeiculoId,StatusLocacaoId,TemporadaId,DataLocacao,DataEntrega,QtdDiasAlugados,QtdRenovacoes,ValorDiaria,ValorMultaDiaria,ValorMultaFixa,DataCadastro,DataAlteracao")] LocacaoViewModel locacao)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,ClienteId,VeiculoId,StatusLocacaoId,TemporadaId,DataLocacao,DataEntrega,QtdDiasAlugados,QtdRenovacoes,ValorDiaria,ValorMultaDiaria,ValorMultaFixa,Desconto,DataCadastro,DataAlteracao")] LocacaoViewModel locacao)
         {
             if (id != locacao.Id)
             {
@@ -218,9 +218,14 @@ namespace ProjetoLocadoraDeVeiculos.Controllers
                     editLoc.StatusLocacaoId = locacao.StatusLocacaoId;
                     editLoc.TemporadaId = locacao.TemporadaId;
                     editLoc.Desconto = locacao.Desconto;
-                    editLoc.VeiculoId= locacao.VeiculoId;
+                    editLoc.VeiculoId = locacao.VeiculoId;
                     editLoc.DataEntrega = locacao.DataEntrega;
                     editLoc.DataAlteracao = DateTime.Now;
+
+                    if (editLoc.Desconto == null)
+                    {
+                        editLoc.Desconto = 0;
+                    }
 
                     if (aux3 == 1 && editLoc.StatusLocacaoId == 2)
                     {
@@ -246,7 +251,8 @@ namespace ProjetoLocadoraDeVeiculos.Controllers
                     }
 
 
-                    else {
+                    else
+                    {
                         var vec = await _context.Veiculo.FindAsync(editLoc.VeiculoId);
 
                         var carro = _context.Veiculo.Where(x => x.Id == editLoc.VeiculoId);
@@ -255,9 +261,9 @@ namespace ProjetoLocadoraDeVeiculos.Controllers
                         var temporada = _context.Temporada.Where(x => x.Id == editLoc.TemporadaId);
                         var tempPerc = temporada.FirstOrDefault();
 
-                        editLoc.ValorDiaria = (carVal.ValorDiaria + (carVal.ValorDiaria * tempPerc.PercentualAcrescerDiaria));
-                        editLoc.ValorMultaDiaria = (carVal.ValorMultaDiaria + (carVal.ValorMultaDiaria * tempPerc.PercentualAcrescerMultaDiaria));
-                        editLoc.ValorMultaFixa = (carVal.ValorMultaFixa + (carVal.ValorMultaFixa * tempPerc.PercentualAcrescerMultaFixa));
+                        editLoc.ValorDiaria = carVal.ValorDiaria + (carVal.ValorDiaria * tempPerc.PercentualAcrescerDiaria / 100);
+                        editLoc.ValorMultaDiaria = carVal.ValorMultaDiaria + (carVal.ValorMultaDiaria * tempPerc.PercentualAcrescerMultaDiaria / 100);
+                        editLoc.ValorMultaFixa = carVal.ValorMultaFixa + (carVal.ValorMultaFixa * tempPerc.PercentualAcrescerMultaFixa / 100);
 
                         //Validação para alterar o status do veículo para "Alugado" caso o status da locação seja definido como "Em andamento".
                         if (editLoc.StatusLocacaoId == 3)
@@ -273,10 +279,10 @@ namespace ProjetoLocadoraDeVeiculos.Controllers
                             editLoc.DataEntrega = DateTime.Now;
                             vec.StatusVeiculoId = 3;
                             _context.Update(vec);
-                            
+
 
                             //Calculo caso a devolução esteja em dias.
-                            if (difDias <= 0) 
+                            if (difDias <= 0)
                             {
                                 var valorTotal = ((editLoc.DataEntrega - editLoc.DataLocacao).Days * (editLoc.ValorDiaria + (editLoc.ValorMultaDiaria * tempPerc.PercentualAcrescerDiaria / 100))) - editLoc.Desconto;
                                 editLoc.ValorTotal = valorTotal;
@@ -286,11 +292,11 @@ namespace ProjetoLocadoraDeVeiculos.Controllers
                             else
                             {
 
-                                
+
 
                                 var days = (DateTime.Now - aux2).Days;
-                                var valorTotal = ((aux2 - aux).Days * (carVal.ValorDiaria + (carVal.ValorMultaDiaria * tempPerc.PercentualAcrescerDiaria / 100))) + 
-                                                 (days * (carVal.ValorMultaDiaria + (carVal.ValorMultaDiaria * tempPerc.PercentualAcrescerMultaDiaria / 100))) + 
+                                var valorTotal = ((aux2 - aux).Days * (carVal.ValorDiaria + (carVal.ValorDiaria * tempPerc.PercentualAcrescerDiaria / 100))) +
+                                                 (days * (carVal.ValorMultaDiaria + (carVal.ValorMultaDiaria * tempPerc.PercentualAcrescerMultaDiaria / 100))) +
                                                  (carVal.ValorMultaFixa + (carVal.ValorMultaFixa * tempPerc.PercentualAcrescerMultaFixa / 100)) - editLoc.Desconto;
                                 editLoc.ValorTotal = valorTotal;
                             }
@@ -298,9 +304,9 @@ namespace ProjetoLocadoraDeVeiculos.Controllers
                             await _context.SaveChangesAsync();
 
                         }
-                        else 
-                        { 
-                            var valorTotal = (editLoc.DataEntrega - editLoc.DataLocacao).Days * (carVal.ValorDiaria + (carVal.ValorMultaDiaria * tempPerc.PercentualAcrescerDiaria / 100)) - editLoc.Desconto;
+                        else
+                        {
+                            var valorTotal = (editLoc.DataEntrega - editLoc.DataLocacao).Days * (carVal.ValorDiaria + (carVal.ValorDiaria * tempPerc.PercentualAcrescerDiaria / 100)) - editLoc.Desconto;
                             editLoc.ValorTotal = valorTotal;
 
                             //Validação para alterar o status do veículo para "Disponível" caso o status da locação seja definido como "Cancelada" e definir valor total como R$ 0,00.
@@ -363,25 +369,25 @@ namespace ProjetoLocadoraDeVeiculos.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            
-                if (_context.Locacao == null)
-                {
-                    return Problem("Entity set 'ProjetoLocadoraDeVeiculosContext.Locacao'  is null.");
-                }
-                var locacao = await _context.Locacao.FindAsync(id);
-                if (locacao != null)
-                {
-                    _context.Locacao.Remove(locacao);
-                }
 
-                await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
-            
+            if (_context.Locacao == null)
+            {
+                return Problem("Entity set 'ProjetoLocadoraDeVeiculosContext.Locacao'  is null.");
+            }
+            var locacao = await _context.Locacao.FindAsync(id);
+            if (locacao != null)
+            {
+                _context.Locacao.Remove(locacao);
+            }
+
+            await _context.SaveChangesAsync();
+            return RedirectToAction(nameof(Index));
+
         }
 
         private bool LocacaoExists(int id)
         {
-          return _context.Locacao.Any(e => e.Id == id);
+            return _context.Locacao.Any(e => e.Id == id);
         }
 
     }

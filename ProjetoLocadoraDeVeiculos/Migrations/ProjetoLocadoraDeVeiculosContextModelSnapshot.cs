@@ -25,7 +25,7 @@ namespace ProjetoLocadoraDeVeiculos.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    b.Property<DateTime>("DataAlteracao")
+                    b.Property<DateTime?>("DataAlteracao")
                         .HasColumnType("datetime(6)");
 
                     b.Property<DateTime>("DataCadastro")
