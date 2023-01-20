@@ -23,7 +23,17 @@ namespace ProjetoLocadoraDeVeiculos.Controllers
         // GET: CategoriaVeiculos
         public async Task<IActionResult> Index()
         {
-              return View(await _context.CategoriaVeiculo.ToListAsync());
+            try
+            {
+                var categorias = await _context.CategoriaVeiculo.ToListAsync();
+                return View(categorias);
+            }
+            catch (Exception)
+            {
+
+                return RedirectToAction("ErroReferencialCategoria", "Error");
+            }  
+            
         }
 
         // GET: CategoriaVeiculos/Details/5

@@ -3,35 +3,49 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Security.Cryptography.X509Certificates;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using ProjetoLocadoraDeVeiculos.Data;
+using ProjetoLocadoraDeVeiculos.Helper;
 using ProjetoLocadoraDeVeiculos.Models;
 using ProjetoLocadoraDeVeiculos.Models.ViewModels;
+using ProjetoLocadoraDeVeiculos.Repositorios;
 
 namespace ProjetoLocadoraDeVeiculos.Controllers
 {
     public class LocacoesController : Controller
     {
+        private readonly IUsuarioRepositorio _usuariorepositorio;
+
+        private readonly ISessao _sessao;
+
         private readonly ProjetoLocadoraDeVeiculosContext _context;
 
-        public LocacoesController(ProjetoLocadoraDeVeiculosContext context)
+        public LocacoesController(ProjetoLocadoraDeVeiculosContext context, IUsuarioRepositorio usuariorepositorio, ISessao sessao)
         {
             _context = context;
+            _usuariorepositorio = usuariorepositorio;
+            _sessao = sessao;
         }
 
         // GET: Locacoes
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index([FromServices] ISessao _sessao)
         {
             var projetoLocadoraDeVeiculosContext = _context.Locacao.Include(l => l.Cliente).Include(l => l.StatusLocacao).Include(l => l.Temporada).Include(l => l.Veiculo);
             var locacao = await projetoLocadoraDeVeiculosContext.ToListAsync();
+
+            if (_sessao.BuscarSessaoUsuario() == null) return RedirectToAction("Index", "Login");
+
             return View(locacao);
         }
 
         // GET: Locacoes/Details/5
-        public async Task<IActionResult> Details(int? id)
+        public async Task<IActionResult> Details([FromServices] ISessao _sessao, int? id)
         {
+            if (_sessao.BuscarSessaoUsuario() == null) return RedirectToAction("Index", "Login");
+
             if (id == null || _context.Locacao == null)
             {
                 return NotFound();
@@ -74,6 +88,7 @@ namespace ProjetoLocadoraDeVeiculos.Controllers
         {
             if (ModelState.IsValid)
             {
+                
                 var newLoc = new Locacao()
                 {
                     ClienteId = locacao.ClienteId,
@@ -89,6 +104,8 @@ namespace ProjetoLocadoraDeVeiculos.Controllers
                     DataCadastro = DateTime.Now
 
                 };
+
+
                 if (newLoc.Desconto == null)
                 {
                     newLoc.Desconto = 0;

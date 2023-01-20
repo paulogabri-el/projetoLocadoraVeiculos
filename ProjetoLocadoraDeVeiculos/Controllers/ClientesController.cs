@@ -59,7 +59,8 @@ namespace ProjetoLocadoraDeVeiculos.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("Id,Nome,Cpf,Cnh,DataNascimento,DataCadastro,DataAlteracao")] ClienteViewModel cliente)
         {
-                if (ModelState.IsValid)
+                var cpfValidade = CpfValidation.Validate(cliente.Cpf);
+                if (ModelState.IsValid && cpfValidade)
                 {
                     var newCliente = new Cliente()
                     {
