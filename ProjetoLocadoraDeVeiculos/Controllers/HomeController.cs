@@ -15,15 +15,7 @@ namespace ProjetoLocadoraDeVeiculos.Controllers
 
         public IActionResult Index()
         {
-            try
-            {
-                return View();
-            }
-            catch (Exception)
-            {
-
-                return RedirectToAction("ErroReferencialCategoria", "Error");
-            }
+            return View();
         }
 
         public IActionResult Privacy()

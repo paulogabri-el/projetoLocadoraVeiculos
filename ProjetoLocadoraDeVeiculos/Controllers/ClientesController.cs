@@ -10,6 +10,7 @@ using ProjetoLocadoraDeVeiculos.Models;
 using ProjetoLocadoraDeVeiculos.Models.ViewModels;
 using DocumentValidator;
 using System.Linq.Expressions;
+using ProjetoLocadoraDeVeiculos.Helper;
 
 namespace ProjetoLocadoraDeVeiculos.Controllers
 {
@@ -23,14 +24,16 @@ namespace ProjetoLocadoraDeVeiculos.Controllers
         }
 
         // GET: Clientes
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index([FromServices] ISessao _sessao)
         {
-              return View(await _context.Cliente.ToListAsync());
+            return View(await _context.Cliente.ToListAsync());
         }
 
         // GET: Clientes/Details/5
-        public async Task<IActionResult> Details(int? id)
+        public async Task<IActionResult> Details([FromServices] ISessao _sessao, int? id)
         {
+            if (_sessao.BuscarSessaoUsuario() == null) return RedirectToAction("Index", "Login");
+
             if (id == null || _context.Cliente == null)
             {
                 return NotFound();
@@ -47,8 +50,10 @@ namespace ProjetoLocadoraDeVeiculos.Controllers
         }
 
         // GET: Clientes/Create
-        public IActionResult Create()
+        public IActionResult Create([FromServices] ISessao _sessao)
         {
+            if (_sessao.BuscarSessaoUsuario() == null) return RedirectToAction("Index", "Login");
+
             return View();
         }
 
@@ -57,31 +62,35 @@ namespace ProjetoLocadoraDeVeiculos.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Nome,Cpf,Cnh,DataNascimento,DataCadastro,DataAlteracao")] ClienteViewModel cliente)
+        public async Task<IActionResult> Create([FromServices] ISessao _sessao, [Bind("Id,Nome,Cpf,Cnh,DataNascimento,DataCadastro,DataAlteracao")] ClienteViewModel cliente)
         {
-                var cpfValidade = CpfValidation.Validate(cliente.Cpf);
-                if (ModelState.IsValid && cpfValidade)
+            if (_sessao.BuscarSessaoUsuario() == null) return RedirectToAction("Index", "Login");
+
+            var cpfValidade = CpfValidation.Validate(cliente.Cpf);
+            if (ModelState.IsValid && cpfValidade)
+            {
+                var newCliente = new Cliente()
                 {
-                    var newCliente = new Cliente()
-                    {
-                        Id = cliente.Id,
-                        Nome = cliente.Nome,
-                        Cpf = cliente.Cpf,
-                        Cnh = cliente.Cnh,
-                        DataNascimento = cliente.DataNascimento,
-                        DataCadastro = DateTime.Now
-                    };
-                        _context.Add(newCliente);
-                        await _context.SaveChangesAsync();
-                        return RedirectToAction(nameof(Index));
-                    }
-                return View(cliente);
+                    Id = cliente.Id,
+                    Nome = cliente.Nome,
+                    Cpf = cliente.Cpf,
+                    Cnh = cliente.Cnh,
+                    DataNascimento = cliente.DataNascimento,
+                    DataCadastro = DateTime.Now
+                };
+                _context.Add(newCliente);
+                await _context.SaveChangesAsync();
+                return RedirectToAction(nameof(Index));
+            }
+            return View(cliente);
         }
-                
+
 
         // GET: Clientes/Edit/5
-        public async Task<IActionResult> Edit(int? id)
+        public async Task<IActionResult> Edit([FromServices] ISessao _sessao, int? id)
         {
+            if (_sessao.BuscarSessaoUsuario() == null) return RedirectToAction("Index", "Login");
+
             if (id == null || _context.Cliente == null)
             {
                 return NotFound();
@@ -100,8 +109,10 @@ namespace ProjetoLocadoraDeVeiculos.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,Nome,Cpf,Cnh,DataNascimento,DataCadastro,DataAlteracao")] ClienteViewModel cliente)
+        public async Task<IActionResult> Edit([FromServices] ISessao _sessao, int id, [Bind("Id,Nome,Cpf,Cnh,DataNascimento,DataCadastro,DataAlteracao")] ClienteViewModel cliente)
         {
+            if (_sessao.BuscarSessaoUsuario() == null) return RedirectToAction("Index", "Login");
+
             if (id != cliente.Id)
             {
                 return NotFound();
@@ -138,8 +149,10 @@ namespace ProjetoLocadoraDeVeiculos.Controllers
         }
 
         // GET: Clientes/Delete/5
-        public async Task<IActionResult> Delete(int? id)
+        public async Task<IActionResult> Delete([FromServices] ISessao _sessao, int? id)
         {
+            if (_sessao.BuscarSessaoUsuario() == null) return RedirectToAction("Index", "Login");
+
             if (id == null || _context.Cliente == null)
             {
                 return NotFound();
@@ -158,8 +171,10 @@ namespace ProjetoLocadoraDeVeiculos.Controllers
         // POST: Clientes/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> DeleteConfirmed(int id)
+        public async Task<IActionResult> DeleteConfirmed([FromServices] ISessao _sessao, int id)
         {
+            if (_sessao.BuscarSessaoUsuario() == null) return RedirectToAction("Index", "Login");
+
             try
             {
                 if (_context.Cliente == null)
@@ -184,7 +199,7 @@ namespace ProjetoLocadoraDeVeiculos.Controllers
 
         private bool ClienteExists(int id)
         {
-          return _context.Cliente.Any(e => e.Id == id);
+            return _context.Cliente.Any(e => e.Id == id);
         }
     }
 }

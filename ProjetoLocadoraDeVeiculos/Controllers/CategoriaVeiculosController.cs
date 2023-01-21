@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using ProjetoLocadoraDeVeiculos.Data;
+using ProjetoLocadoraDeVeiculos.Helper;
 using ProjetoLocadoraDeVeiculos.Models;
 using ProjetoLocadoraDeVeiculos.Models.ViewModels;
 
@@ -21,24 +22,20 @@ namespace ProjetoLocadoraDeVeiculos.Controllers
         }
 
         // GET: CategoriaVeiculos
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index([FromServices] ISessao _sessao)
         {
-            try
-            {
-                var categorias = await _context.CategoriaVeiculo.ToListAsync();
-                return View(categorias);
-            }
-            catch (Exception)
-            {
+            if (_sessao.BuscarSessaoUsuario() == null) return RedirectToAction("Index", "Login");
 
-                return RedirectToAction("ErroReferencialCategoria", "Error");
-            }  
-            
+            var categorias = await _context.CategoriaVeiculo.ToListAsync();
+            return View(categorias);
+
         }
 
         // GET: CategoriaVeiculos/Details/5
-        public async Task<IActionResult> Details(int? id)
+        public async Task<IActionResult> Details([FromServices] ISessao _sessao, int? id)
         {
+            if (_sessao.BuscarSessaoUsuario() == null) return RedirectToAction("Index", "Login");
+
             if (id == null || _context.CategoriaVeiculo == null)
             {
                 return NotFound();
@@ -55,8 +52,10 @@ namespace ProjetoLocadoraDeVeiculos.Controllers
         }
 
         // GET: CategoriaVeiculos/Create
-        public IActionResult Create()
+        public IActionResult Create([FromServices] ISessao _sessao)
         {
+            if (_sessao.BuscarSessaoUsuario() == null) return RedirectToAction("Index", "Login");
+
             return View();
         }
 
@@ -65,8 +64,10 @@ namespace ProjetoLocadoraDeVeiculos.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Nome,DataCadastro,DataAlteracao")] CategoriaVeiculoViewModel categoriaVeiculo)
+        public async Task<IActionResult> Create([FromServices] ISessao _sessao, [Bind("Id,Nome,DataCadastro,DataAlteracao")] CategoriaVeiculoViewModel categoriaVeiculo)
         {
+            if (_sessao.BuscarSessaoUsuario() == null) return RedirectToAction("Index", "Login");
+
             if (ModelState.IsValid)
             {
                 var newCategoriaVec = new CategoriaVeiculo()
@@ -83,8 +84,10 @@ namespace ProjetoLocadoraDeVeiculos.Controllers
         }
 
         // GET: CategoriaVeiculos/Edit/5
-        public async Task<IActionResult> Edit(int? id)
+        public async Task<IActionResult> Edit([FromServices] ISessao _sessao, int? id)
         {
+            if (_sessao.BuscarSessaoUsuario() == null) return RedirectToAction("Index", "Login");
+
             if (id == null || _context.CategoriaVeiculo == null)
             {
                 return NotFound();
@@ -103,8 +106,10 @@ namespace ProjetoLocadoraDeVeiculos.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,Nome,DataCadastro,DataAlteracao")] CategoriaVeiculoViewModel categoriaVeiculo)
+        public async Task<IActionResult> Edit([FromServices] ISessao _sessao, int id, [Bind("Id,Nome,DataCadastro,DataAlteracao")] CategoriaVeiculoViewModel categoriaVeiculo)
         {
+            if (_sessao.BuscarSessaoUsuario() == null) return RedirectToAction("Index", "Login");
+
             if (id != categoriaVeiculo.Id)
             {
                 return NotFound();
@@ -112,39 +117,43 @@ namespace ProjetoLocadoraDeVeiculos.Controllers
 
             if (ModelState.IsValid)
             {
-                    var editCategoriaVec = await _context.CategoriaVeiculo.FindAsync(id);
-                    editCategoriaVec.Nome = categoriaVeiculo.Nome;
-                    editCategoriaVec.DataAlteracao = DateTime.Now;
-                    _context.Update(editCategoriaVec);
-                    await _context.SaveChangesAsync();
+                var editCategoriaVec = await _context.CategoriaVeiculo.FindAsync(id);
+                editCategoriaVec.Nome = categoriaVeiculo.Nome;
+                editCategoriaVec.DataAlteracao = DateTime.Now;
+                _context.Update(editCategoriaVec);
+                await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
             return View(categoriaVeiculo);
         }
 
         // GET: CategoriaVeiculos/Delete/5
-        public async Task<IActionResult> Delete(int? id)
+        public async Task<IActionResult> Delete([FromServices] ISessao _sessao, int? id)
         {
-                if (id == null || _context.CategoriaVeiculo == null)
-                {
-                    return NotFound();
-                }
+            if (_sessao.BuscarSessaoUsuario() == null) return RedirectToAction("Index", "Login");
 
-                var categoriaVeiculo = await _context.CategoriaVeiculo
-                    .FirstOrDefaultAsync(m => m.Id == id);
-                if (categoriaVeiculo == null)
-                {
-                    return NotFound();
-                }
+            if (id == null || _context.CategoriaVeiculo == null)
+            {
+                return NotFound();
+            }
 
-                return View(categoriaVeiculo);
+            var categoriaVeiculo = await _context.CategoriaVeiculo
+                .FirstOrDefaultAsync(m => m.Id == id);
+            if (categoriaVeiculo == null)
+            {
+                return NotFound();
+            }
+
+            return View(categoriaVeiculo);
         }
 
         // POST: CategoriaVeiculos/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> DeleteConfirmed(int id)
+        public async Task<IActionResult> DeleteConfirmed([FromServices] ISessao _sessao, int id)
         {
+            if (_sessao.BuscarSessaoUsuario() == null) return RedirectToAction("Index", "Login");
+
             try
             {
                 if (_context.CategoriaVeiculo == null)
@@ -169,7 +178,7 @@ namespace ProjetoLocadoraDeVeiculos.Controllers
 
         private bool CategoriaVeiculoExists(int id)
         {
-          return _context.CategoriaVeiculo.Any(e => e.Id == id);
+            return _context.CategoriaVeiculo.Any(e => e.Id == id);
         }
     }
 }

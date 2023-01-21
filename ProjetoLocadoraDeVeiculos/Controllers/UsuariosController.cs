@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using ProjetoLocadoraDeVeiculos.Data;
+using ProjetoLocadoraDeVeiculos.Helper;
 using ProjetoLocadoraDeVeiculos.Models;
 using ProjetoLocadoraDeVeiculos.Models.ViewModels;
 
@@ -21,14 +22,18 @@ namespace ProjetoLocadoraDeVeiculos.Controllers
         }
 
         // GET: Usuarios
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index([FromServices] ISessao _sessao)
         {
+            if (_sessao.BuscarSessaoUsuario() == null) return RedirectToAction("Index", "Login");
+
             return View(await _context.Usuario.ToListAsync());
         }
 
         // GET: Usuarios/Details/5
-        public async Task<IActionResult> Details(int? id)
+        public async Task<IActionResult> Details([FromServices] ISessao _sessao, int? id)
         {
+            if (_sessao.BuscarSessaoUsuario() == null) return RedirectToAction("Index", "Login");
+
             if (id == null || _context.Usuario == null)
             {
                 return NotFound();
@@ -45,7 +50,7 @@ namespace ProjetoLocadoraDeVeiculos.Controllers
         }
 
         // GET: Usuarios/Create
-        public IActionResult Create()
+        public IActionResult Create([FromServices] ISessao _sessao)
         {
             return View();
         }
@@ -55,8 +60,10 @@ namespace ProjetoLocadoraDeVeiculos.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Nome,Cpf,Email,Senha,DataCadastro,DataAlteracao")] UsuarioViewModel usuario)
+        public async Task<IActionResult> Create([FromServices] ISessao _sessao, [Bind("Id,Nome,Cpf,Email,Senha,DataCadastro,DataAlteracao")] UsuarioViewModel usuario)
         {
+            if (_sessao.BuscarSessaoUsuario() == null) return RedirectToAction("Index", "Login");
+
             if (ModelState.IsValid)
             {
                 var newUser = new Usuario()
@@ -77,8 +84,10 @@ namespace ProjetoLocadoraDeVeiculos.Controllers
         }
 
         // GET: Usuarios/Edit/5
-        public async Task<IActionResult> Edit(int? id)
+        public async Task<IActionResult> Edit([FromServices] ISessao _sessao, int? id)
         {
+            if (_sessao.BuscarSessaoUsuario() == null) return RedirectToAction("Index", "Login");
+
             if (id == null || _context.Usuario == null)
             {
                 return NotFound();
@@ -97,8 +106,10 @@ namespace ProjetoLocadoraDeVeiculos.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,Nome,Cpf,Email,Senha,DataCadastro,DataAlteracao")] UsuarioViewModel usuario)
+        public async Task<IActionResult> Edit([FromServices] ISessao _sessao, int id, [Bind("Id,Nome,Cpf,Email,Senha,DataCadastro,DataAlteracao")] UsuarioViewModel usuario)
         {
+            if (_sessao.BuscarSessaoUsuario() == null) return RedirectToAction("Index", "Login");
+
             if (id != usuario.Id)
             {
                 return NotFound();
@@ -136,8 +147,10 @@ namespace ProjetoLocadoraDeVeiculos.Controllers
         }
 
         // GET: Usuarios/Delete/5
-        public async Task<IActionResult> Delete(int? id)
+        public async Task<IActionResult> Delete([FromServices] ISessao _sessao, int? id)
         {
+            if (_sessao.BuscarSessaoUsuario() == null) return RedirectToAction("Index", "Login");
+
             if (id == null || _context.Usuario == null)
             {
                 return NotFound();
@@ -156,8 +169,10 @@ namespace ProjetoLocadoraDeVeiculos.Controllers
         // POST: Usuarios/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> DeleteConfirmed(int id)
+        public async Task<IActionResult> DeleteConfirmed([FromServices] ISessao _sessao, int id)
         {
+            if (_sessao.BuscarSessaoUsuario() == null) return RedirectToAction("Index", "Login");
+
             if (_context.Usuario == null)
             {
                 return Problem("Entity set 'ProjetoLocadoraDeVeiculosContext.Usuario'  is null.");

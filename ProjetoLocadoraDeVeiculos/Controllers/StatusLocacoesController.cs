@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using ProjetoLocadoraDeVeiculos.Data;
+using ProjetoLocadoraDeVeiculos.Helper;
 using ProjetoLocadoraDeVeiculos.Models;
 using ProjetoLocadoraDeVeiculos.Models.ViewModels;
 
@@ -21,14 +22,18 @@ namespace ProjetoLocadoraDeVeiculos.Controllers
         }
 
         // GET: StatusLocacoes
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index([FromServices] ISessao _sessao)
         {
-              return View(await _context.StatusLocacao.ToListAsync());
+            if (_sessao.BuscarSessaoUsuario() == null) return RedirectToAction("Index", "Login");
+
+            return View(await _context.StatusLocacao.ToListAsync());
         }
 
         // GET: StatusLocacoes/Details/5
-        public async Task<IActionResult> Details(int? id)
+        public async Task<IActionResult> Details([FromServices] ISessao _sessao, int? id)
         {
+            if (_sessao.BuscarSessaoUsuario() == null) return RedirectToAction("Index", "Login");
+
             if (id == null || _context.StatusLocacao == null)
             {
                 return NotFound();
@@ -45,8 +50,10 @@ namespace ProjetoLocadoraDeVeiculos.Controllers
         }
 
         // GET: StatusLocacoes/Create
-        public IActionResult Create()
+        public IActionResult Create([FromServices] ISessao _sessao)
         {
+            if (_sessao.BuscarSessaoUsuario() == null) return RedirectToAction("Index", "Login");
+
             return View();
         }
 
@@ -55,8 +62,10 @@ namespace ProjetoLocadoraDeVeiculos.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Nome")] StatusLocacaoViewModel statusLocacao)
+        public async Task<IActionResult> Create([FromServices] ISessao _sessao, [Bind("Id,Nome")] StatusLocacaoViewModel statusLocacao)
         {
+            if (_sessao.BuscarSessaoUsuario() == null) return RedirectToAction("Index", "Login");
+
             if (ModelState.IsValid)
             {
                 var newStatusLoc = new StatusLocacao()
@@ -73,8 +82,10 @@ namespace ProjetoLocadoraDeVeiculos.Controllers
         }
 
         // GET: StatusLocacoes/Edit/5
-        public async Task<IActionResult> Edit(int? id)
+        public async Task<IActionResult> Edit([FromServices] ISessao _sessao, int? id)
         {
+            if (_sessao.BuscarSessaoUsuario() == null) return RedirectToAction("Index", "Login");
+
             if (id == null || _context.StatusLocacao == null)
             {
                 return NotFound();
@@ -93,8 +104,10 @@ namespace ProjetoLocadoraDeVeiculos.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,Nome")] StatusLocacaoViewModel statusLocacao)
+        public async Task<IActionResult> Edit([FromServices] ISessao _sessao, int id, [Bind("Id,Nome")] StatusLocacaoViewModel statusLocacao)
         {
+            if (_sessao.BuscarSessaoUsuario() == null) return RedirectToAction("Index", "Login");
+
             if (id != statusLocacao.Id)
             {
                 return NotFound();
@@ -127,8 +140,10 @@ namespace ProjetoLocadoraDeVeiculos.Controllers
         }
 
         // GET: StatusLocacoes/Delete/5
-        public async Task<IActionResult> Delete(int? id)
+        public async Task<IActionResult> Delete([FromServices] ISessao _sessao, int? id)
         {
+            if (_sessao.BuscarSessaoUsuario() == null) return RedirectToAction("Index", "Login");
+
             if (id == null || _context.StatusLocacao == null)
             {
                 return NotFound();
@@ -147,8 +162,10 @@ namespace ProjetoLocadoraDeVeiculos.Controllers
         // POST: StatusLocacoes/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> DeleteConfirmed(int id)
+        public async Task<IActionResult> DeleteConfirmed([FromServices] ISessao _sessao, int id)
         {
+            if (_sessao.BuscarSessaoUsuario() == null) return RedirectToAction("Index", "Login");
+
             try
             {
                 if (_context.StatusLocacao == null)
@@ -173,7 +190,7 @@ namespace ProjetoLocadoraDeVeiculos.Controllers
 
         private bool StatusLocacaoExists(int id)
         {
-          return _context.StatusLocacao.Any(e => e.Id == id);
+            return _context.StatusLocacao.Any(e => e.Id == id);
         }
     }
 }

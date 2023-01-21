@@ -17,26 +17,21 @@ namespace ProjetoLocadoraDeVeiculos.Controllers
 {
     public class LocacoesController : Controller
     {
-        private readonly IUsuarioRepositorio _usuariorepositorio;
-
-        private readonly ISessao _sessao;
 
         private readonly ProjetoLocadoraDeVeiculosContext _context;
 
-        public LocacoesController(ProjetoLocadoraDeVeiculosContext context, IUsuarioRepositorio usuariorepositorio, ISessao sessao)
+        public LocacoesController(ProjetoLocadoraDeVeiculosContext context)
         {
             _context = context;
-            _usuariorepositorio = usuariorepositorio;
-            _sessao = sessao;
         }
 
         // GET: Locacoes
         public async Task<IActionResult> Index([FromServices] ISessao _sessao)
         {
+            if (_sessao.BuscarSessaoUsuario() == null) return RedirectToAction("Index", "Login");
+
             var projetoLocadoraDeVeiculosContext = _context.Locacao.Include(l => l.Cliente).Include(l => l.StatusLocacao).Include(l => l.Temporada).Include(l => l.Veiculo);
             var locacao = await projetoLocadoraDeVeiculosContext.ToListAsync();
-
-            if (_sessao.BuscarSessaoUsuario() == null) return RedirectToAction("Index", "Login");
 
             return View(locacao);
         }
@@ -66,8 +61,11 @@ namespace ProjetoLocadoraDeVeiculos.Controllers
         }
 
         // GET: Locacoes/Create
-        public IActionResult Create()
+        [Authorize]
+        public IActionResult Create([FromServices] ISessao _sessao)
         {
+            if (_sessao.BuscarSessaoUsuario() == null) return RedirectToAction("Index", "Login");
+
             ViewData["ClienteId"] = new SelectList(_context.Cliente, "Id", "Nome");
             //Exibir somente os status "Agendada" e "Em andamento" no momento do cadastro da locação.
             var resultStat = _context.StatusLocacao.Where(x => x.Id == 1 || x.Id == 3);
@@ -84,11 +82,13 @@ namespace ProjetoLocadoraDeVeiculos.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,ClienteId,VeiculoId,StatusLocacaoId,TemporadaId,DataLocacao,DataEntrega,QtdDiasAlugados,QtdRenovacoes,ValorDiaria,ValorMultaDiaria,ValorMultaFixa,Desconto,DataCadastro,DataAlteracao")] LocacaoViewModel locacao)
+        public async Task<IActionResult> Create([FromServices] ISessao _sessao, [Bind("Id,ClienteId,VeiculoId,StatusLocacaoId,TemporadaId,DataLocacao,DataEntrega,QtdDiasAlugados,QtdRenovacoes,ValorDiaria,ValorMultaDiaria,ValorMultaFixa,Desconto,DataCadastro,DataAlteracao")] LocacaoViewModel locacao)
         {
+            if (_sessao.BuscarSessaoUsuario() == null) return RedirectToAction("Index", "Login");
+
             if (ModelState.IsValid)
             {
-                
+
                 var newLoc = new Locacao()
                 {
                     ClienteId = locacao.ClienteId,
@@ -189,8 +189,10 @@ namespace ProjetoLocadoraDeVeiculos.Controllers
 
 
         // GET: Locacoes/Edit/5
-        public async Task<IActionResult> Edit(int? id)
+        public async Task<IActionResult> Edit([FromServices] ISessao _sessao, int? id)
         {
+            if (_sessao.BuscarSessaoUsuario() == null) return RedirectToAction("Index", "Login");
+
             if (id == null || _context.Locacao == null)
             {
                 return NotFound();
@@ -216,8 +218,10 @@ namespace ProjetoLocadoraDeVeiculos.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,ClienteId,VeiculoId,StatusLocacaoId,TemporadaId,DataLocacao,DataEntrega,QtdDiasAlugados,QtdRenovacoes,ValorDiaria,ValorMultaDiaria,ValorMultaFixa,Desconto,DataCadastro,DataAlteracao")] LocacaoViewModel locacao)
+        public async Task<IActionResult> Edit([FromServices] ISessao _sessao, int id, [Bind("Id,ClienteId,VeiculoId,StatusLocacaoId,TemporadaId,DataLocacao,DataEntrega,QtdDiasAlugados,QtdRenovacoes,ValorDiaria,ValorMultaDiaria,ValorMultaFixa,Desconto,DataCadastro,DataAlteracao")] LocacaoViewModel locacao)
         {
+            if (_sessao.BuscarSessaoUsuario() == null) return RedirectToAction("Index", "Login");
+
             if (id != locacao.Id)
             {
                 return NotFound();
@@ -360,8 +364,10 @@ namespace ProjetoLocadoraDeVeiculos.Controllers
         }
 
         // GET: Locacoes/Delete/5
-        public async Task<IActionResult> Delete(int? id)
+        public async Task<IActionResult> Delete([FromServices] ISessao _sessao, int? id)
         {
+            if (_sessao.BuscarSessaoUsuario() == null) return RedirectToAction("Index", "Login");
+
             if (id == null || _context.Locacao == null)
             {
                 return NotFound();
@@ -384,8 +390,9 @@ namespace ProjetoLocadoraDeVeiculos.Controllers
         // POST: Locacoes/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> DeleteConfirmed(int id)
+        public async Task<IActionResult> DeleteConfirmed([FromServices] ISessao _sessao, int id)
         {
+            if (_sessao.BuscarSessaoUsuario() == null) return RedirectToAction("Index", "Login");
 
             if (_context.Locacao == null)
             {
