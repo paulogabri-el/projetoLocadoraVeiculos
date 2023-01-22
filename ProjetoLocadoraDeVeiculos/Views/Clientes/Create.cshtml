@@ -6,6 +6,31 @@
 <h1>Cadastro</h1>
 
 <h4>Cliente</h4>
+
+@if (TempData["MensagemErroCpf"] != null)
+{
+    <div class="alert alert-danger" role="alert">
+        <button type="button" class="btn btn-danger btn-sm btn-close" data-bs-dismiss="alert" arial-label="Close"></button>
+        @TempData["MensagemErroCpf"]
+    </div>
+}
+
+@if (TempData["MensagemErroCnh"] != null)
+{
+    <div class="alert alert-danger" role="alert">
+        <button type="button" class="btn btn-danger btn-sm btn-close" data-bs-dismiss="alert" arial-label="Close"></button>
+        @TempData["MensagemErroCnh"]
+    </div>
+}
+
+@if (TempData["MensagemErroIdade"] != null)
+{
+    <div class="alert alert-danger" role="alert">
+        <button type="button" class="btn btn-danger btn-sm btn-close" data-bs-dismiss="alert" arial-label="Close"></button>
+        @TempData["MensagemErroIdade"]
+    </div>
+}
+
 <hr />
 <div class="row">
     <div class="col-md-4">

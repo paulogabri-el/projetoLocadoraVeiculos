@@ -66,8 +66,12 @@ namespace ProjetoLocadoraDeVeiculos.Controllers
         {
             if (_sessao.BuscarSessaoUsuario() == null) return RedirectToAction("Index", "Login");
 
-            var cpfValidade = CpfValidation.Validate(cliente.Cpf);
-            if (ModelState.IsValid && cpfValidade)
+            var cpfValido = CpfValidation.Validate(cliente.Cpf);
+            var cnhValida = CnhValidation.Validate(cliente.Cnh);
+            var idadeValida = (DateTime.Now - cliente.DataNascimento).Days >= 6570;
+
+
+            if (ModelState.IsValid && cpfValido && cnhValida && idadeValida)
             {
                 var newCliente = new Cliente()
                 {
@@ -82,7 +86,19 @@ namespace ProjetoLocadoraDeVeiculos.Controllers
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            return View(cliente);
+            else
+            {
+                if (!cpfValido)
+                    TempData["MensagemErroCpf"] = $"O CPF informado não é valido!";
+
+                if (!cnhValida)
+                    TempData["MensagemErroCnh"] = $"A CNH informada não é valida!";
+
+                if (!idadeValida)
+                    TempData["MensagemErroIdade"] = $"Só é permitido pessoas com mais de 18 anos!";
+
+                return RedirectToAction(nameof(Create));
+            }
         }
 
 
@@ -118,11 +134,16 @@ namespace ProjetoLocadoraDeVeiculos.Controllers
                 return NotFound();
             }
 
-            if (ModelState.IsValid)
+            var editCliente = await _context.Cliente.FindAsync(id);
+
+            var cpfValido = CpfValidation.Validate(cliente.Cpf);
+            var cnhValida = CnhValidation.Validate(cliente.Cnh);
+            var idadeValida = (DateTime.Now - cliente.DataNascimento).Days >= 6570;
+
+            if (ModelState.IsValid && cpfValido && cnhValida && idadeValida)
             {
                 try
                 {
-                    var editCliente = await _context.Cliente.FindAsync(id);
                     editCliente.Id = cliente.Id;
                     editCliente.Nome = cliente.Nome;
                     editCliente.Cpf = cliente.Cpf;
@@ -145,7 +166,20 @@ namespace ProjetoLocadoraDeVeiculos.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            return View(cliente);
+            else
+            {
+                if (!cpfValido)
+                    TempData["MensagemErroCpf"] = $"O CPF informado não é valido!";
+
+                if (!cnhValida)
+                    TempData["MensagemErroCnh"] = $"A CNH informada não é valida!";
+
+                if (!idadeValida)
+                    TempData["MensagemErroIdade"] = $"Só é permitido pessoas com mais de 18 anos!";
+
+                return RedirectToAction(nameof(Edit));
+            }
+
         }
 
         // GET: Clientes/Delete/5

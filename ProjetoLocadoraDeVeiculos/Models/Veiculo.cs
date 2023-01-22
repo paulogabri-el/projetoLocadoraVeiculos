@@ -32,17 +32,17 @@ namespace ProjetoLocadoraDeVeiculos.Models
 
         [Required(ErrorMessage = "Campo de preenchimento obrigatório.")]
         [DisplayName("Valor diária")]
-        [DisplayFormat(DataFormatString = "{0:F2}")]
+        [DataType(DataType.Currency)]
         public decimal ValorDiaria { get; set; }
 
         [Required(ErrorMessage = "Campo de preenchimento obrigatório.")]
         [DisplayName("Valor multa fixa")]
-        [DisplayFormat(DataFormatString = "{0:F2}")]
+        [DataType(DataType.Currency)]
         public decimal ValorMultaFixa { get; set; }
 
         [Required(ErrorMessage = "Campo de preenchimento obrigatório.")]
         [DisplayName("Valor multa diária")]
-        [DisplayFormat(DataFormatString = "{0:F2}")]
+        [DataType(DataType.Currency)]
         public decimal ValorMultaDiaria { get; set; }
         
         [DisplayName("Data de cadastro")]

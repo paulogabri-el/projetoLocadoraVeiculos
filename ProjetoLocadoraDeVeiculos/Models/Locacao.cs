@@ -58,23 +58,27 @@ namespace ProjetoLocadoraDeVeiculos.Models
         [DisplayName("Renovações")]
         public int? QtdRenovacoes { get; set; }
 
-        [Required(ErrorMessage = "O valor da diária é obrigatório.")]
+
         [DisplayName("Valor calculado da diária")]
-        [DisplayFormat(DataFormatString = "{0:F2}")]
+        [DataType(DataType.Currency)]
         public decimal ValorDiaria { get; set; } //Calculado com base na diária do carro e adicionado o % em cima com base na temporada escolhida
 
-        [Required(ErrorMessage = "O valor da multa diária é obrigatório.")]
+
         [DisplayName("Valor calculado da multa diária")]
+        [DataType(DataType.Currency)]
         public decimal ValorMultaDiaria { get; set; }
 
-        [Required(ErrorMessage = "O valor da multa fixa é obrigatório.")]
+
         [DisplayName("Valor calculado da multa fixa")]
+        [DataType(DataType.Currency)]
         public decimal ValorMultaFixa { get; set; }
 
         [DisplayName("Valor total")]
+        [DataType(DataType.Currency)]
         public decimal? ValorTotal { get; set; }
 
         [DisplayName("Desconto")]
+        [DataType(DataType.Currency)]
         public decimal? Desconto { get; set; }
 
         [DisplayName("Data de cadastro")]
