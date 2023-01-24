@@ -9,7 +9,7 @@ namespace ProjetoLocadoraDeVeiculos.Models.ViewModels
 
         [Required(ErrorMessage = "Campo de preenchimento obrigatório.")]
         [DisplayName("Nome")]
-        [RegularExpression(@"^[a-zA-Zà-úÀ-Ú ]+$", ErrorMessage = "Você inseriu caracteres inválidos para o nome.")]
+        [RegularExpression(@"^[a-zA-Zà-úÀ-Ú0-9 /]+$", ErrorMessage = "Você inseriu caracteres inválidos para o nome.")]
         public string Nome { get; set; }
 
         [DisplayName("Categoria veículo")]

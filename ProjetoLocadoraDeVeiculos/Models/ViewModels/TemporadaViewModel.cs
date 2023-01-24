@@ -9,7 +9,7 @@ namespace ProjetoLocadoraDeVeiculos.Models.ViewModels
 
         [Required(ErrorMessage = "Nome da temporada é obrigatório.")]
         [DisplayName("Nome temporada")]
-        [RegularExpression(@"^[a-zA-Zà-úÀ-Ú ]+$", ErrorMessage = "Você inseriu caracteres inválidos para o nome.")]
+        [RegularExpression(@"^[a-zA-Zà-úÀ-Ú /]+$", ErrorMessage = "Você inseriu caracteres inválidos para o nome.")]
         public string Nome { get; set; }
 
         [Required(ErrorMessage = "O percentual a acrescer na diária é obrigatório.")]

@@ -9,6 +9,14 @@
 <h4>Locação</h4>
 <hr />
 
+@if (TempData["MensagemErroValid"] != null)
+{
+    <div class="alert alert-danger" role="alert">
+        <button type="button" class="btn btn-danger btn-sm btn-close" data-bs-dismiss="alert" arial-label="Close"></button>
+        @TempData["MensagemErroValid"]
+    </div>
+}
+
 @if (TempData["MensagemErro"] != null)
 {
     <div class="alert alert-danger" role="alert">

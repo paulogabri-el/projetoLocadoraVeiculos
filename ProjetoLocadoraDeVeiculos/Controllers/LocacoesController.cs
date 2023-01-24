@@ -86,7 +86,7 @@ namespace ProjetoLocadoraDeVeiculos.Controllers
         {
             if (_sessao.BuscarSessaoUsuario() == null) return RedirectToAction("Index", "Login");
 
-            
+
             if (ModelState.IsValid)
             {
 
@@ -155,9 +155,11 @@ namespace ProjetoLocadoraDeVeiculos.Controllers
                             var dataLocAlug = idLoc.DataLocacao;
                             var dataDevAlug = idLoc.DataEntrega;
 
-                            if ((newLoc.DataLocacao >= dataLocAlug && newLoc.DataLocacao <= dataDevAlug) || (newLoc.DataEntrega >= dataLocAlug && newLoc.DataEntrega <= dataDevAlug))
+                            if ((newLoc.DataLocacao >= dataLocAlug.AddDays(-1) && newLoc.DataLocacao <= dataDevAlug.AddDays(+1)) || (newLoc.DataEntrega >= dataLocAlug.AddDays(-1) && newLoc.DataEntrega <= dataDevAlug.AddDays(+1)))
                             {
-                                TempData["MensagemErroValid"] = $"O veículo escolhido não pode ser alugado/agendado entre {dataLocAlug.ToString("dd/MM/yyyy")} e {dataDevAlug.ToString("dd/MM/yyyy")} porquê já está reservado.";
+                                TempData["MensagemErroValid"] = $"O veículo escolhido não pode ser alugado/agendado entre {(dataLocAlug.AddDays(-1)).ToString("dd/MM/yyyy")} e {(dataDevAlug.AddDays(+1)).ToString("dd/MM/yyyy")} porquê já está reservado para as datas {dataLocAlug.ToString("dd/MM/yyyy")} e {dataDevAlug.ToString("dd/MM/yyyy")}! As locações precisam ter pelo menos 1 dia de diferença entre uma e outra para realizar a preparação do veículo.";
+
+                                return RedirectToAction(nameof(Create));
                             }
                         }
                     }
@@ -183,7 +185,7 @@ namespace ProjetoLocadoraDeVeiculos.Controllers
                         _context.Update(vec);
                     }
                     //if(newLoc.DataLocacao < newLoc.DataEntrega)
-                    if(DateTime.Compare(newLoc.DataLocacao, newLoc.DataEntrega) > 0)
+                    if (DateTime.Compare(newLoc.DataLocacao, newLoc.DataEntrega) > 0)
                     {
                         TempData["MensagemErro"] = $"A data de locação não pode ser menor do que a data de entrega.";
 
@@ -200,7 +202,7 @@ namespace ProjetoLocadoraDeVeiculos.Controllers
                     await _context.SaveChangesAsync();
                     return RedirectToAction(nameof(Index));
                 }
-                
+
             }
             ViewData["ClienteId"] = new SelectList(_context.Cliente, "Id", "Nome", locacao.ClienteId);
             ViewData["StatusLocacaoId"] = new SelectList(_context.StatusLocacao, "Id", "Nome", locacao.StatusLocacaoId);
@@ -242,7 +244,7 @@ namespace ProjetoLocadoraDeVeiculos.Controllers
             ViewData["ClienteId"] = new SelectList(_context.Cliente, "Id", "Nome", locacaoEdit.ClienteId);
             ViewData["StatusLocacaoId"] = new SelectList(_context.StatusLocacao, "Id", "Nome", locacaoEdit.StatusLocacaoId);
             ViewData["TemporadaId"] = new SelectList(_context.Temporada, "Id", "Nome", locacaoEdit.TemporadaId);
-            var resultVec = _context.Veiculo.Where(x => x.StatusVeiculoId == 1);
+            var resultVec = _context.Veiculo.Where(x => x.StatusVeiculoId == 1 || x.Id == locacaoEdit.VeiculoId);
             ViewData["VeiculoId"] = new SelectList(resultVec, "Id", "Nome");
 
             return View(locacaoEdit);
@@ -305,6 +307,28 @@ namespace ProjetoLocadoraDeVeiculos.Controllers
                         TempData["MensagemErro4"] = $"Locações com status 'Em andamento' só podem ter o status alterado para 'Finalizada'.";
                     }
 
+                    if (editLoc.VeiculoId != 0)
+                    {
+                        var locsAgendadas = _context.Locacao.Where(x => x.StatusLocacaoId == 1 && x.VeiculoId == editLoc.VeiculoId);
+                        var idLoc = locsAgendadas.FirstOrDefault();
+
+                        if (idLoc != null)
+                        {
+                            if (idLoc.VeiculoId > 0)
+                            {
+                                var dataLocAlug = idLoc.DataLocacao;
+                                var dataDevAlug = idLoc.DataEntrega;
+
+                                if (editLoc.DataEntrega >= dataLocAlug.AddDays(-1))
+                                {
+                                    TempData["MensagemErroValid"] = $"Você só pode alugar o veículo até {(dataLocAlug.AddDays(-2).ToString("dd/MM/yyyy"))}, pois já existe reserva para a data {(dataLocAlug.ToString("dd/MM/yyyy"))} e precisamos de um dia de antecedência para preparar o veículo!";
+                                   
+                                    return RedirectToAction(nameof(Edit));
+                                }
+                            }
+                        }
+
+                    }
 
                     else
                     {
@@ -355,7 +379,7 @@ namespace ProjetoLocadoraDeVeiculos.Controllers
                                                  (carVal.ValorMultaFixa + (carVal.ValorMultaFixa * tempPerc.PercentualAcrescerMultaFixa / 100)) - editLoc.Desconto;
                                 editLoc.ValorTotal = valorTotal;
                             }
-                            if(editLoc.ValorTotal < 0)
+                            if (editLoc.ValorTotal < 0)
                             {
                                 editLoc.ValorTotal = 0;
                             }

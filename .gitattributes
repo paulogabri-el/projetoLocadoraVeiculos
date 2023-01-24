@@ -1,4 +1,0 @@
-* linguist-vendored
-*.javascript linguist-vendored=false
-
-*.c# linguist-detectable=true

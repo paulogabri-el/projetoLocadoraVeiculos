@@ -233,6 +233,15 @@ namespace ProjetoLocadoraDeVeiculos.Controllers
                 return Problem("Entity set 'ProjetoLocadoraDeVeiculosContext.Usuario'  is null.");
             }
             var usuario = await _context.Usuario.FindAsync(id);
+            var usuarioLogado = _sessao.BuscarSessaoUsuario();
+            var novoTeste = usuarioLogado.Id;
+
+            if (usuario.Id == novoTeste)
+            {
+                TempData["MensagemErro"] = $"Não é possível excluir o usuário logado!";
+
+                return RedirectToAction("Delete");
+            }
             if (usuario != null)
             {
                 _context.Usuario.Remove(usuario);
