@@ -137,6 +137,10 @@ namespace ProjetoLocadoraDeVeiculos.Controllers
                 //Calculo estipulado do valor total da locação, juros vão ser calculados somente quando a locação for alterada para o status "Finalizada".
                 var valorTotal = (((newLoc.DataEntrega - newLoc.DataLocacao).Days) * (carVal.ValorDiaria + (carVal.ValorDiaria * tempPerc.PercentualAcrescerDiaria / 100))) - newLoc.Desconto;
                 newLoc.ValorTotal = valorTotal;
+                if (newLoc.ValorTotal < 0)
+                {
+                    newLoc.ValorTotal = 0;
+                }
 
 
                 if (newLoc.VeiculoId != 0)
@@ -164,6 +168,8 @@ namespace ProjetoLocadoraDeVeiculos.Controllers
                 if ((newLoc.DataEntrega - newLoc.DataLocacao).Days > 30)
                 {
                     TempData["MensagemErro"] = $"Você não pode alugar um veículo por mais de 30 dias.";
+
+                    return RedirectToAction(nameof(Create));
                 }
 
                 else
@@ -176,11 +182,25 @@ namespace ProjetoLocadoraDeVeiculos.Controllers
                         vec.StatusVeiculoId = 2;
                         _context.Update(vec);
                     }
+                    //if(newLoc.DataLocacao < newLoc.DataEntrega)
+                    if(DateTime.Compare(newLoc.DataLocacao, newLoc.DataEntrega) > 0)
+                    {
+                        TempData["MensagemErro"] = $"A data de locação não pode ser menor do que a data de entrega.";
+
+                        return RedirectToAction(nameof(Create));
+                    }
+
+                    if (newLoc.DataLocacao == newLoc.DataEntrega)
+                    {
+                        TempData["MensagemErro"] = $"A data de locação não pode ser igual a data de entrega.";
+
+                        return RedirectToAction(nameof(Create));
+                    }
 
                     await _context.SaveChangesAsync();
                     return RedirectToAction(nameof(Index));
                 }
-                return RedirectToAction(nameof(Create));
+                
             }
             ViewData["ClienteId"] = new SelectList(_context.Cliente, "Id", "Nome", locacao.ClienteId);
             ViewData["StatusLocacaoId"] = new SelectList(_context.StatusLocacao, "Id", "Nome", locacao.StatusLocacaoId);
@@ -262,11 +282,6 @@ namespace ProjetoLocadoraDeVeiculos.Controllers
                     editLoc.DataEntrega = locacao.DataEntrega;
                     editLoc.DataAlteracao = DateTime.Now;
 
-                    if (editLoc.Desconto == null)
-                    {
-                        editLoc.Desconto = 0;
-                    }
-
                     if (aux3 == 1 && editLoc.StatusLocacaoId == 2)
                     {
                         TempData["MensagemErro"] = $"Locações com status 'Agendada' só podem ser alteradas para 'Em andamento' ou 'Cancelada'.";
@@ -340,6 +355,10 @@ namespace ProjetoLocadoraDeVeiculos.Controllers
                                                  (carVal.ValorMultaFixa + (carVal.ValorMultaFixa * tempPerc.PercentualAcrescerMultaFixa / 100)) - editLoc.Desconto;
                                 editLoc.ValorTotal = valorTotal;
                             }
+                            if(editLoc.ValorTotal < 0)
+                            {
+                                editLoc.ValorTotal = 0;
+                            }
                             _context.Update(editLoc);
                             await _context.SaveChangesAsync();
 
@@ -348,7 +367,10 @@ namespace ProjetoLocadoraDeVeiculos.Controllers
                         {
                             var valorTotal = (editLoc.DataEntrega - editLoc.DataLocacao).Days * (carVal.ValorDiaria + (carVal.ValorDiaria * tempPerc.PercentualAcrescerDiaria / 100)) - editLoc.Desconto;
                             editLoc.ValorTotal = valorTotal;
-
+                            if (editLoc.ValorTotal < 0)
+                            {
+                                editLoc.ValorTotal = 0;
+                            }
                             //Validação para alterar o status do veículo para "Disponível" caso o status da locação seja definido como "Cancelada" e definir valor total como R$ 0,00.
                             if (editLoc.StatusLocacaoId == 4)
                             {
@@ -356,6 +378,7 @@ namespace ProjetoLocadoraDeVeiculos.Controllers
                                 vec.StatusVeiculoId = 1;
                                 _context.Update(vec);
                             }
+
                             _context.Update(editLoc);
                             await _context.SaveChangesAsync();
                         }

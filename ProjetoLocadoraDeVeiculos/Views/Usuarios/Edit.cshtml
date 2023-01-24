@@ -16,19 +16,11 @@
     </div>
 }
 
-@if (TempData["MensagemUsuarioExistente"] != null)
+@if (TempData["MensagemErro"] != null)
 {
     <div class="alert alert-danger" role="alert">
         <button type="button" class="btn btn-danger btn-sm btn-close" data-bs-dismiss="alert" arial-label="Close"></button>
-        @TempData["MensagemUsuarioExistente"]
-    </div>
-}
-
-@if (TempData["MensagemUsuarioExistente1"] != null)
-{
-    <div class="alert alert-danger" role="alert">
-        <button type="button" class="btn btn-danger btn-sm btn-close" data-bs-dismiss="alert" arial-label="Close"></button>
-        @TempData["MensagemUsuarioExistente1"]
+        @TempData["MensagemErro"]
     </div>
 }
 

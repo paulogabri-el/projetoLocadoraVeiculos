@@ -153,72 +153,51 @@ namespace ProjetoLocadoraDeVeiculos.Controllers
                 return NotFound();
             }
 
-            var usuarioExiste1 = _context.Usuario.Where(x => x.Cpf == usuario.Cpf);
-
-            if (usuarioExiste1 != null)
-            {
-                var usuarioExistente = usuarioExiste1.FirstOrDefault();
-                if (usuarioExistente != null)
-                {
-                    TempData["MensagemUsuarioExistente"] = $"Já existe um usuário cadastrado com esse CPF! Nome: {usuarioExistente.Nome}";
-
-                    return RedirectToAction(nameof(Create));
-                }
-
-            }
-
-            var usuarioExiste = _context.Usuario.Where(x => x.Email == usuario.Email);
-
-            if (usuarioExiste != null)
-            {
-                var usuarioExistente = usuarioExiste.FirstOrDefault();
-                if (usuarioExistente != null)
-                {
-                    TempData["MensagemUsuarioExistente1"] = $"Já existe um usuário cadastrado com esse email! Nome: {usuarioExistente.Nome}";
-
-                    return RedirectToAction(nameof(Create));
-                }
-
-            }
-
-            
-
             var cpfValido = CpfValidation.Validate(usuario.Cpf);
 
-            if (ModelState.IsValid && cpfValido)
+            try
             {
-                try
+                if (ModelState.IsValid && cpfValido)
                 {
-                    var editUser = await _context.Usuario.FindAsync(id);
-                    editUser.Id = usuario.Id;
-                    editUser.Nome = usuario.Nome;
-                    editUser.Cpf = usuario.Cpf;
-                    editUser.Email = usuario.Email;
-                    editUser.DataAlteracao = DateTime.Now;
-                    editUser.Senha = usuario.Senha;
-                    editUser.SetSenhaHash();
-                    _context.Update(editUser);
-                    await _context.SaveChangesAsync();
+                    try
+                    {
+                        var editUser = await _context.Usuario.FindAsync(id);
+                        editUser.Id = usuario.Id;
+                        editUser.Nome = usuario.Nome;
+                        editUser.Cpf = usuario.Cpf;
+                        editUser.Email = usuario.Email;
+                        editUser.DataAlteracao = DateTime.Now;
+                        editUser.Senha = usuario.Senha;
+                        editUser.SetSenhaHash();
+                        _context.Update(editUser);
+                        await _context.SaveChangesAsync();
+                    }
+                    catch (DbUpdateConcurrencyException)
+                    {
+                        if (!UsuarioExists(usuario.Id))
+                        {
+                            return NotFound();
+                        }
+                        else
+                        {
+                            throw;
+                        }
+                    }
+                    return RedirectToAction(nameof(Index));
                 }
-                catch (DbUpdateConcurrencyException)
+                else
                 {
-                    if (!UsuarioExists(usuario.Id))
-                    {
-                        return NotFound();
-                    }
-                    else
-                    {
-                        throw;
-                    }
-                }
-                return RedirectToAction(nameof(Index));
-            }
-            else
-            {
-                if (!cpfValido)
-                    TempData["MensagemErroCpf"] = $"O CPF informado não é valido!";
+                    if (!cpfValido)
+                        TempData["MensagemErroCpf"] = $"O CPF informado não é valido!";
 
-                return RedirectToAction(nameof(Create));
+                    return RedirectToAction(nameof(Edit));
+                }
+            }
+            catch (Exception)
+            {
+                TempData["MensagemErro"] = $"O CPF ou o EMAIL que está tentando utilizar já está sendo utilizado por outro usuário!";
+
+                return RedirectToAction("Edit");
             }
         }
 

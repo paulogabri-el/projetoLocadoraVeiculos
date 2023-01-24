@@ -1,12 +1,13 @@
-﻿using System.Globalization;
+﻿using System.Data.SqlTypes;
+using System.Globalization;
 
 namespace ProjetoLocadoraDeVeiculos.Helper
 {
     public class Convert
     {
-        public static decimal ConvertStringDecimal(string desconto)
+        public static decimal ConvertStringDecimal(string? desconto)
         {
-            var money = decimal.Parse(desconto);
+            var money = String.IsNullOrEmpty(desconto) ? 0 : Decimal.Parse(desconto);
 
             return money;
         }

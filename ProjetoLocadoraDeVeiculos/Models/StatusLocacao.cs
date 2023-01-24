@@ -8,8 +8,8 @@ namespace ProjetoLocadoraDeVeiculos.Models
     {
         public int Id { get; set; }
 
-        [System.ComponentModel.DataAnnotations.Required(ErrorMessage = "Nome do status é obrigatório.")]
-        [DisplayName("Nome do cliente")]
+        [System.ComponentModel.DataAnnotations.Required(ErrorMessage = "Descrição do status é obrigatório.")]
+        [DisplayName("Status")]
         [RegularExpression(@"^[a-zA-Zà-úÀ-Ú /]+$", ErrorMessage = "Você inseriu caracteres inválidos para o nome.")]
         public string Nome { get; set; }
 
