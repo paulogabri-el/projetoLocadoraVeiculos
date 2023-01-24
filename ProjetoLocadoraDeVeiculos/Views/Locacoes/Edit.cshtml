@@ -1,4 +1,4 @@
-﻿@model ProjetoLocadoraDeVeiculos.Models.Locacao
+﻿@model ProjetoLocadoraDeVeiculos.Models.ViewModels.LocacaoViewModel
 
 @{
     ViewData["Title"] = "Editar";
@@ -74,12 +74,13 @@
                 <input asp-for="Desconto" class="form-control" />
                 <span asp-validation-for="Desconto" class="text-danger"></span>
 
-                @if (Model.StatusLocacao.Id != 2 || TempData["MensagemErro"] != null)
+                @if (Model.StatusLocacaoId != 2 || TempData["MensagemErro"] != null)
                 {
                     <div class="form-group">
                         <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop">Salvar</button>
                     </div>
                 }
+            </div>
 
                 <!-- Modal -->
                 <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
@@ -109,7 +110,7 @@
 </div>
 <br />
 
-@if (Model.StatusLocacao.Id == 2)
+@if (Model.StatusLocacaoId == 2)
 {
     <h5 class="flex-nowrap">Locações finalizadas não podem ser editadas!</h5>
 }

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using DocumentValidator;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
@@ -64,7 +65,38 @@ namespace ProjetoLocadoraDeVeiculos.Controllers
         {
             if (_sessao.BuscarSessaoUsuario() == null) return RedirectToAction("Index", "Login");
 
-            if (ModelState.IsValid)
+            var usuarioExiste1 = _context.Usuario.Where(x => x.Cpf == usuario.Cpf);
+
+            if (usuarioExiste1 != null)
+            {
+                var usuarioExistente = usuarioExiste1.FirstOrDefault();
+                if (usuarioExistente != null)
+                {
+                    TempData["MensagemUsuarioExistente"] = $"Já existe um usuário cadastrado com esse CPF! Nome: {usuarioExistente.Nome}";
+
+                    return RedirectToAction(nameof(Create));
+                }
+
+            }
+
+            var usuarioExiste = _context.Usuario.Where(x => x.Email == usuario.Email);
+
+            if (usuarioExiste != null)
+            {
+                var usuarioExistente = usuarioExiste.FirstOrDefault();
+                if (usuarioExistente != null)
+                {
+                    TempData["MensagemUsuarioExistente1"] = $"Já existe um usuário cadastrado com esse email! Nome: {usuarioExistente.Nome}";
+
+                    return RedirectToAction(nameof(Create));
+                }
+
+            }
+            
+
+            var cpfValido = CpfValidation.Validate(usuario.Cpf);
+
+            if (ModelState.IsValid && cpfValido)
             {
                 var newUser = new Usuario()
                 {
@@ -80,7 +112,13 @@ namespace ProjetoLocadoraDeVeiculos.Controllers
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            return View(usuario);
+            else
+            {
+                if (!cpfValido)
+                    TempData["MensagemErroCpf"] = $"O CPF informado não é valido!";
+
+                return RedirectToAction(nameof(Create));
+            }
         }
 
         // GET: Usuarios/Edit/5
@@ -115,7 +153,39 @@ namespace ProjetoLocadoraDeVeiculos.Controllers
                 return NotFound();
             }
 
-            if (ModelState.IsValid)
+            var usuarioExiste1 = _context.Usuario.Where(x => x.Cpf == usuario.Cpf);
+
+            if (usuarioExiste1 != null)
+            {
+                var usuarioExistente = usuarioExiste1.FirstOrDefault();
+                if (usuarioExistente != null)
+                {
+                    TempData["MensagemUsuarioExistente"] = $"Já existe um usuário cadastrado com esse CPF! Nome: {usuarioExistente.Nome}";
+
+                    return RedirectToAction(nameof(Create));
+                }
+
+            }
+
+            var usuarioExiste = _context.Usuario.Where(x => x.Email == usuario.Email);
+
+            if (usuarioExiste != null)
+            {
+                var usuarioExistente = usuarioExiste.FirstOrDefault();
+                if (usuarioExistente != null)
+                {
+                    TempData["MensagemUsuarioExistente1"] = $"Já existe um usuário cadastrado com esse email! Nome: {usuarioExistente.Nome}";
+
+                    return RedirectToAction(nameof(Create));
+                }
+
+            }
+
+            
+
+            var cpfValido = CpfValidation.Validate(usuario.Cpf);
+
+            if (ModelState.IsValid && cpfValido)
             {
                 try
                 {
@@ -143,7 +213,13 @@ namespace ProjetoLocadoraDeVeiculos.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            return View(usuario);
+            else
+            {
+                if (!cpfValido)
+                    TempData["MensagemErroCpf"] = $"O CPF informado não é valido!";
+
+                return RedirectToAction(nameof(Create));
+            }
         }
 
         // GET: Usuarios/Delete/5

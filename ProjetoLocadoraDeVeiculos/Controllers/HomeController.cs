@@ -18,7 +18,7 @@ namespace ProjetoLocadoraDeVeiculos.Controllers
             return View();
         }
 
-        public IActionResult Privacy()
+        public IActionResult Sobre()
         {
             return View();
         }

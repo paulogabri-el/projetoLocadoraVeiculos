@@ -66,39 +66,65 @@ namespace ProjetoLocadoraDeVeiculos.Controllers
         {
             if (_sessao.BuscarSessaoUsuario() == null) return RedirectToAction("Index", "Login");
 
+            //var clienteExiste = _context.Cliente.Where(x => x.Cpf == cliente.Cpf);
+
+            //if (clienteExiste != null)
+            //{
+            //    var clienteExistente = clienteExiste.FirstOrDefault();
+            //    if (clienteExistente != null)
+            //    {
+            //        TempData["MensagemClienteExistente"] = $"Já existe uma pessoa cadastrada com esse CPF! Nome: {clienteExistente.Nome}";
+
+            //        return RedirectToAction(nameof(Create));
+            //    }
+                
+            //}
+
             var cpfValido = CpfValidation.Validate(cliente.Cpf);
             var cnhValida = CnhValidation.Validate(cliente.Cnh);
             var idadeValida = (DateTime.Now - cliente.DataNascimento).Days >= 6570;
 
-
-            if (ModelState.IsValid && cpfValido && cnhValida && idadeValida)
+            try
             {
-                var newCliente = new Cliente()
+                if (ModelState.IsValid && cpfValido && cnhValida && idadeValida)
                 {
-                    Id = cliente.Id,
-                    Nome = cliente.Nome,
-                    Cpf = cliente.Cpf,
-                    Cnh = cliente.Cnh,
-                    DataNascimento = cliente.DataNascimento,
-                    DataCadastro = DateTime.Now
-                };
-                _context.Add(newCliente);
-                await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
+                    var cpf = Helper.Convert.RemoverCaracteresCpf(cliente.Cpf);
+
+                    var newCliente = new Cliente()
+                    {
+                        Id = cliente.Id,
+                        Nome = cliente.Nome,
+                        Cpf = cpf,
+                        Cnh = cliente.Cnh,
+                        DataNascimento = cliente.DataNascimento,
+                        DataCadastro = DateTime.Now
+                    };
+                    _context.Add(newCliente);
+                    await _context.SaveChangesAsync();
+                    return RedirectToAction(nameof(Index));
+                }
+                else
+                {
+                    if (!cpfValido)
+                        TempData["MensagemErroCpf"] = $"O CPF informado não é valido!";
+
+                    if (!cnhValida)
+                        TempData["MensagemErroCnh"] = $"A CNH informada não é valida!";
+
+                    if (!idadeValida)
+                        TempData["MensagemErroIdade"] = $"Só é permitido pessoas com mais de 18 anos!";
+
+                    return RedirectToAction(nameof(Create));
+                }
             }
-            else
+            catch (Exception)
             {
-                if (!cpfValido)
-                    TempData["MensagemErroCpf"] = $"O CPF informado não é valido!";
 
-                if (!cnhValida)
-                    TempData["MensagemErroCnh"] = $"A CNH informada não é valida!";
+                TempData["MensagemErro"] = $"O CPF ou a CNH que está tentando utilizar já está sendo utilizado por outro cliente!";
 
-                if (!idadeValida)
-                    TempData["MensagemErroIdade"] = $"Só é permitido pessoas com mais de 18 anos!";
-
-                return RedirectToAction(nameof(Create));
+                return RedirectToAction("Create");
             }
+            
         }
 
 
@@ -134,51 +160,65 @@ namespace ProjetoLocadoraDeVeiculos.Controllers
                 return NotFound();
             }
 
+            
             var editCliente = await _context.Cliente.FindAsync(id);
 
             var cpfValido = CpfValidation.Validate(cliente.Cpf);
             var cnhValida = CnhValidation.Validate(cliente.Cnh);
             var idadeValida = (DateTime.Now - cliente.DataNascimento).Days >= 6570;
 
-            if (ModelState.IsValid && cpfValido && cnhValida && idadeValida)
+            try
             {
-                try
+                if (ModelState.IsValid && cpfValido && cnhValida && idadeValida)
                 {
-                    editCliente.Id = cliente.Id;
-                    editCliente.Nome = cliente.Nome;
-                    editCliente.Cpf = cliente.Cpf;
-                    editCliente.Cnh = cliente.Cnh;
-                    editCliente.DataNascimento = cliente.DataNascimento;
-                    editCliente.DataAlteracao = DateTime.Now;
-                    _context.Update(editCliente);
-                    await _context.SaveChangesAsync();
+                    try
+                    {
+                        var cpf = Helper.Convert.RemoverCaracteresCpf(cliente.Cpf);
+
+                        editCliente.Id = cliente.Id;
+                        editCliente.Nome = cliente.Nome;
+                        editCliente.Cpf = cpf;
+                        editCliente.Cnh = cliente.Cnh;
+                        editCliente.DataNascimento = cliente.DataNascimento;
+                        editCliente.DataAlteracao = DateTime.Now;
+                        _context.Update(editCliente);
+                        await _context.SaveChangesAsync();
+                    }
+                    catch (DbUpdateConcurrencyException)
+                    {
+                        if (!ClienteExists(cliente.Id))
+                        {
+                            return NotFound();
+                        }
+                        else
+                        {
+                            throw;
+                        }
+                    }
+                    return RedirectToAction(nameof(Index));
                 }
-                catch (DbUpdateConcurrencyException)
+                else
                 {
-                    if (!ClienteExists(cliente.Id))
-                    {
-                        return NotFound();
-                    }
-                    else
-                    {
-                        throw;
-                    }
+                    if (!cpfValido)
+                        TempData["MensagemErroCpf"] = $"O CPF informado não é valido!";
+
+                    if (!cnhValida)
+                        TempData["MensagemErroCnh"] = $"A CNH informada não é valida!";
+
+                    if (!idadeValida)
+                        TempData["MensagemErroIdade"] = $"Só é permitido pessoas com mais de 18 anos!";
+
+                    return RedirectToAction(nameof(Edit));
                 }
-                return RedirectToAction(nameof(Index));
             }
-            else
+            catch (Exception)
             {
-                if (!cpfValido)
-                    TempData["MensagemErroCpf"] = $"O CPF informado não é valido!";
 
-                if (!cnhValida)
-                    TempData["MensagemErroCnh"] = $"A CNH informada não é valida!";
+                TempData["MensagemErro"] = $"O CPF ou a CNH que está tentando utilizar já está sendo utilizado por outro cliente!";
 
-                if (!idadeValida)
-                    TempData["MensagemErroIdade"] = $"Só é permitido pessoas com mais de 18 anos!";
-
-                return RedirectToAction(nameof(Edit));
+                return RedirectToAction("Edit");
             }
+            
 
         }
 

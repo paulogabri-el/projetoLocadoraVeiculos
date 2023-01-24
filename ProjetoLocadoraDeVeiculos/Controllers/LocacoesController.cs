@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Security.Cryptography.X509Certificates;
 using System.Threading.Tasks;
@@ -61,7 +62,6 @@ namespace ProjetoLocadoraDeVeiculos.Controllers
         }
 
         // GET: Locacoes/Create
-        [Authorize]
         public IActionResult Create([FromServices] ISessao _sessao)
         {
             if (_sessao.BuscarSessaoUsuario() == null) return RedirectToAction("Index", "Login");
@@ -86,15 +86,18 @@ namespace ProjetoLocadoraDeVeiculos.Controllers
         {
             if (_sessao.BuscarSessaoUsuario() == null) return RedirectToAction("Index", "Login");
 
+            
             if (ModelState.IsValid)
             {
+
+                var desconto = Helper.Convert.ConvertStringDecimal(locacao.Desconto);
 
                 var newLoc = new Locacao()
                 {
                     ClienteId = locacao.ClienteId,
                     StatusLocacaoId = locacao.StatusLocacaoId,
                     TemporadaId = locacao.TemporadaId,
-                    Desconto = locacao.Desconto,
+                    Desconto = desconto,
                     VeiculoId = locacao.VeiculoId,
                     QtdDiasAlugados = locacao.QtdDiasAlugados,
                     QtdRenovacoes = 0,
@@ -199,17 +202,30 @@ namespace ProjetoLocadoraDeVeiculos.Controllers
             }
 
             var locacao = await _context.Locacao.FindAsync(id);
+            var desconto = locacao.Desconto?.ToString("F2", CultureInfo.InvariantCulture).Replace(".", ",");
+
+            var locacaoEdit = new LocacaoViewModel()
+            {
+                ClienteId = locacao.ClienteId,
+                StatusLocacaoId = locacao.StatusLocacaoId,
+                TemporadaId = locacao.TemporadaId,
+                VeiculoId = locacao.VeiculoId,
+                DataEntrega = locacao.DataEntrega,
+                Desconto = desconto
+            };
+
             if (locacao == null)
             {
                 return NotFound();
             }
 
-            ViewData["ClienteId"] = new SelectList(_context.Cliente, "Id", "Nome", locacao.ClienteId);
-            ViewData["StatusLocacaoId"] = new SelectList(_context.StatusLocacao, "Id", "Nome", locacao.StatusLocacaoId);
-            ViewData["TemporadaId"] = new SelectList(_context.Temporada, "Id", "Nome", locacao.TemporadaId);
-            ViewData["VeiculoId"] = new SelectList(_context.Veiculo, "Id", "Nome", locacao.VeiculoId);
+            ViewData["ClienteId"] = new SelectList(_context.Cliente, "Id", "Nome", locacaoEdit.ClienteId);
+            ViewData["StatusLocacaoId"] = new SelectList(_context.StatusLocacao, "Id", "Nome", locacaoEdit.StatusLocacaoId);
+            ViewData["TemporadaId"] = new SelectList(_context.Temporada, "Id", "Nome", locacaoEdit.TemporadaId);
+            var resultVec = _context.Veiculo.Where(x => x.StatusVeiculoId == 1);
+            ViewData["VeiculoId"] = new SelectList(resultVec, "Id", "Nome");
 
-            return View(locacao);
+            return View(locacaoEdit);
 
         }
 
@@ -227,10 +243,13 @@ namespace ProjetoLocadoraDeVeiculos.Controllers
                 return NotFound();
             }
 
+
             if (ModelState.IsValid)
             {
                 try
                 {
+                    var desconto = Helper.Convert.ConvertStringDecimal(locacao.Desconto);
+
                     var editLoc = await _context.Locacao.FindAsync(id);
                     var aux = editLoc.DataLocacao;
                     var aux2 = editLoc.DataEntrega;
@@ -238,7 +257,7 @@ namespace ProjetoLocadoraDeVeiculos.Controllers
                     editLoc.ClienteId = locacao.ClienteId;
                     editLoc.StatusLocacaoId = locacao.StatusLocacaoId;
                     editLoc.TemporadaId = locacao.TemporadaId;
-                    editLoc.Desconto = locacao.Desconto;
+                    editLoc.Desconto = desconto;
                     editLoc.VeiculoId = locacao.VeiculoId;
                     editLoc.DataEntrega = locacao.DataEntrega;
                     editLoc.DataAlteracao = DateTime.Now;

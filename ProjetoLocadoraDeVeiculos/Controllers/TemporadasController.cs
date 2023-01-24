@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
@@ -68,13 +69,17 @@ namespace ProjetoLocadoraDeVeiculos.Controllers
 
             if (ModelState.IsValid)
             {
+                var percentualAcrescerDiaria = Helper.Convert.ConvertStringDecimal(temporada.PercentualAcrescerDiaria);
+                var percentualAcrescerMultaFixa = Helper.Convert.ConvertStringDecimal(temporada.PercentualAcrescerMultaFixa);
+                var percentualAcrescerMultaDiaria = Helper.Convert.ConvertStringDecimal(temporada.PercentualAcrescerMultaDiaria);
+
                 var newTemp = new Temporada()
                 {
                     Id = temporada.Id,
                     Nome = temporada.Nome,
-                    PercentualAcrescerDiaria = temporada.PercentualAcrescerDiaria,
-                    PercentualAcrescerMultaFixa = temporada.PercentualAcrescerMultaFixa,
-                    PercentualAcrescerMultaDiaria = temporada.PercentualAcrescerMultaDiaria,
+                    PercentualAcrescerDiaria = percentualAcrescerDiaria,
+                    PercentualAcrescerMultaFixa = percentualAcrescerMultaFixa,
+                    PercentualAcrescerMultaDiaria = percentualAcrescerMultaDiaria,
                     DataCadastro = DateTime.Now
                 };
                 _context.Add(newTemp);
@@ -95,11 +100,24 @@ namespace ProjetoLocadoraDeVeiculos.Controllers
             }
 
             var temporada = await _context.Temporada.FindAsync(id);
+
+            var percentualAcrescerDiaria = temporada.PercentualAcrescerDiaria.ToString("F2", CultureInfo.InvariantCulture).Replace(".", ",");
+            var percentualAcrescerMultaFixa = temporada.PercentualAcrescerMultaFixa.ToString("F2", CultureInfo.InvariantCulture).Replace(".", ",");
+            var percentualAcrescerMultaDiaria = temporada.PercentualAcrescerMultaDiaria.ToString("F2", CultureInfo.InvariantCulture).Replace(".", ",");
+
+            var temporadaEdit = new TemporadaViewModel()
+            {
+                Nome = temporada.Nome,
+                PercentualAcrescerDiaria = percentualAcrescerDiaria,
+                PercentualAcrescerMultaFixa = percentualAcrescerMultaFixa,
+                PercentualAcrescerMultaDiaria = percentualAcrescerMultaDiaria
+            };
+
             if (temporada == null)
             {
                 return NotFound();
             }
-            return View(temporada);
+            return View(temporadaEdit);
         }
 
         // POST: Temporadas/Edit/5
@@ -120,12 +138,16 @@ namespace ProjetoLocadoraDeVeiculos.Controllers
             {
                 try
                 {
+                    var percentualAcrescerDiaria = Helper.Convert.ConvertStringDecimal(temporada.PercentualAcrescerDiaria);
+                    var percentualAcrescerMultaFixa = Helper.Convert.ConvertStringDecimal(temporada.PercentualAcrescerMultaFixa);
+                    var percentualAcrescerMultaDiaria = Helper.Convert.ConvertStringDecimal(temporada.PercentualAcrescerMultaDiaria);
+
                     var editTemp = await _context.Temporada.FindAsync(id);
                     editTemp.Id = temporada.Id;
                     editTemp.Nome = temporada.Nome;
-                    editTemp.PercentualAcrescerDiaria = temporada.PercentualAcrescerDiaria;
-                    editTemp.PercentualAcrescerMultaFixa = temporada.PercentualAcrescerMultaFixa;
-                    editTemp.PercentualAcrescerMultaDiaria = temporada.PercentualAcrescerMultaDiaria;
+                    editTemp.PercentualAcrescerDiaria = percentualAcrescerDiaria;
+                    editTemp.PercentualAcrescerMultaFixa = percentualAcrescerMultaFixa;
+                    editTemp.PercentualAcrescerMultaDiaria = percentualAcrescerMultaDiaria;
                     editTemp.DataAlteracao = DateTime.Now;
                     _context.Update(editTemp);
                     await _context.SaveChangesAsync();

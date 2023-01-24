@@ -2,11 +2,16 @@
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 
+
 namespace ProjetoLocadoraDeVeiculos.Models
 {
     public class StatusVeiculo
     {
         public int Id { get; set; }
+
+        [System.ComponentModel.DataAnnotations.Required(ErrorMessage = "Nome do status é obrigatório.")]
+        [DisplayName("Nome do cliente")]
+        [RegularExpression(@"^[a-zA-Zà-úÀ-Ú /]+$", ErrorMessage = "Você inseriu caracteres inválidos para o nome.")]
         public string Nome { get; set; }
 
         [DisplayName("Data Cadastro")]

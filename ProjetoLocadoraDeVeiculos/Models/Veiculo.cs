@@ -1,9 +1,11 @@
-﻿using System.ComponentModel;
+﻿using Microsoft.EntityFrameworkCore;
+using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace ProjetoLocadoraDeVeiculos.Models
 {
+    [Index(nameof(Placa), IsUnique = true)]
     public class Veiculo
     {
         public int Id { get; set; }
@@ -21,6 +23,7 @@ namespace ProjetoLocadoraDeVeiculos.Models
         
         [Required(ErrorMessage = "Campo de preenchimento obrigatório.")]
         [DisplayName("Placa veículo")]
+        [RegularExpression(@"^[a-zA-Z0-9-]+$", ErrorMessage = "É permitido somente letras, números, e hífen.")]
         public string Placa { get; set; }
 
         [DisplayName("Status veiculo")]

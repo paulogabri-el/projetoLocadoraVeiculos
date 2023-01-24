@@ -1,4 +1,4 @@
-﻿@model ProjetoLocadoraDeVeiculos.Models.Veiculo
+﻿@model ProjetoLocadoraDeVeiculos.Models.ViewModels.VeiculoViewModel
 
 @{
     ViewData["Title"] = "Cadastro";
@@ -7,6 +7,15 @@
 <h1>Cadastro</h1>
 
 <h4>Veículo</h4>
+
+@if (TempData["MensagemVeiculoExistente"] != null)
+{
+    <div class="alert alert-danger" role="alert">
+        <button type="button" class="btn btn-danger btn-sm btn-close" data-bs-dismiss="alert" arial-label="Close"></button>
+        @TempData["MensagemVeiculoExistente"]
+    </div>
+}
+
 <hr />
 <div class="row">
     <div class="col-md-4">
@@ -45,16 +54,6 @@
                 <input asp-for="ValorMultaDiaria" class="form-control" />
                 <span asp-validation-for="ValorMultaDiaria" class="text-danger"></span>
             </div>
-            @*<div class="form-group">
-                <label asp-for="DataCadastro" class="control-label"></label>
-                <input asp-for="DataCadastro" class="form-control" />
-                <span asp-validation-for="DataCadastro" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="DataAlteracao" class="control-label"></label>
-                <input asp-for="DataAlteracao" class="form-control" />
-                <span asp-validation-for="DataAlteracao" class="text-danger"></span>
-            </div>*@
             <div class="form-group">
                 <input type="submit" value="Cadastrar" class="btn btn-primary" />
             </div>

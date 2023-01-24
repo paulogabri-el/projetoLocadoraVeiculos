@@ -1,4 +1,4 @@
-﻿@model ProjetoLocadoraDeVeiculos.Models.Veiculo
+﻿@model ProjetoLocadoraDeVeiculos.Models.ViewModels.VeiculoViewModel
 
 @{
     ViewData["Title"] = "Editar";
@@ -7,6 +7,15 @@
 <h1>Editar</h1>
 
 <h4>Veículo</h4>
+
+@if (TempData["MensagemVeiculoExistente"] != null)
+{
+    <div class="alert alert-danger" role="alert">
+        <button type="button" class="btn btn-danger btn-sm btn-close" data-bs-dismiss="alert" arial-label="Close"></button>
+        @TempData["MensagemVeiculoExistente"]
+    </div>
+}
+
 <hr />
 <div class="row">
     <div class="col-md-4">
@@ -48,7 +57,7 @@
                 <input asp-for="ValorMultaDiaria" class="form-control" />
                 <span asp-validation-for="ValorMultaDiaria" class="text-danger"></span>
             </div>
-            @if (Model.StatusVeiculo.Id != 2)
+            @if (Model.StatusVeiculoId != 2)
             {
                 <div class="form-group">
                     <input type="submit" value="Salvar" class="btn btn-primary" />
@@ -63,7 +72,7 @@
     <a asp-action="Index">Voltar</a>
 </div>
 <br />
-@if (Model.StatusVeiculo.Id == 2)
+@if (Model.StatusVeiculoId == 2)
 {
     <h5 class="flex-nowrap">Veículos com status 'Alugado' não podem ser editados!</h5>
 }

@@ -48,11 +48,11 @@ namespace ProjetoLocadoraDeVeiculos.Migrations
 
                     b.Property<string>("Cnh")
                         .IsRequired()
-                        .HasColumnType("longtext");
+                        .HasColumnType("varchar(255)");
 
                     b.Property<string>("Cpf")
                         .IsRequired()
-                        .HasColumnType("longtext");
+                        .HasColumnType("varchar(255)");
 
                     b.Property<DateTime?>("DataAlteracao")
                         .HasColumnType("datetime(6)");
@@ -68,6 +68,12 @@ namespace ProjetoLocadoraDeVeiculos.Migrations
                         .HasColumnType("longtext");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("Cnh")
+                        .IsUnique();
+
+                    b.HasIndex("Cpf")
+                        .IsUnique();
 
                     b.ToTable("Cliente");
                 });
@@ -225,7 +231,7 @@ namespace ProjetoLocadoraDeVeiculos.Migrations
 
                     b.Property<string>("Cpf")
                         .IsRequired()
-                        .HasColumnType("longtext");
+                        .HasColumnType("varchar(255)");
 
                     b.Property<DateTime?>("DataAlteracao")
                         .HasColumnType("datetime(6)");
@@ -235,7 +241,7 @@ namespace ProjetoLocadoraDeVeiculos.Migrations
 
                     b.Property<string>("Email")
                         .IsRequired()
-                        .HasColumnType("longtext");
+                        .HasColumnType("varchar(255)");
 
                     b.Property<string>("Nome")
                         .IsRequired()
@@ -246,6 +252,12 @@ namespace ProjetoLocadoraDeVeiculos.Migrations
                         .HasColumnType("longtext");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("Cpf")
+                        .IsUnique();
+
+                    b.HasIndex("Email")
+                        .IsUnique();
 
                     b.ToTable("Usuario");
                 });
@@ -271,7 +283,7 @@ namespace ProjetoLocadoraDeVeiculos.Migrations
 
                     b.Property<string>("Placa")
                         .IsRequired()
-                        .HasColumnType("longtext");
+                        .HasColumnType("varchar(255)");
 
                     b.Property<int>("StatusVeiculoId")
                         .HasColumnType("int");
@@ -288,6 +300,9 @@ namespace ProjetoLocadoraDeVeiculos.Migrations
                     b.HasKey("Id");
 
                     b.HasIndex("CategoriaVeiculoId");
+
+                    b.HasIndex("Placa")
+                        .IsUnique();
 
                     b.HasIndex("StatusVeiculoId");
 

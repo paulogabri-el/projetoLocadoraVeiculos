@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
@@ -71,18 +72,24 @@ namespace ProjetoLocadoraDeVeiculos.Controllers
         {
             if (_sessao.BuscarSessaoUsuario() == null) return RedirectToAction("Index", "Login");
 
+
             if (ModelState.IsValid)
             {
+                var valorDiaria = Helper.Convert.ConvertStringDecimal(veiculo.ValorDiaria);
+                var valorMultaFixa = Helper.Convert.ConvertStringDecimal(veiculo.ValorMultaFixa);
+                var valorMultaDiaria = Helper.Convert.ConvertStringDecimal(veiculo.ValorMultaDiaria);
+                var placa = Helper.Convert.RemoverCaracteresPlaca(veiculo.Placa);
+
                 var newCar = new Veiculo()
                 {
                     Id = veiculo.Id,
                     Nome = veiculo.Nome,
                     CategoriaVeiculoId = veiculo.CategoriaVeiculoId,
-                    Placa = veiculo.Placa,
+                    Placa = placa,
                     StatusVeiculoId = veiculo.StatusVeiculoId,
-                    ValorDiaria = veiculo.ValorDiaria,
-                    ValorMultaFixa = veiculo.ValorMultaFixa,
-                    ValorMultaDiaria = veiculo.ValorMultaDiaria,
+                    ValorDiaria = valorDiaria,
+                    ValorMultaFixa = valorMultaFixa,
+                    ValorMultaDiaria = valorMultaDiaria,
                     DataCadastro = DateTime.Now
                 };
                 _context.Add(newCar);
@@ -105,13 +112,30 @@ namespace ProjetoLocadoraDeVeiculos.Controllers
             }
 
             var veiculo = await _context.Veiculo.FindAsync(id);
+            var valorDiaria = veiculo.ValorDiaria.ToString("F2", CultureInfo.InvariantCulture).Replace(".", ",");
+            var valorMultaDiaria = veiculo.ValorMultaDiaria.ToString("F2", CultureInfo.InvariantCulture).Replace(".", ",");
+            var valorMultaFixa = veiculo.ValorMultaFixa.ToString("F2", CultureInfo.InvariantCulture).Replace(".", ",");
+            var placa = Helper.Convert.RemoverCaracteresPlaca(veiculo.Placa);
+
+            var veiculoEdit = new VeiculoViewModel()
+            {
+                Nome = veiculo.Nome,
+                CategoriaVeiculoId = veiculo.CategoriaVeiculoId,
+                StatusVeiculoId = veiculo.StatusVeiculoId,
+                Placa = placa,
+                ValorDiaria = valorDiaria,
+                ValorMultaDiaria = valorMultaDiaria,
+                ValorMultaFixa = valorMultaFixa,
+
+            };
+
             if (veiculo == null)
             {
                 return NotFound();
             }
-            ViewData["CategoriaVeiculoId"] = new SelectList(_context.CategoriaVeiculo, "Id", "Nome", veiculo.CategoriaVeiculoId);
-            ViewData["StatusVeiculoId"] = new SelectList(_context.StatusVeiculo, "Id", "Nome", veiculo.StatusVeiculoId);
-            return View(veiculo);
+            ViewData["CategoriaVeiculoId"] = new SelectList(_context.CategoriaVeiculo, "Id", "Nome", veiculoEdit.CategoriaVeiculoId);
+            ViewData["StatusVeiculoId"] = new SelectList(_context.StatusVeiculo, "Id", "Nome", veiculoEdit.StatusVeiculoId);
+            return View(veiculoEdit);
         }
 
         // POST: Veiculos/Edit/5
@@ -128,18 +152,24 @@ namespace ProjetoLocadoraDeVeiculos.Controllers
                 return NotFound();
             }
 
+
             if (ModelState.IsValid)
             {
                 try
                 {
+                    var valorDiaria = Helper.Convert.ConvertStringDecimal(veiculo.ValorDiaria);
+                    var valorMultaFixa = Helper.Convert.ConvertStringDecimal(veiculo.ValorMultaFixa);
+                    var valorMultaDiaria = Helper.Convert.ConvertStringDecimal(veiculo.ValorMultaDiaria);
+
+
                     var editCar = await _context.Veiculo.FindAsync(id);
                     editCar.Nome = veiculo.Nome;
                     editCar.CategoriaVeiculoId = veiculo.CategoriaVeiculoId;
                     editCar.Placa = veiculo.Placa;
                     editCar.StatusVeiculoId = veiculo.StatusVeiculoId;
-                    editCar.ValorDiaria = veiculo.ValorDiaria;
-                    editCar.ValorMultaFixa = veiculo.ValorMultaFixa;
-                    editCar.ValorMultaDiaria = veiculo.ValorMultaDiaria;
+                    editCar.ValorDiaria = valorDiaria;
+                    editCar.ValorMultaFixa = valorMultaFixa;
+                    editCar.ValorMultaDiaria = valorMultaDiaria;
                     editCar.DataAlteracao = DateTime.Now;
                     _context.Update(editCar);
                     await _context.SaveChangesAsync();

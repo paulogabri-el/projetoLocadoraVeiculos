@@ -1,0 +1,48 @@
+﻿@{
+    ViewData["Title"] = "Sobre";
+}
+<div class="container flex-column align-items-center">
+    <div class="logo">
+        <img src="../image/logoLocVec.png" alt="LOCVEC - Locadora de Veículos" />
+    </div>
+    <br />
+    <div class="text-center">
+        <h1 class="display-4 text-uppercase fs-3">Regras da aplicação</h1>
+    </div>
+    <br />
+    <hr class="border border-dark border-2 opacity-50">
+    <br />
+    <ul class="list-group list-group-flush">
+        <li class="list-group-item">
+            - Os status que vem confirgurados previamente não podem ser editados e nem excluídos pois podem afetar a integridadde do sistema! <br />
+            (Qualquer alteração, pode ser passada para o autor da aplicação para fazer os devidos ajustes.)<br /><br />
+        </li>
+        <li class="list-group-item">
+            - As temporadas são configuradas para acrescer (ou não) o valor da diária do veículo e as multas no momento do cadastro da locação! <br />
+            (O valor também pode ser zero, não alterando em nada o valor da diária e das multas dos veículos.)<br /><br />
+        </li>
+        <li class="list-group-item">- As categorias dos veículos precisam sem configuradas antes do cadastro do veículo, pois não é permitido o cadastro de um veículo sem categoria! <br /><br /></li>
+        <li class="list-group-item">- O valor da diária do carro e das devidas multas são configurados no cadastro do veículo e podem ser alterados no momento da locação de acordo com a temporada escolhida!. <br /><br /></li>
+        <li class="list-group-item">- No momento do cadastro da locação só ficam disponíveis os status "Agendada" e "Em andamento", sendo necessário a edição posterior para finalizar a locação! <br /><br /></li>
+        <li class="list-group-item">
+            - Os valores são calculados automaticamente após o cadastro da locação, ou seja, ele mostra o total estimado, porém em caso de finalização, o sistema vai calcular o valor total baseado na data de finalização! <br />
+            (As multas são exibidas no valor total somente após a finalização da locação.) <br /><br />
+        </li>
+        <li class="list-group-item">- Só é possível alterar as locações para o status "Cancelada" se a locação ainda estiver em andamento, no qual é definido o valor total como R$ 0,00! <br /><br /></li>
+        <li class="list-group-item">- Cada cliente só pode renovar a data de entrega (alterar a data de entrega para uma data maior do que a original) por no máximo 3 vezes, ou permanecer no máximo 30 dias com o veículo! <br /><br /></li>
+        <li class="list-group-item">- Os dias alugados exibidos na tela de locações, são calculados automaticamente, baseado na data que o cliente pegou o carro até a data atual!<br /><br /></li>
+        <li class="list-group-item">- Ao definir uma locação como "Agendada" o status do veículo permanece como "Disponível", porém, caso haja alguma tentativa de locação para uma data que o veículo já esteja agendado, o sistema não vai permitir! <br /><br /></li>
+        <li class="list-group-item">
+            - Ao definir uma locação como "Em andamento" o status do veículo em questão é alterado automatiacmente para "Alugado", e no caso da locação ser alterada para "Finalizada",
+            o status do veículo é alterado para "Manutenção", sendo necessário a alteração pelo operador depois do veículo ficar disponível novamente para locação!
+        </li>
+    </ul>
+    <br />
+    <br />
+    <br />
+    <div class="text-center">
+        <a class="btn btn-outline-dark" asp-action="Index">Voltar para a tela inicial</a>
+    </div>
+    <br />
+    <hr class="border border-dark border-2 opacity-50">
+</div>

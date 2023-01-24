@@ -1,14 +1,20 @@
 ﻿using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
+using System.Net.Mail;
 using DocumentValidator;
+using Microsoft.EntityFrameworkCore;
 
 namespace ProjetoLocadoraDeVeiculos.Models
 {
+    [Index(nameof(Cpf), IsUnique = true)]
+    [Index(nameof(Cnh), IsUnique = true)]
     public class Cliente
     {
         public int Id { get; set; }
+
         [Required(ErrorMessage = "Nome é obrigatório.")]
         [DisplayName("Nome do cliente")]
+        [RegularExpression(@"^[a-zA-Zà-úÀ-Ú ]+$", ErrorMessage = "Você inseriu caracteres inválidos para o nome.")]
         public string Nome { get; set; }
         [Required(ErrorMessage = "CPF é obrigatório.")]
         [DisplayName("CPF")]

@@ -15,6 +15,12 @@ builder.Services.AddDbContext<ProjetoLocadoraDeVeiculosContext>(options =>
     ServerVersion.AutoDetect(builder.Configuration.GetConnectionString("ProjetoLocadoraDeVeiculosContext")),
     builder => builder.MigrationsAssembly("ProjetoLocadoraDeVeiculos")));
 
+builder.Services.AddRazorPages().AddMvcOptions(options =>
+{
+    options.ModelBindingMessageProvider.SetValueMustNotBeNullAccessor(
+            _ => "Este campo é obrigatório!.");
+});
+
 // Add services to the container.
 builder.Services.AddControllersWithViews();
 builder.Services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
