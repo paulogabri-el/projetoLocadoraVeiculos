@@ -29,16 +29,7 @@
                     @Html.DisplayNameFor(model => model.DataLocacao)
                 </th>
                 <th>
-                    @Html.DisplayNameFor(model => model.DataEntregaOriginal)
-                </th>
-                <th>
                     @Html.DisplayNameFor(model => model.DataEntrega)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.QtdDiasAlugados)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.QtdRenovacoes)
                 </th>
                 <th>
                     @Html.DisplayNameFor(model => model.ValorDiaria)
@@ -54,12 +45,6 @@
                 </th>
                 <th>
                     @Html.DisplayNameFor(model => model.ValorTotal)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.DataCadastro)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.DataAlteracao)
                 </th>
                 <th></th>
             </tr>
@@ -84,16 +69,7 @@
                         @Html.DisplayFor(modelItem => item.DataLocacao)
                     </td>
                     <td>
-                        @Html.DisplayFor(modelItem => item.DataEntregaOriginal)
-                    </td>
-                    <td>
                         @Html.DisplayFor(modelItem => item.DataEntrega)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.QtdDiasAlugados)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.QtdRenovacoes)
                     </td>
                     <td>
                         @Html.DisplayFor(modelItem => item.ValorDiaria)
@@ -109,12 +85,6 @@
                     </td>
                     <td>
                         @Html.DisplayFor(modelItem => item.ValorTotal)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.DataCadastro)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.DataAlteracao)
                     </td>
                     <td>
                         <a asp-action="Edit" asp-route-id="@item.Id">Editar</a> |

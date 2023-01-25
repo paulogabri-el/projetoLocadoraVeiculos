@@ -59,17 +59,17 @@ namespace ProjetoLocadoraDeVeiculos.Models
         public int? QtdRenovacoes { get; set; }
 
 
-        [DisplayName("Valor calculado da diária")]
+        [DisplayName("Valor diária")]
         [DataType(DataType.Currency)]
-        public decimal ValorDiaria { get; set; } //Calculado com base na diária do carro e adicionado o % em cima com base na temporada escolhida
+        public decimal ValorDiaria { get; set; }
 
 
-        [DisplayName("Valor calculado da multa diária")]
+        [DisplayName("Valor multa diária")]
         [DataType(DataType.Currency)]
         public decimal ValorMultaDiaria { get; set; }
 
 
-        [DisplayName("Valor calculado da multa fixa")]
+        [DisplayName("Valor multa fixa")]
         [DataType(DataType.Currency)]
         public decimal ValorMultaFixa { get; set; }
 

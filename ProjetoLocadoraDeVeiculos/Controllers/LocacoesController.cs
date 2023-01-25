@@ -157,7 +157,7 @@ namespace ProjetoLocadoraDeVeiculos.Controllers
 
                             if ((newLoc.DataLocacao >= dataLocAlug.AddDays(-1) && newLoc.DataLocacao <= dataDevAlug.AddDays(+1)) || (newLoc.DataEntrega >= dataLocAlug.AddDays(-1) && newLoc.DataEntrega <= dataDevAlug.AddDays(+1)))
                             {
-                                TempData["MensagemErroValid"] = $"O veículo escolhido não pode ser alugado/agendado entre {(dataLocAlug.AddDays(-1)).ToString("dd/MM/yyyy")} e {(dataDevAlug.AddDays(+1)).ToString("dd/MM/yyyy")} porquê já está reservado para as datas {dataLocAlug.ToString("dd/MM/yyyy")} e {dataDevAlug.ToString("dd/MM/yyyy")}! As locações precisam ter pelo menos 1 dia de diferença entre uma e outra para realizar a preparação do veículo.";
+                                TempData["MensagemErroValid"] = $"O veículo escolhido não pode ser alugado/agendado entre {(dataLocAlug.AddDays(-1).ToString("dd/MM/yyyy"))} e {(dataDevAlug.AddDays(+1).ToString("dd/MM/yyyy"))} porquê já está reservado para as datas {dataLocAlug.ToString("dd/MM/yyyy")} e {dataDevAlug.ToString("dd/MM/yyyy")}! As locações precisam ter pelo menos 1 dia de diferença entre uma e outra para realizar a preparação do veículo.";
 
                                 return RedirectToAction(nameof(Create));
                             }
