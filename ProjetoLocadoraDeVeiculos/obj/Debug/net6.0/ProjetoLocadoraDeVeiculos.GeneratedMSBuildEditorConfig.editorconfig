@@ -9,233 +9,233 @@ build_property.EnforceExtendedAnalyzerRules =
 build_property._SupportedPlatformList = Linux,macOS,Windows
 build_property.RootNamespace = ProjetoLocadoraDeVeiculos
 build_property.RootNamespace = ProjetoLocadoraDeVeiculos
-build_property.ProjectDir = C:\Users\Paulo Gabriel\Desktop\202301081833ProjetoLocadoraDeVeiculos\ProjetoLocadoraDeVeiculos\ProjetoLocadoraDeVeiculos\
+build_property.ProjectDir = C:\Users\Paulo Gabriel\Desktop\Nova pasta\projetoLocadoraVeiculos\ProjetoLocadoraDeVeiculos\
 build_property.RazorLangVersion = 6.0
 build_property.SupportLocalizedComponentNames = 
 build_property.GenerateRazorMetadataSourceChecksumAttributes = 
-build_property.MSBuildProjectDirectory = C:\Users\Paulo Gabriel\Desktop\202301081833ProjetoLocadoraDeVeiculos\ProjetoLocadoraDeVeiculos\ProjetoLocadoraDeVeiculos
+build_property.MSBuildProjectDirectory = C:\Users\Paulo Gabriel\Desktop\Nova pasta\projetoLocadoraVeiculos\ProjetoLocadoraDeVeiculos
 build_property._RazorSourceGeneratorDebug = 
 
-[C:/Users/Paulo Gabriel/Desktop/202301081833ProjetoLocadoraDeVeiculos/ProjetoLocadoraDeVeiculos/ProjetoLocadoraDeVeiculos/Views/CategoriaVeiculos/Create.cshtml]
+[C:/Users/Paulo Gabriel/Desktop/Nova pasta/projetoLocadoraVeiculos/ProjetoLocadoraDeVeiculos/Views/CategoriaVeiculos/Create.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ2F0ZWdvcmlhVmVpY3Vsb3NcQ3JlYXRlLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Paulo Gabriel/Desktop/202301081833ProjetoLocadoraDeVeiculos/ProjetoLocadoraDeVeiculos/ProjetoLocadoraDeVeiculos/Views/CategoriaVeiculos/Delete.cshtml]
+[C:/Users/Paulo Gabriel/Desktop/Nova pasta/projetoLocadoraVeiculos/ProjetoLocadoraDeVeiculos/Views/CategoriaVeiculos/Delete.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ2F0ZWdvcmlhVmVpY3Vsb3NcRGVsZXRlLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Paulo Gabriel/Desktop/202301081833ProjetoLocadoraDeVeiculos/ProjetoLocadoraDeVeiculos/ProjetoLocadoraDeVeiculos/Views/CategoriaVeiculos/Details.cshtml]
+[C:/Users/Paulo Gabriel/Desktop/Nova pasta/projetoLocadoraVeiculos/ProjetoLocadoraDeVeiculos/Views/CategoriaVeiculos/Details.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ2F0ZWdvcmlhVmVpY3Vsb3NcRGV0YWlscy5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Paulo Gabriel/Desktop/202301081833ProjetoLocadoraDeVeiculos/ProjetoLocadoraDeVeiculos/ProjetoLocadoraDeVeiculos/Views/CategoriaVeiculos/Edit.cshtml]
+[C:/Users/Paulo Gabriel/Desktop/Nova pasta/projetoLocadoraVeiculos/ProjetoLocadoraDeVeiculos/Views/CategoriaVeiculos/Edit.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ2F0ZWdvcmlhVmVpY3Vsb3NcRWRpdC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Paulo Gabriel/Desktop/202301081833ProjetoLocadoraDeVeiculos/ProjetoLocadoraDeVeiculos/ProjetoLocadoraDeVeiculos/Views/CategoriaVeiculos/Index.cshtml]
+[C:/Users/Paulo Gabriel/Desktop/Nova pasta/projetoLocadoraVeiculos/ProjetoLocadoraDeVeiculos/Views/CategoriaVeiculos/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ2F0ZWdvcmlhVmVpY3Vsb3NcSW5kZXguY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Paulo Gabriel/Desktop/202301081833ProjetoLocadoraDeVeiculos/ProjetoLocadoraDeVeiculos/ProjetoLocadoraDeVeiculos/Views/Clientes/Create.cshtml]
+[C:/Users/Paulo Gabriel/Desktop/Nova pasta/projetoLocadoraVeiculos/ProjetoLocadoraDeVeiculos/Views/Clientes/Create.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ2xpZW50ZXNcQ3JlYXRlLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Paulo Gabriel/Desktop/202301081833ProjetoLocadoraDeVeiculos/ProjetoLocadoraDeVeiculos/ProjetoLocadoraDeVeiculos/Views/Clientes/Delete.cshtml]
+[C:/Users/Paulo Gabriel/Desktop/Nova pasta/projetoLocadoraVeiculos/ProjetoLocadoraDeVeiculos/Views/Clientes/Delete.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ2xpZW50ZXNcRGVsZXRlLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Paulo Gabriel/Desktop/202301081833ProjetoLocadoraDeVeiculos/ProjetoLocadoraDeVeiculos/ProjetoLocadoraDeVeiculos/Views/Clientes/Details.cshtml]
+[C:/Users/Paulo Gabriel/Desktop/Nova pasta/projetoLocadoraVeiculos/ProjetoLocadoraDeVeiculos/Views/Clientes/Details.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ2xpZW50ZXNcRGV0YWlscy5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Paulo Gabriel/Desktop/202301081833ProjetoLocadoraDeVeiculos/ProjetoLocadoraDeVeiculos/ProjetoLocadoraDeVeiculos/Views/Clientes/Edit.cshtml]
+[C:/Users/Paulo Gabriel/Desktop/Nova pasta/projetoLocadoraVeiculos/ProjetoLocadoraDeVeiculos/Views/Clientes/Edit.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ2xpZW50ZXNcRWRpdC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Paulo Gabriel/Desktop/202301081833ProjetoLocadoraDeVeiculos/ProjetoLocadoraDeVeiculos/ProjetoLocadoraDeVeiculos/Views/Clientes/Index.cshtml]
+[C:/Users/Paulo Gabriel/Desktop/Nova pasta/projetoLocadoraVeiculos/ProjetoLocadoraDeVeiculos/Views/Clientes/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ2xpZW50ZXNcSW5kZXguY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Paulo Gabriel/Desktop/202301081833ProjetoLocadoraDeVeiculos/ProjetoLocadoraDeVeiculos/ProjetoLocadoraDeVeiculos/Views/Error/ErroReferencialCategoria.cshtml]
+[C:/Users/Paulo Gabriel/Desktop/Nova pasta/projetoLocadoraVeiculos/ProjetoLocadoraDeVeiculos/Views/Error/ErroReferencialCategoria.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRXJyb3JcRXJyb1JlZmVyZW5jaWFsQ2F0ZWdvcmlhLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Paulo Gabriel/Desktop/202301081833ProjetoLocadoraDeVeiculos/ProjetoLocadoraDeVeiculos/ProjetoLocadoraDeVeiculos/Views/Error/ErroReferencialCliente.cshtml]
+[C:/Users/Paulo Gabriel/Desktop/Nova pasta/projetoLocadoraVeiculos/ProjetoLocadoraDeVeiculos/Views/Error/ErroReferencialCliente.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRXJyb3JcRXJyb1JlZmVyZW5jaWFsQ2xpZW50ZS5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Paulo Gabriel/Desktop/202301081833ProjetoLocadoraDeVeiculos/ProjetoLocadoraDeVeiculos/ProjetoLocadoraDeVeiculos/Views/Error/ErroReferencialStatusLocacao.cshtml]
+[C:/Users/Paulo Gabriel/Desktop/Nova pasta/projetoLocadoraVeiculos/ProjetoLocadoraDeVeiculos/Views/Error/ErroReferencialStatusLocacao.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRXJyb3JcRXJyb1JlZmVyZW5jaWFsU3RhdHVzTG9jYWNhby5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Paulo Gabriel/Desktop/202301081833ProjetoLocadoraDeVeiculos/ProjetoLocadoraDeVeiculos/ProjetoLocadoraDeVeiculos/Views/Error/ErroReferencialStatusVeiculo.cshtml]
+[C:/Users/Paulo Gabriel/Desktop/Nova pasta/projetoLocadoraVeiculos/ProjetoLocadoraDeVeiculos/Views/Error/ErroReferencialStatusVeiculo.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRXJyb3JcRXJyb1JlZmVyZW5jaWFsU3RhdHVzVmVpY3Vsby5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Paulo Gabriel/Desktop/202301081833ProjetoLocadoraDeVeiculos/ProjetoLocadoraDeVeiculos/ProjetoLocadoraDeVeiculos/Views/Error/ErroReferencialTemporada.cshtml]
+[C:/Users/Paulo Gabriel/Desktop/Nova pasta/projetoLocadoraVeiculos/ProjetoLocadoraDeVeiculos/Views/Error/ErroReferencialTemporada.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRXJyb3JcRXJyb1JlZmVyZW5jaWFsVGVtcG9yYWRhLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Paulo Gabriel/Desktop/202301081833ProjetoLocadoraDeVeiculos/ProjetoLocadoraDeVeiculos/ProjetoLocadoraDeVeiculos/Views/Error/ErroReferencialVeiculo.cshtml]
+[C:/Users/Paulo Gabriel/Desktop/Nova pasta/projetoLocadoraVeiculos/ProjetoLocadoraDeVeiculos/Views/Error/ErroReferencialVeiculo.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRXJyb3JcRXJyb1JlZmVyZW5jaWFsVmVpY3Vsby5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Paulo Gabriel/Desktop/202301081833ProjetoLocadoraDeVeiculos/ProjetoLocadoraDeVeiculos/ProjetoLocadoraDeVeiculos/Views/Home/Index.cshtml]
+[C:/Users/Paulo Gabriel/Desktop/Nova pasta/projetoLocadoraVeiculos/ProjetoLocadoraDeVeiculos/Views/Home/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxJbmRleC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Paulo Gabriel/Desktop/202301081833ProjetoLocadoraDeVeiculos/ProjetoLocadoraDeVeiculos/ProjetoLocadoraDeVeiculos/Views/Home/Sobre.cshtml]
+[C:/Users/Paulo Gabriel/Desktop/Nova pasta/projetoLocadoraVeiculos/ProjetoLocadoraDeVeiculos/Views/Home/Sobre.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxTb2JyZS5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Paulo Gabriel/Desktop/202301081833ProjetoLocadoraDeVeiculos/ProjetoLocadoraDeVeiculos/ProjetoLocadoraDeVeiculos/Views/Locacoes/Create.cshtml]
+[C:/Users/Paulo Gabriel/Desktop/Nova pasta/projetoLocadoraVeiculos/ProjetoLocadoraDeVeiculos/Views/Locacoes/Create.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcTG9jYWNvZXNcQ3JlYXRlLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Paulo Gabriel/Desktop/202301081833ProjetoLocadoraDeVeiculos/ProjetoLocadoraDeVeiculos/ProjetoLocadoraDeVeiculos/Views/Locacoes/Delete.cshtml]
+[C:/Users/Paulo Gabriel/Desktop/Nova pasta/projetoLocadoraVeiculos/ProjetoLocadoraDeVeiculos/Views/Locacoes/Delete.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcTG9jYWNvZXNcRGVsZXRlLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Paulo Gabriel/Desktop/202301081833ProjetoLocadoraDeVeiculos/ProjetoLocadoraDeVeiculos/ProjetoLocadoraDeVeiculos/Views/Locacoes/Details.cshtml]
+[C:/Users/Paulo Gabriel/Desktop/Nova pasta/projetoLocadoraVeiculos/ProjetoLocadoraDeVeiculos/Views/Locacoes/Details.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcTG9jYWNvZXNcRGV0YWlscy5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Paulo Gabriel/Desktop/202301081833ProjetoLocadoraDeVeiculos/ProjetoLocadoraDeVeiculos/ProjetoLocadoraDeVeiculos/Views/Locacoes/Edit.cshtml]
+[C:/Users/Paulo Gabriel/Desktop/Nova pasta/projetoLocadoraVeiculos/ProjetoLocadoraDeVeiculos/Views/Locacoes/Edit.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcTG9jYWNvZXNcRWRpdC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Paulo Gabriel/Desktop/202301081833ProjetoLocadoraDeVeiculos/ProjetoLocadoraDeVeiculos/ProjetoLocadoraDeVeiculos/Views/Locacoes/Index.cshtml]
+[C:/Users/Paulo Gabriel/Desktop/Nova pasta/projetoLocadoraVeiculos/ProjetoLocadoraDeVeiculos/Views/Locacoes/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcTG9jYWNvZXNcSW5kZXguY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Paulo Gabriel/Desktop/202301081833ProjetoLocadoraDeVeiculos/ProjetoLocadoraDeVeiculos/ProjetoLocadoraDeVeiculos/Views/Login/Index.cshtml]
+[C:/Users/Paulo Gabriel/Desktop/Nova pasta/projetoLocadoraVeiculos/ProjetoLocadoraDeVeiculos/Views/Login/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcTG9naW5cSW5kZXguY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Paulo Gabriel/Desktop/202301081833ProjetoLocadoraDeVeiculos/ProjetoLocadoraDeVeiculos/ProjetoLocadoraDeVeiculos/Views/Shared/Components/Menu/Default.cshtml]
+[C:/Users/Paulo Gabriel/Desktop/Nova pasta/projetoLocadoraVeiculos/ProjetoLocadoraDeVeiculos/Views/Shared/Components/Menu/Default.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXENvbXBvbmVudHNcTWVudVxEZWZhdWx0LmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Paulo Gabriel/Desktop/202301081833ProjetoLocadoraDeVeiculos/ProjetoLocadoraDeVeiculos/ProjetoLocadoraDeVeiculos/Views/Shared/Error.cshtml]
+[C:/Users/Paulo Gabriel/Desktop/Nova pasta/projetoLocadoraVeiculos/ProjetoLocadoraDeVeiculos/Views/Shared/Error.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXEVycm9yLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Paulo Gabriel/Desktop/202301081833ProjetoLocadoraDeVeiculos/ProjetoLocadoraDeVeiculos/ProjetoLocadoraDeVeiculos/Views/Shared/_ValidationScriptsPartial.cshtml]
+[C:/Users/Paulo Gabriel/Desktop/Nova pasta/projetoLocadoraVeiculos/ProjetoLocadoraDeVeiculos/Views/Shared/_ValidationScriptsPartial.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9WYWxpZGF0aW9uU2NyaXB0c1BhcnRpYWwuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Paulo Gabriel/Desktop/202301081833ProjetoLocadoraDeVeiculos/ProjetoLocadoraDeVeiculos/ProjetoLocadoraDeVeiculos/Views/StatusLocacoes/Create.cshtml]
+[C:/Users/Paulo Gabriel/Desktop/Nova pasta/projetoLocadoraVeiculos/ProjetoLocadoraDeVeiculos/Views/StatusLocacoes/Create.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU3RhdHVzTG9jYWNvZXNcQ3JlYXRlLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Paulo Gabriel/Desktop/202301081833ProjetoLocadoraDeVeiculos/ProjetoLocadoraDeVeiculos/ProjetoLocadoraDeVeiculos/Views/StatusLocacoes/Delete.cshtml]
+[C:/Users/Paulo Gabriel/Desktop/Nova pasta/projetoLocadoraVeiculos/ProjetoLocadoraDeVeiculos/Views/StatusLocacoes/Delete.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU3RhdHVzTG9jYWNvZXNcRGVsZXRlLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Paulo Gabriel/Desktop/202301081833ProjetoLocadoraDeVeiculos/ProjetoLocadoraDeVeiculos/ProjetoLocadoraDeVeiculos/Views/StatusLocacoes/Details.cshtml]
+[C:/Users/Paulo Gabriel/Desktop/Nova pasta/projetoLocadoraVeiculos/ProjetoLocadoraDeVeiculos/Views/StatusLocacoes/Details.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU3RhdHVzTG9jYWNvZXNcRGV0YWlscy5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Paulo Gabriel/Desktop/202301081833ProjetoLocadoraDeVeiculos/ProjetoLocadoraDeVeiculos/ProjetoLocadoraDeVeiculos/Views/StatusLocacoes/Edit.cshtml]
+[C:/Users/Paulo Gabriel/Desktop/Nova pasta/projetoLocadoraVeiculos/ProjetoLocadoraDeVeiculos/Views/StatusLocacoes/Edit.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU3RhdHVzTG9jYWNvZXNcRWRpdC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Paulo Gabriel/Desktop/202301081833ProjetoLocadoraDeVeiculos/ProjetoLocadoraDeVeiculos/ProjetoLocadoraDeVeiculos/Views/StatusLocacoes/Index.cshtml]
+[C:/Users/Paulo Gabriel/Desktop/Nova pasta/projetoLocadoraVeiculos/ProjetoLocadoraDeVeiculos/Views/StatusLocacoes/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU3RhdHVzTG9jYWNvZXNcSW5kZXguY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Paulo Gabriel/Desktop/202301081833ProjetoLocadoraDeVeiculos/ProjetoLocadoraDeVeiculos/ProjetoLocadoraDeVeiculos/Views/StatusVeiculos/Create.cshtml]
+[C:/Users/Paulo Gabriel/Desktop/Nova pasta/projetoLocadoraVeiculos/ProjetoLocadoraDeVeiculos/Views/StatusVeiculos/Create.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU3RhdHVzVmVpY3Vsb3NcQ3JlYXRlLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Paulo Gabriel/Desktop/202301081833ProjetoLocadoraDeVeiculos/ProjetoLocadoraDeVeiculos/ProjetoLocadoraDeVeiculos/Views/StatusVeiculos/Delete.cshtml]
+[C:/Users/Paulo Gabriel/Desktop/Nova pasta/projetoLocadoraVeiculos/ProjetoLocadoraDeVeiculos/Views/StatusVeiculos/Delete.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU3RhdHVzVmVpY3Vsb3NcRGVsZXRlLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Paulo Gabriel/Desktop/202301081833ProjetoLocadoraDeVeiculos/ProjetoLocadoraDeVeiculos/ProjetoLocadoraDeVeiculos/Views/StatusVeiculos/Details.cshtml]
+[C:/Users/Paulo Gabriel/Desktop/Nova pasta/projetoLocadoraVeiculos/ProjetoLocadoraDeVeiculos/Views/StatusVeiculos/Details.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU3RhdHVzVmVpY3Vsb3NcRGV0YWlscy5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Paulo Gabriel/Desktop/202301081833ProjetoLocadoraDeVeiculos/ProjetoLocadoraDeVeiculos/ProjetoLocadoraDeVeiculos/Views/StatusVeiculos/Edit.cshtml]
+[C:/Users/Paulo Gabriel/Desktop/Nova pasta/projetoLocadoraVeiculos/ProjetoLocadoraDeVeiculos/Views/StatusVeiculos/Edit.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU3RhdHVzVmVpY3Vsb3NcRWRpdC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Paulo Gabriel/Desktop/202301081833ProjetoLocadoraDeVeiculos/ProjetoLocadoraDeVeiculos/ProjetoLocadoraDeVeiculos/Views/StatusVeiculos/Index.cshtml]
+[C:/Users/Paulo Gabriel/Desktop/Nova pasta/projetoLocadoraVeiculos/ProjetoLocadoraDeVeiculos/Views/StatusVeiculos/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU3RhdHVzVmVpY3Vsb3NcSW5kZXguY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Paulo Gabriel/Desktop/202301081833ProjetoLocadoraDeVeiculos/ProjetoLocadoraDeVeiculos/ProjetoLocadoraDeVeiculos/Views/Temporadas/Create.cshtml]
+[C:/Users/Paulo Gabriel/Desktop/Nova pasta/projetoLocadoraVeiculos/ProjetoLocadoraDeVeiculos/Views/Temporadas/Create.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVGVtcG9yYWRhc1xDcmVhdGUuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Paulo Gabriel/Desktop/202301081833ProjetoLocadoraDeVeiculos/ProjetoLocadoraDeVeiculos/ProjetoLocadoraDeVeiculos/Views/Temporadas/Delete.cshtml]
+[C:/Users/Paulo Gabriel/Desktop/Nova pasta/projetoLocadoraVeiculos/ProjetoLocadoraDeVeiculos/Views/Temporadas/Delete.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVGVtcG9yYWRhc1xEZWxldGUuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Paulo Gabriel/Desktop/202301081833ProjetoLocadoraDeVeiculos/ProjetoLocadoraDeVeiculos/ProjetoLocadoraDeVeiculos/Views/Temporadas/Details.cshtml]
+[C:/Users/Paulo Gabriel/Desktop/Nova pasta/projetoLocadoraVeiculos/ProjetoLocadoraDeVeiculos/Views/Temporadas/Details.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVGVtcG9yYWRhc1xEZXRhaWxzLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Paulo Gabriel/Desktop/202301081833ProjetoLocadoraDeVeiculos/ProjetoLocadoraDeVeiculos/ProjetoLocadoraDeVeiculos/Views/Temporadas/Edit.cshtml]
+[C:/Users/Paulo Gabriel/Desktop/Nova pasta/projetoLocadoraVeiculos/ProjetoLocadoraDeVeiculos/Views/Temporadas/Edit.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVGVtcG9yYWRhc1xFZGl0LmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Paulo Gabriel/Desktop/202301081833ProjetoLocadoraDeVeiculos/ProjetoLocadoraDeVeiculos/ProjetoLocadoraDeVeiculos/Views/Temporadas/Index.cshtml]
+[C:/Users/Paulo Gabriel/Desktop/Nova pasta/projetoLocadoraVeiculos/ProjetoLocadoraDeVeiculos/Views/Temporadas/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVGVtcG9yYWRhc1xJbmRleC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Paulo Gabriel/Desktop/202301081833ProjetoLocadoraDeVeiculos/ProjetoLocadoraDeVeiculos/ProjetoLocadoraDeVeiculos/Views/Usuarios/Create.cshtml]
+[C:/Users/Paulo Gabriel/Desktop/Nova pasta/projetoLocadoraVeiculos/ProjetoLocadoraDeVeiculos/Views/Usuarios/Create.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVXN1YXJpb3NcQ3JlYXRlLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Paulo Gabriel/Desktop/202301081833ProjetoLocadoraDeVeiculos/ProjetoLocadoraDeVeiculos/ProjetoLocadoraDeVeiculos/Views/Usuarios/Delete.cshtml]
+[C:/Users/Paulo Gabriel/Desktop/Nova pasta/projetoLocadoraVeiculos/ProjetoLocadoraDeVeiculos/Views/Usuarios/Delete.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVXN1YXJpb3NcRGVsZXRlLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Paulo Gabriel/Desktop/202301081833ProjetoLocadoraDeVeiculos/ProjetoLocadoraDeVeiculos/ProjetoLocadoraDeVeiculos/Views/Usuarios/Details.cshtml]
+[C:/Users/Paulo Gabriel/Desktop/Nova pasta/projetoLocadoraVeiculos/ProjetoLocadoraDeVeiculos/Views/Usuarios/Details.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVXN1YXJpb3NcRGV0YWlscy5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Paulo Gabriel/Desktop/202301081833ProjetoLocadoraDeVeiculos/ProjetoLocadoraDeVeiculos/ProjetoLocadoraDeVeiculos/Views/Usuarios/Edit.cshtml]
+[C:/Users/Paulo Gabriel/Desktop/Nova pasta/projetoLocadoraVeiculos/ProjetoLocadoraDeVeiculos/Views/Usuarios/Edit.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVXN1YXJpb3NcRWRpdC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Paulo Gabriel/Desktop/202301081833ProjetoLocadoraDeVeiculos/ProjetoLocadoraDeVeiculos/ProjetoLocadoraDeVeiculos/Views/Usuarios/Index.cshtml]
+[C:/Users/Paulo Gabriel/Desktop/Nova pasta/projetoLocadoraVeiculos/ProjetoLocadoraDeVeiculos/Views/Usuarios/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVXN1YXJpb3NcSW5kZXguY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Paulo Gabriel/Desktop/202301081833ProjetoLocadoraDeVeiculos/ProjetoLocadoraDeVeiculos/ProjetoLocadoraDeVeiculos/Views/Veiculos/Create.cshtml]
+[C:/Users/Paulo Gabriel/Desktop/Nova pasta/projetoLocadoraVeiculos/ProjetoLocadoraDeVeiculos/Views/Veiculos/Create.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVmVpY3Vsb3NcQ3JlYXRlLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Paulo Gabriel/Desktop/202301081833ProjetoLocadoraDeVeiculos/ProjetoLocadoraDeVeiculos/ProjetoLocadoraDeVeiculos/Views/Veiculos/Delete.cshtml]
+[C:/Users/Paulo Gabriel/Desktop/Nova pasta/projetoLocadoraVeiculos/ProjetoLocadoraDeVeiculos/Views/Veiculos/Delete.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVmVpY3Vsb3NcRGVsZXRlLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Paulo Gabriel/Desktop/202301081833ProjetoLocadoraDeVeiculos/ProjetoLocadoraDeVeiculos/ProjetoLocadoraDeVeiculos/Views/Veiculos/Details.cshtml]
+[C:/Users/Paulo Gabriel/Desktop/Nova pasta/projetoLocadoraVeiculos/ProjetoLocadoraDeVeiculos/Views/Veiculos/Details.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVmVpY3Vsb3NcRGV0YWlscy5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Paulo Gabriel/Desktop/202301081833ProjetoLocadoraDeVeiculos/ProjetoLocadoraDeVeiculos/ProjetoLocadoraDeVeiculos/Views/Veiculos/Edit.cshtml]
+[C:/Users/Paulo Gabriel/Desktop/Nova pasta/projetoLocadoraVeiculos/ProjetoLocadoraDeVeiculos/Views/Veiculos/Edit.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVmVpY3Vsb3NcRWRpdC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Paulo Gabriel/Desktop/202301081833ProjetoLocadoraDeVeiculos/ProjetoLocadoraDeVeiculos/ProjetoLocadoraDeVeiculos/Views/Veiculos/Index.cshtml]
+[C:/Users/Paulo Gabriel/Desktop/Nova pasta/projetoLocadoraVeiculos/ProjetoLocadoraDeVeiculos/Views/Veiculos/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVmVpY3Vsb3NcSW5kZXguY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Paulo Gabriel/Desktop/202301081833ProjetoLocadoraDeVeiculos/ProjetoLocadoraDeVeiculos/ProjetoLocadoraDeVeiculos/Views/_ViewImports.cshtml]
+[C:/Users/Paulo Gabriel/Desktop/Nova pasta/projetoLocadoraVeiculos/ProjetoLocadoraDeVeiculos/Views/_ViewImports.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcX1ZpZXdJbXBvcnRzLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Paulo Gabriel/Desktop/202301081833ProjetoLocadoraDeVeiculos/ProjetoLocadoraDeVeiculos/ProjetoLocadoraDeVeiculos/Views/_ViewStart.cshtml]
+[C:/Users/Paulo Gabriel/Desktop/Nova pasta/projetoLocadoraVeiculos/ProjetoLocadoraDeVeiculos/Views/_ViewStart.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcX1ZpZXdTdGFydC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Paulo Gabriel/Desktop/202301081833ProjetoLocadoraDeVeiculos/ProjetoLocadoraDeVeiculos/ProjetoLocadoraDeVeiculos/Views/Shared/_Layout.cshtml]
+[C:/Users/Paulo Gabriel/Desktop/Nova pasta/projetoLocadoraVeiculos/ProjetoLocadoraDeVeiculos/Views/Shared/_Layout.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9MYXlvdXQuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = b-zr6mqu7e7h
 
-[C:/Users/Paulo Gabriel/Desktop/202301081833ProjetoLocadoraDeVeiculos/ProjetoLocadoraDeVeiculos/ProjetoLocadoraDeVeiculos/Views/Shared/_LayoutDeslogado.cshtml]
+[C:/Users/Paulo Gabriel/Desktop/Nova pasta/projetoLocadoraVeiculos/ProjetoLocadoraDeVeiculos/Views/Shared/_LayoutDeslogado.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9MYXlvdXREZXNsb2dhZG8uY3NodG1s
 build_metadata.AdditionalFiles.CssScope = b-szjeuuso2w

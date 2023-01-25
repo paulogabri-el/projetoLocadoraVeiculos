@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\Paulo Gabriel\\Desktop\\202301081833ProjetoLocadoraDeVeiculos\\ProjetoLocadoraDeVeiculos\\ProjetoLocadoraDeVeiculos\\ProjetoLocadoraDeVeiculos.csproj": {}
+    "C:\\Users\\Paulo Gabriel\\Desktop\\Nova pasta\\projetoLocadoraVeiculos\\ProjetoLocadoraDeVeiculos\\ProjetoLocadoraDeVeiculos.csproj": {}
   },
   "projects": {
-    "C:\\Users\\Paulo Gabriel\\Desktop\\202301081833ProjetoLocadoraDeVeiculos\\ProjetoLocadoraDeVeiculos\\ProjetoLocadoraDeVeiculos\\ProjetoLocadoraDeVeiculos.csproj": {
+    "C:\\Users\\Paulo Gabriel\\Desktop\\Nova pasta\\projetoLocadoraVeiculos\\ProjetoLocadoraDeVeiculos\\ProjetoLocadoraDeVeiculos.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Paulo Gabriel\\Desktop\\202301081833ProjetoLocadoraDeVeiculos\\ProjetoLocadoraDeVeiculos\\ProjetoLocadoraDeVeiculos\\ProjetoLocadoraDeVeiculos.csproj",
+        "projectUniqueName": "C:\\Users\\Paulo Gabriel\\Desktop\\Nova pasta\\projetoLocadoraVeiculos\\ProjetoLocadoraDeVeiculos\\ProjetoLocadoraDeVeiculos.csproj",
         "projectName": "ProjetoLocadoraDeVeiculos",
-        "projectPath": "C:\\Users\\Paulo Gabriel\\Desktop\\202301081833ProjetoLocadoraDeVeiculos\\ProjetoLocadoraDeVeiculos\\ProjetoLocadoraDeVeiculos\\ProjetoLocadoraDeVeiculos.csproj",
+        "projectPath": "C:\\Users\\Paulo Gabriel\\Desktop\\Nova pasta\\projetoLocadoraVeiculos\\ProjetoLocadoraDeVeiculos\\ProjetoLocadoraDeVeiculos.csproj",
         "packagesPath": "C:\\Users\\Paulo Gabriel\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Paulo Gabriel\\Desktop\\202301081833ProjetoLocadoraDeVeiculos\\ProjetoLocadoraDeVeiculos\\ProjetoLocadoraDeVeiculos\\obj\\",
+        "outputPath": "C:\\Users\\Paulo Gabriel\\Desktop\\Nova pasta\\projetoLocadoraVeiculos\\ProjetoLocadoraDeVeiculos\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages",

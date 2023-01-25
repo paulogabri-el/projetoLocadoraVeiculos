@@ -155,7 +155,7 @@ namespace ProjetoLocadoraDeVeiculos.Controllers
                             var dataLocAlug = idLoc.DataLocacao;
                             var dataDevAlug = idLoc.DataEntrega;
 
-                            if ((newLoc.DataLocacao >= dataLocAlug.AddDays(-1) && newLoc.DataLocacao <= dataDevAlug.AddDays(+1)) || (newLoc.DataEntrega >= dataLocAlug.AddDays(-1) && newLoc.DataEntrega <= dataDevAlug.AddDays(+1)))
+                            if ((newLoc.DataLocacao >= dataLocAlug.AddDays(-1) && newLoc.DataLocacao <= dataDevAlug.AddDays(+1)) || (newLoc.DataEntrega >= dataLocAlug.AddDays(-1) && newLoc.DataEntrega <= dataDevAlug.AddDays(+1)) || (newLoc.DataEntrega >= dataLocAlug.AddDays(-1)))
                             {
                                 TempData["MensagemErroValid"] = $"O veículo escolhido não pode ser alugado/agendado entre {(dataLocAlug.AddDays(-1).ToString("dd/MM/yyyy"))} e {(dataDevAlug.AddDays(+1).ToString("dd/MM/yyyy"))} porquê já está reservado para as datas {dataLocAlug.ToString("dd/MM/yyyy")} e {dataDevAlug.ToString("dd/MM/yyyy")}! As locações precisam ter pelo menos 1 dia de diferença entre uma e outra para realizar a preparação do veículo.";
 
@@ -287,27 +287,35 @@ namespace ProjetoLocadoraDeVeiculos.Controllers
                     if (aux3 == 1 && editLoc.StatusLocacaoId == 2)
                     {
                         TempData["MensagemErro"] = $"Locações com status 'Agendada' só podem ser alteradas para 'Em andamento' ou 'Cancelada'.";
+
+                        return RedirectToAction(nameof(Edit));
                     }
 
                     //Validação para não permitir o veículo ser alugado por mais de 30 dias ou ter mais de 3 renovações.
                     else if ((editLoc.DataEntrega - editLoc.DataLocacao).Days > 30 || (editLoc.QtdRenovacoes == 3 && editLoc.DataEntrega > aux2))
                     {
                         TempData["MensagemErro2"] = $"Você não pode ter mais de 3 renovações ou alugar um carro por mais de 30 dias.";
+
+                        return RedirectToAction(nameof(Edit));
                     }
 
 
                     else if (aux3 != 1 && editLoc.StatusLocacaoId == 4)
                     {
                         TempData["MensagemErro3"] = $"Somente locações com status 'Agendada' podem ser canceladas.";
+
+                        return RedirectToAction(nameof(Edit));
                     }
 
 
                     else if (aux3 == 3 && (editLoc.StatusLocacaoId == 1 || editLoc.StatusLocacaoId == 4))
                     {
                         TempData["MensagemErro4"] = $"Locações com status 'Em andamento' só podem ter o status alterado para 'Finalizada'.";
+
+                        return RedirectToAction(nameof(Edit));
                     }
 
-                    if (editLoc.VeiculoId != 0)
+                    else if (editLoc.VeiculoId != 0)
                     {
                         var locsAgendadas = _context.Locacao.Where(x => x.StatusLocacaoId == 1 && x.VeiculoId == editLoc.VeiculoId);
                         var idLoc = locsAgendadas.FirstOrDefault();
@@ -319,19 +327,18 @@ namespace ProjetoLocadoraDeVeiculos.Controllers
                                 var dataLocAlug = idLoc.DataLocacao;
                                 var dataDevAlug = idLoc.DataEntrega;
 
-                                if (editLoc.DataEntrega >= dataLocAlug.AddDays(-1))
+                                if (editLoc.DataEntrega >= dataLocAlug.AddDays(-1) && idLoc.Id != editLoc.Id)
                                 {
                                     TempData["MensagemErroValid"] = $"Você só pode alugar o veículo até {(dataLocAlug.AddDays(-2).ToString("dd/MM/yyyy"))}, pois já existe reserva para a data {(dataLocAlug.ToString("dd/MM/yyyy"))} e precisamos de um dia de antecedência para preparar o veículo!";
-                                   
+
                                     return RedirectToAction(nameof(Edit));
                                 }
+
                             }
                         }
 
                     }
-
-                    else
-                    {
+                    
                         var vec = await _context.Veiculo.FindAsync(editLoc.VeiculoId);
 
                         var carro = _context.Veiculo.Where(x => x.Id == editLoc.VeiculoId);
@@ -407,7 +414,9 @@ namespace ProjetoLocadoraDeVeiculos.Controllers
                             await _context.SaveChangesAsync();
                         }
                         return RedirectToAction(nameof(Index));
-                    }
+                    
+
+
                 }
                 catch (DbUpdateConcurrencyException)
                 {
