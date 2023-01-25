@@ -16,7 +16,7 @@ Depois da instalação dos programas necessários, seguir os passos:
   - Clonar o projeto;
   
   - Configurar a string de conexão com o MySql no arquivo appsettings.json;
-      "server=nomedoserver;userid=usuario;password=senha;database=nomedobancodedados"
+      ``` "server=nomedoserver;userid=usuario;password=senha;database=nomedobancodedados" ```
       
   - Salvar o projeto e rodar o comando "Update-Database" no console do gerenciador de pacotes;
       Uma vez feito, o EF já cria o banco de dados seguindo a string de conexão configurada.
@@ -26,11 +26,10 @@ Depois da instalação dos programas necessários, seguir os passos:
       [Scrip Inicial BD](https://github.com/paulogabri-el/projetoLocadoraVeiculos/files/10495278/ScriptLocadoraVec.txt)
   
   - Ao executar a aplicação você pode usar o seguinte usuário para login:
-  
+      ```
       Email: admin@admin.com.br
-      
       Senha: useradmin
-  
+      ``` 
   
   - Ao acessar a aplicação, você consegue visualizar um botão "SOBRE A APLICAÇÃO", ele direciona para uma página listando as regras de negócio do projeto.
 
