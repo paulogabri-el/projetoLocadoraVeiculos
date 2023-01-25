@@ -19,6 +19,7 @@ Depois da instalação dos programas necessários, seguir os passos:
       ``` "server=nomedoserver;userid=usuario;password=senha;database=nomedobancodedados" ```
       
   - Salvar o projeto e rodar o comando "Update-Database" no console do gerenciador de pacotes;
+  
       Uma vez feito, o EF já cria o banco de dados seguindo a string de conexão configurada.
   
   - Rodar os comandos presentes no .TXT abaixo no MySql para inserir uma pequena base incluindo o usuário admin para acesso ao sistema;
