@@ -14,6 +14,7 @@ Aplicação desenvolvida para atender a demanda de uma locadora de veículos, ut
 Depois da instalação dos programas necessários, seguir os passos:
 
   - Clonar o projeto;
+       ``` git@github.com:paulogabri-el/projetoLocadoraVeiculos.git ```
   
   - Configurar a string de conexão com o MySql no arquivo appsettings.json;
       ``` "server=nomedoserver;userid=usuario;password=senha;database=nomedobancodedados" ```
